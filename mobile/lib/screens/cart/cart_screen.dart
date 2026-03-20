@@ -7,6 +7,7 @@ import '../../providers/auth_provider.dart';
 import '../../providers/cart_provider.dart';
 import '../../services/api_service.dart';
 import '../../services/order_service.dart';
+import '../../widgets/address_picker.dart';
 
 class CartScreen extends ConsumerWidget {
   const CartScreen({super.key});
@@ -21,51 +22,23 @@ class CartScreen extends ConsumerWidget {
     final cart = ref.read(cartProvider);
     if (cart.items.isEmpty) return;
 
-    final nameCtrl = TextEditingController();
-    final phoneCtrl = TextEditingController();
-    final addressCtrl = TextEditingController();
-
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (ctx) {
-        final l10n = AppLocalizations.of(ctx)!;
-        return AlertDialog(
-          title: Text(l10n.checkout),
-          content: SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextField(controller: nameCtrl, decoration: InputDecoration(labelText: l10n.appName == '分享好物' ? '收货人' : 'Recipient')),
-                const SizedBox(height: 8),
-                TextField(controller: phoneCtrl, decoration: InputDecoration(labelText: l10n.phone), keyboardType: TextInputType.phone),
-                const SizedBox(height: 8),
-                TextField(controller: addressCtrl, decoration: InputDecoration(labelText: l10n.appName == '分享好物' ? '收货地址' : 'Address'), maxLines: 2),
-              ],
-            ),
-          ),
-          actions: [
-            TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(l10n.cancel)),
-            FilledButton(onPressed: () => Navigator.pop(ctx, true), child: Text(l10n.confirm)),
-          ],
-        );
-      },
+    final address = await Navigator.push<AddressResult>(
+      context,
+      MaterialPageRoute(builder: (_) => const AddressPickerPage()),
     );
 
-    if (confirmed != true || !context.mounted) return;
-    if (nameCtrl.text.isEmpty || phoneCtrl.text.isEmpty || addressCtrl.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.appName == '分享好物' ? '请填写完整收货信息' : 'Please fill in all fields'), backgroundColor: Colors.orange));
-      return;
-    }
+    if (address == null || !context.mounted) return;
 
     try {
       final dio = ref.read(apiServiceProvider).dio;
       final orderService = OrderService(dio);
       final items = cart.items.map((e) => CreateOrderLine(productId: e.product.id, quantity: e.quantity)).toList();
-      await orderService.createOrder(items: items, shippingAddress: {'name': nameCtrl.text, 'phone': phoneCtrl.text, 'detail': addressCtrl.text}, paymentMethod: 'wechat');
+      await orderService.createOrder(items: items, shippingAddress: address.toJson(), paymentMethod: 'wechat');
 
       ref.read(cartProvider.notifier).clearCart();
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.appName == '分享好物' ? '下单成功！' : 'Order placed!'), backgroundColor: Colors.green));
+        final isZh = AppLocalizations.of(context)!.appName == '分享好物';
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(isZh ? '下单成功！' : 'Order placed!'), backgroundColor: Colors.green));
         context.go('/orders');
       }
     } catch (e) {
