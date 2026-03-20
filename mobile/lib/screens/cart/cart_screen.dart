@@ -1,12 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
+import '../../providers/auth_provider.dart';
 import '../../providers/cart_provider.dart';
 import '../../services/api_service.dart';
+import '../../services/order_service.dart';
 
 class CartScreen extends ConsumerWidget {
   const CartScreen({super.key});
+
+  Future<void> _checkout(BuildContext context, WidgetRef ref) async {
+    final auth = ref.read(authProvider);
+    if (!auth.isLoggedIn) {
+      context.go('/login');
+      return;
+    }
+
+    final cart = ref.read(cartProvider);
+    if (cart.items.isEmpty) return;
+
+    final nameCtrl = TextEditingController();
+    final phoneCtrl = TextEditingController();
+    final addressCtrl = TextEditingController();
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) {
+        final l10n = AppLocalizations.of(ctx)!;
+        return AlertDialog(
+          title: Text(l10n.checkout),
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TextField(controller: nameCtrl, decoration: InputDecoration(labelText: l10n.appName == '分享好物' ? '收货人' : 'Recipient')),
+                const SizedBox(height: 8),
+                TextField(controller: phoneCtrl, decoration: InputDecoration(labelText: l10n.phone), keyboardType: TextInputType.phone),
+                const SizedBox(height: 8),
+                TextField(controller: addressCtrl, decoration: InputDecoration(labelText: l10n.appName == '分享好物' ? '收货地址' : 'Address'), maxLines: 2),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(ctx, false), child: Text(l10n.cancel)),
+            FilledButton(onPressed: () => Navigator.pop(ctx, true), child: Text(l10n.confirm)),
+          ],
+        );
+      },
+    );
+
+    if (confirmed != true || !context.mounted) return;
+    if (nameCtrl.text.isEmpty || phoneCtrl.text.isEmpty || addressCtrl.text.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.appName == '分享好物' ? '请填写完整收货信息' : 'Please fill in all fields'), backgroundColor: Colors.orange));
+      return;
+    }
+
+    try {
+      final dio = ref.read(apiServiceProvider).dio;
+      final orderService = OrderService(dio);
+      final items = cart.items.map((e) => CreateOrderLine(productId: e.product.id, quantity: e.quantity)).toList();
+      await orderService.createOrder(items: items, shippingAddress: {'name': nameCtrl.text, 'phone': phoneCtrl.text, 'detail': addressCtrl.text}, paymentMethod: 'wechat');
+
+      ref.read(cartProvider.notifier).clearCart();
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(AppLocalizations.of(context)!.appName == '分享好物' ? '下单成功！' : 'Order placed!'), backgroundColor: Colors.green));
+        context.go('/orders');
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$e'), backgroundColor: Colors.red));
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -109,11 +176,7 @@ class CartScreen extends ConsumerWidget {
                   ),
                 ),
                 FilledButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('订单功能将在阶段四实现 / Orders coming in Phase 4')),
-                    );
-                  },
+                  onPressed: () => _checkout(context, ref),
                   style: FilledButton.styleFrom(padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14)),
                   child: Text(l10n.checkout),
                 ),
