@@ -111,6 +111,13 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         onPressed: () => context.go('/register'),
                         child: Text(l10n.noAccount),
                       ),
+                      TextButton(
+                        onPressed: () => context.go('/'),
+                        child: Text(
+                          l10n.appName == '分享好物' ? '先随便逛逛 →' : 'Browse first →',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                      ),
                     ],
                   ),
                 ),

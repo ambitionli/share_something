@@ -151,4 +151,120 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get searchProducts => 'Search products';
+
+  @override
+  String get orderStatusPending => 'Pending payment';
+
+  @override
+  String get orderStatusPaid => 'Paid';
+
+  @override
+  String get orderStatusShipped => 'Shipped';
+
+  @override
+  String get orderStatusCompleted => 'Completed';
+
+  @override
+  String get orderStatusCancelled => 'Cancelled';
+
+  @override
+  String get orderTotalLabel => 'Total';
+
+  @override
+  String get orderPlacedAt => 'Placed at';
+
+  @override
+  String get orderItemsHeader => 'Items';
+
+  @override
+  String get orderExpress => 'Carrier';
+
+  @override
+  String get orderTrackingNo => 'Tracking';
+
+  @override
+  String get orderNumberPrefix => 'Order #';
+
+  @override
+  String get pay => 'Pay';
+
+  @override
+  String get confirmReceipt => 'Confirm receipt';
+
+  @override
+  String orderLineItem(int productId, int quantity, String unitPrice) {
+    return 'Product #$productId × $quantity @ $unitPrice';
+  }
+
+  @override
+  String get adminPanel => 'Admin Panel';
+
+  @override
+  String get manageProducts => 'Product management';
+
+  @override
+  String get manageOrders => 'Order management';
+
+  @override
+  String get ship => 'Ship';
+
+  @override
+  String get expressCompany => 'Carrier';
+
+  @override
+  String get trackingNumber => 'Tracking number';
+
+  @override
+  String get productName => 'Product name';
+
+  @override
+  String get productPrice => 'Price';
+
+  @override
+  String get productStock => 'Stock';
+
+  @override
+  String get productDescription => 'Description';
+
+  @override
+  String get editProduct => 'Edit product';
+
+  @override
+  String get addProduct => 'Add product';
+
+  @override
+  String get deleteConfirm => 'Delete this item?';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get adminAccessDenied => 'Admin access required';
+
+  @override
+  String get adminHubTitle => 'Admin';
+
+  @override
+  String get adminStatsOrders => 'Total orders';
+
+  @override
+  String get adminStatsProducts => 'Total products';
+
+  @override
+  String get onShelf => 'On shelf';
+
+  @override
+  String get serverError => 'Server error';
+
+  @override
+  String get adminOrdersTitle => 'All orders';
+
+  @override
+  String get adminProductsTitle => 'Products';
+
+  @override
+  String get fieldRequired => 'This field is required';
+
+  @override
+  String get invalidNumber => 'Invalid number';
 }

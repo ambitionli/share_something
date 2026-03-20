@@ -1,4 +1,6 @@
 import re
+from typing import Literal
+
 from pydantic import BaseModel, field_validator
 
 
@@ -45,3 +47,53 @@ class UserResponse(BaseModel):
     role: str
 
     model_config = {"from_attributes": True}
+
+
+class SmsSendRequest(BaseModel):
+    phone: str
+
+    @field_validator("phone")
+    @classmethod
+    def validate_phone(cls, v: str) -> str:
+        if not re.match(r"^1[3-9]\d{9}$", v):
+            raise ValueError("手机号格式不正确")
+        return v
+
+
+class SmsSendResponse(BaseModel):
+    message: str = "ok"
+    code: str | None = None
+
+
+class SmsVerifyRequest(BaseModel):
+    phone: str
+    code: str
+
+    @field_validator("phone")
+    @classmethod
+    def validate_phone(cls, v: str) -> str:
+        if not re.match(r"^1[3-9]\d{9}$", v):
+            raise ValueError("手机号格式不正确")
+        return v
+
+
+class WeChatLoginRequest(BaseModel):
+    code: str
+
+
+class WeChatNeedsBindResponse(BaseModel):
+    needs_bindphone: Literal[True] = True
+    temp_openid: str
+
+
+class WeChatBindPhoneRequest(BaseModel):
+    openid: str
+    phone: str
+    code: str
+
+    @field_validator("phone")
+    @classmethod
+    def validate_phone(cls, v: str) -> str:
+        if not re.match(r"^1[3-9]\d{9}$", v):
+            raise ValueError("手机号格式不正确")
+        return v

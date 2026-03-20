@@ -12,7 +12,11 @@ import 'screens/home/home_screen.dart';
 import 'screens/products/product_list_screen.dart';
 import 'screens/products/product_detail_screen.dart';
 import 'screens/cart/cart_screen.dart';
+import 'screens/orders/order_list_screen.dart';
 import 'screens/auth/profile_screen.dart';
+import 'screens/admin/admin_hub_screen.dart';
+import 'screens/admin/admin_products_screen.dart';
+import 'screens/admin/admin_orders_screen.dart';
 import 'widgets/main_scaffold.dart';
 
 void main() {
@@ -36,7 +40,17 @@ final _router = GoRouter(
           ),
         ),
         GoRoute(path: '/cart', builder: (_, __) => const CartScreen()),
+        GoRoute(path: '/orders', builder: (_, __) => const OrderListScreen()),
         GoRoute(path: '/profile', builder: (_, __) => const ProfileScreen()),
+        GoRoute(path: '/admin', builder: (_, __) => const AdminHubScreen()),
+        GoRoute(
+          path: '/admin/products',
+          builder: (_, __) => const AdminProductsScreen(),
+        ),
+        GoRoute(
+          path: '/admin/orders',
+          builder: (_, __) => const AdminOrdersScreen(),
+        ),
       ],
     ),
   ],

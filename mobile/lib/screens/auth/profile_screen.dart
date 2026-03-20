@@ -50,9 +50,18 @@ class ProfileScreen extends ConsumerWidget {
           leading: const Icon(Icons.receipt_long),
           title: Text(l10n.myOrders),
           trailing: const Icon(Icons.chevron_right),
-          onTap: () {},
+          onTap: () => context.push('/orders'),
         ),
         const Divider(height: 1),
+        if (auth.user?.role == 'admin') ...<Widget>[
+          ListTile(
+            leading: const Icon(Icons.admin_panel_settings_outlined),
+            title: Text(l10n.adminPanel),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () => context.push('/admin'),
+          ),
+          const Divider(height: 1),
+        ],
         ListTile(
           leading: const Icon(Icons.language),
           title: Text(l10n.language),

@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 /** Key used with `localStorage` for the admin JWT (must match the auth store). */
 export const ADMIN_TOKEN_KEY = 'admin_token';
 
 export const api = axios.create({
-  baseURL: 'http://localhost:8000',
+  baseURL: API_BASE_URL,
   headers: {
     'Content-Type': 'application/json',
   },
