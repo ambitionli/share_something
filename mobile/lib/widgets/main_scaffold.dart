@@ -14,6 +14,7 @@ class MainScaffold extends ConsumerWidget {
     if (path.startsWith('/products')) return 1;
     if (path == '/cart') return 2;
     if (path == '/profile') return 3;
+    if (path.startsWith('/admin')) return 3;
     return 0;
   }
 

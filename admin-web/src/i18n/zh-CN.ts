@@ -62,6 +62,14 @@ export interface TranslationResources {
     expressCompany: string;
     ship: string;
     confirmReceipt: string;
+    management: string;
+    buyerPhone: string;
+    createdAt: string;
+    actions: string;
+    filterAll: string;
+    pay: string;
+    shipSuccess: string;
+    columnId: string;
   };
   orderStatus: {
     pending: string;
@@ -157,6 +165,14 @@ export const zhCN: TranslationResources = {
     expressCompany: '快递公司',
     ship: '发货',
     confirmReceipt: '确认收货',
+    management: '订单管理',
+    buyerPhone: '买家手机',
+    createdAt: '下单时间',
+    actions: '操作',
+    filterAll: '全部状态',
+    pay: '去支付',
+    shipSuccess: '发货成功',
+    columnId: 'ID',
   },
   orderStatus: {
     pending: '待付款',

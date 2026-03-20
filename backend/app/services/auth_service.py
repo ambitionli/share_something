@@ -1,3 +1,5 @@
+import secrets
+
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -11,6 +13,10 @@ class AuthService:
 
     async def get_user_by_phone(self, phone: str) -> User | None:
         result = await self.db.execute(select(User).where(User.phone == phone))
+        return result.scalar_one_or_none()
+
+    async def get_user_by_wechat_openid(self, openid: str) -> User | None:
+        result = await self.db.execute(select(User).where(User.wechat_openid == openid))
         return result.scalar_one_or_none()
 
     async def get_user_by_id(self, user_id: int) -> User | None:
@@ -46,6 +52,40 @@ class AuthService:
             "refresh_token": create_refresh_token(user_id),
             "token_type": "bearer",
         }
+
+    async def login_or_register_by_phone_sms(self, phone: str) -> User:
+        user = await self.get_user_by_phone(phone)
+        if user is not None:
+            return user
+        random_password = secrets.token_urlsafe(32)
+        return await self.register(phone, random_password, nickname=f"用户{phone[-4:]}")
+
+    async def bind_wechat_openid(self, phone: str, openid: str) -> User:
+        user_by_openid = await self.get_user_by_wechat_openid(openid)
+        if user_by_openid is not None:
+            if user_by_openid.phone == phone:
+                return user_by_openid
+            raise ValueError("该微信已绑定其他手机号")
+
+        user = await self.get_user_by_phone(phone)
+        if user is not None:
+            if user.wechat_openid:
+                raise ValueError("该手机号已绑定微信")
+            user.wechat_openid = openid
+            await self.db.flush()
+            await self.db.refresh(user)
+            return user
+
+        user = User(
+            phone=phone,
+            password_hash=hash_password(secrets.token_urlsafe(32)),
+            wechat_openid=openid,
+            nickname=f"用户{phone[-4:]}",
+        )
+        self.db.add(user)
+        await self.db.flush()
+        await self.db.refresh(user)
+        return user
 
     async def refresh_access_token(self, refresh_token: str) -> dict:
         payload = decode_token(refresh_token)

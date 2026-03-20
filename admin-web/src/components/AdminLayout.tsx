@@ -8,6 +8,7 @@ import {
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  ShoppingCartOutlined,
 } from '@ant-design/icons';
 import { Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -27,6 +28,7 @@ export default function AdminLayout() {
   const menuItems = [
     { key: '/', icon: <HomeOutlined />, label: t('dashboard.totalOrders').replace(/总数$/, '') || 'Dashboard' },
     { key: '/products', icon: <ShopOutlined />, label: t('products.allProducts') },
+    { key: '/orders', icon: <ShoppingCartOutlined />, label: t('orders.management') },
     { key: '/company', icon: <BankOutlined />, label: t('company.news') },
     { key: '/users', icon: <UserOutlined />, label: t('users.role') },
   ];

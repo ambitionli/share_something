@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import Company from './pages/Company';
 import Users from './pages/Users';
+import Orders from './pages/Orders';
 import { useAuthStore } from './stores/auth';
 import { useEffect } from 'react';
 
@@ -43,6 +44,7 @@ export default function App() {
             <Route path="products" element={<Products />} />
             <Route path="company" element={<Company />} />
             <Route path="users" element={<Users />} />
+            <Route path="orders" element={<Orders />} />
           </Route>
         </Routes>
       </BrowserRouter>

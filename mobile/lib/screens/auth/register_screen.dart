@@ -118,6 +118,13 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         onPressed: () => context.go('/login'),
                         child: Text(l10n.hasAccount),
                       ),
+                      TextButton(
+                        onPressed: () => context.go('/'),
+                        child: Text(
+                          l10n.appName == '分享好物' ? '先随便逛逛 →' : 'Browse first →',
+                          style: TextStyle(color: Colors.grey[600]),
+                        ),
+                      ),
                     ],
                   ),
                 ),

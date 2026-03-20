@@ -6,8 +6,9 @@ import { useTranslation } from 'react-i18next';
 import * as productsApi from '../services/products';
 import type { Product, PaginatedProducts } from '../services/products';
 import { ADMIN_TOKEN_KEY } from '../services/api';
+import { API_BASE_URL } from '../config';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = API_BASE_URL;
 
 export default function Products() {
   const { t } = useTranslation();

@@ -47,5 +47,56 @@
   "networkError": "网络错误",
   "retry": "重试",
   "noData": "暂无数据",
-  "searchProducts": "搜索商品"
+  "searchProducts": "搜索商品",
+  "orderStatusPending": "待付款",
+  "orderStatusPaid": "已付款",
+  "orderStatusShipped": "已发货",
+  "orderStatusCompleted": "已完成",
+  "orderStatusCancelled": "已取消",
+  "orderTotalLabel": "合计",
+  "orderPlacedAt": "下单时间",
+  "orderItemsHeader": "商品明细",
+  "orderExpress": "快递公司",
+  "orderTrackingNo": "物流单号",
+  "orderNumberPrefix": "订单 ",
+  "pay": "去支付",
+  "confirmReceipt": "确认收货",
+  "orderLineItem": "商品 #{productId} × {quantity}，单价 {unitPrice}",
+  "@orderLineItem": {
+    "placeholders": {
+      "productId": {
+        "type": "int"
+      },
+      "quantity": {
+        "type": "int"
+      },
+      "unitPrice": {
+        "type": "String"
+      }
+    }
+  },
+  "adminPanel": "管理后台",
+  "manageProducts": "商品管理",
+  "manageOrders": "订单管理",
+  "ship": "发货",
+  "expressCompany": "快递公司",
+  "trackingNumber": "物流单号",
+  "productName": "商品名称",
+  "productPrice": "价格",
+  "productStock": "库存",
+  "productDescription": "描述",
+  "editProduct": "编辑商品",
+  "addProduct": "新增商品",
+  "deleteConfirm": "确定删除此项？",
+  "save": "保存",
+  "adminAccessDenied": "需要管理员权限",
+  "adminHubTitle": "管理后台",
+  "adminStatsOrders": "订单总数",
+  "adminStatsProducts": "商品总数",
+  "onShelf": "上架",
+  "serverError": "服务器错误",
+  "adminOrdersTitle": "全部订单",
+  "adminProductsTitle": "商品管理",
+  "fieldRequired": "此项为必填",
+  "invalidNumber": "数字格式不正确"
 }

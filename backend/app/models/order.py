@@ -24,7 +24,7 @@ class Order(Base):
         server_default=func.now(),
     )
 
-    items: Mapped[list["OrderItem"]] = relationship(back_populates="order", cascade="all, delete-orphan")
+    items: Mapped[list["OrderItem"]] = relationship(back_populates="order", cascade="all, delete-orphan", lazy="selectin")
 
 
 class OrderItem(Base):
