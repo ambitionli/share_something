@@ -49,7 +49,7 @@ Page({
   },
 
   toggleNotifications(event) {
-    const value = event.detail.value;
+    const value = !this.data.settings.notifications;
     const settings = store.updateSettings({ notifications: value });
     this.setData({
       "settings.notifications": settings.notifications,
@@ -58,7 +58,7 @@ Page({
   },
 
   toggleDarkMode(event) {
-    const value = event.detail.value;
+    const value = !this.data.settings.darkMode;
     const settings = store.updateSettings({ darkMode: value });
     this.setData({
       "settings.darkMode": settings.darkMode,

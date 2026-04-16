@@ -191,13 +191,14 @@ test("coupon discount reduces total and cancellation restores coupon", () => {
   const state = core.createSeedState();
   const userId = "u1";
   state.session.currentUserId = userId;
+  const userAddress = state.addresses.find((item) => item.userId === userId && item.isDefault);
 
   core.upsertCartItem(state, { userId, productId: "p1", delta: 1 });
   core.upsertCartItem(state, { userId, productId: "p2", delta: 1 });
 
   const order = core.createOrder(state, {
     userId,
-    addressId: "a201",
+    addressId: userAddress.id,
     remark: "",
     couponId: "c1"
   });
