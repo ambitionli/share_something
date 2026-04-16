@@ -1,0 +1,52 @@
+<view class="page">
+  <view wx:if="{{!user}}" class="card empty">
+    <view>登录后可同步购物车和下单记录</view>
+    <button class="primary-btn action-btn" bindtap="openLogin">立即登录</button>
+  </view>
+
+  <view wx:elif="{{carts.length === 0}}" class="card empty">
+    <view>购物车还是空的，先去首页挑些好物吧</view>
+    <button class="ghost-btn action-btn" bindtap="openHome">去逛逛</button>
+  </view>
+
+  <view wx:for="{{carts}}" wx:for-item="cart" wx:key="id" class="card cart-card">
+    <view class="cart-head">
+      <view>
+        <view class="merchant-name">{{cart.merchantName}}</view>
+        <view class="muted">起送 ¥{{cart.minOrder}} · 配送费 ¥{{cart.deliveryFee}}</view>
+      </view>
+      <button class="ghost-btn head-btn" data-merchant-id="{{cart.merchantId}}" bindtap="clearMerchantCart">清空</button>
+    </view>
+
+    <view wx:for="{{cart.items}}" wx:for-item="item" wx:key="productId" class="item-row">
+      <image class="item-cover" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="item-content">
+        <view class="item-name">{{item.name}}</view>
+        <view class="muted">单价 ¥{{item.price}} · 库存 {{item.stock}}</view>
+        <view class="item-foot">
+          <view class="item-price">¥{{item.subtotal}}</view>
+          <view class="stepper">
+            <button class="step-btn" data-merchant-id="{{cart.merchantId}}" data-product-id="{{item.productId}}" data-delta="-1" bindtap="changeQuantity">-</button>
+            <view class="qty">{{item.quantity}}</view>
+            <button class="step-btn active" data-merchant-id="{{cart.merchantId}}" data-product-id="{{item.productId}}" data-delta="1" bindtap="changeQuantity">+</button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="checkout-bar">
+      <view>
+        <view class="total">合计 ¥{{cart.payableAmount}}</view>
+        <view class="muted">商品 ¥{{cart.goodsAmount}} + 配送费 ¥{{cart.deliveryFee}}</view>
+      </view>
+      <button class="primary-btn checkout-btn" data-merchant-id="{{cart.merchantId}}" bindtap="checkoutMerchant">去结算</button>
+    </view>
+  </view>
+
+  <view wx:if="{{user && totalCount > 0}}" class="card summary-card sticky-bottom">
+    <view>
+      <view class="summary-title">共 {{totalCount}} 件商品</view>
+      <view class="muted">跨商家购物车合计 ¥{{totalPayable}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,113 @@
+.profile-card,
+.section-card {
+  margin-bottom: 24rpx;
+}
+
+.profile-head {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+
+.avatar {
+  width: 104rpx;
+  height: 104rpx;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.nickname {
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.role-tag {
+  margin-top: 12rpx;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.stat-item {
+  background: #f5f7fb;
+  border-radius: 18rpx;
+  padding: 22rpx;
+  text-align: center;
+}
+
+.stat-value {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: #ff5a44;
+}
+
+.address-item,
+.coupon-item,
+.setting-item {
+  padding: 18rpx 0;
+  border-top: 2rpx solid #f1f4fa;
+}
+
+.address-item:first-child,
+.coupon-item:first-child,
+.setting-item:first-child {
+  border-top: none;
+}
+
+.address-head,
+.setting-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16rpx;
+}
+
+.address-name,
+.coupon-title {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.address-actions,
+.coupon-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 16rpx;
+}
+
+.address-main,
+.coupon-right {
+  flex: 1;
+}
+
+.coupon-left {
+  width: 160rpx;
+  flex-shrink: 0;
+}
+
+.coupon-amount {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #ff5a44;
+}
+
+.coupon-title {
+  margin-bottom: 8rpx;
+}
+
+.item-subtitle,
+.muted-line {
+  margin-top: 8rpx;
+  color: #7a879d;
+  line-height: 1.5;
+}
+
+.mini-btn,
+.action-btn {
+  margin-top: 20rpx;
+}

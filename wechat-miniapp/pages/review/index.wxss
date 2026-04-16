@@ -1,0 +1,62 @@
+.order-card,
+.form-card {
+  margin-bottom: 24rpx;
+}
+
+.merchant-name {
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  padding-top: 18rpx;
+  margin-top: 18rpx;
+  border-top: 2rpx solid #f1f4f8;
+}
+
+.star-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 16rpx;
+}
+
+.star {
+  padding: 12rpx 24rpx;
+  border-radius: 999rpx;
+  background: #f4f6fb;
+  color: #7b8497;
+}
+
+.star.active {
+  background: #fff1d6;
+  color: #ff9f1a;
+}
+
+.mt-20 {
+  margin-top: 20rpx;
+}
+
+.image-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 18rpx;
+}
+
+.image-tag {
+  padding: 10rpx 16rpx;
+  border-radius: 999rpx;
+  background: #f4f6fb;
+  color: #56627a;
+  font-size: 22rpx;
+}
+
+.add-btn,
+.submit-btn {
+  margin-top: 20rpx;
+}

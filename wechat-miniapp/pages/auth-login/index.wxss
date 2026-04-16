@@ -1,0 +1,55 @@
+.auth-page {
+  padding-top: 48rpx;
+}
+
+.hero {
+  background: linear-gradient(135deg, #ff9a62, #ff5a44);
+  color: #ffffff;
+  margin-bottom: 24rpx;
+}
+
+.hero-title {
+  font-size: 52rpx;
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+
+.hero-subtitle {
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.tips,
+.paragraph {
+  font-size: 24rpx;
+  line-height: 1.7;
+  opacity: 0.92;
+}
+
+.tips {
+  margin-top: 20rpx;
+}
+
+.form-card,
+.extra-card {
+  margin-bottom: 24rpx;
+}
+
+.mt-16 {
+  margin-top: 16rpx;
+}
+
+.action-btn {
+  margin-top: 24rpx;
+}
+
+.demo-actions {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 20rpx;
+}
+
+.small-btn {
+  flex: 1;
+  font-size: 26rpx;
+}

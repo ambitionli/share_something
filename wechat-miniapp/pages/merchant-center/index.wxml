@@ -1,0 +1,118 @@
+<view class="page">
+  <view wx:if="{{!user}}" class="card empty">
+    <view>请先登录后进入商家中心</view>
+    <button class="primary-btn action-btn" bindtap="goLogin">去登录</button>
+  </view>
+
+  <view wx:elif="{{!merchant}}" class="card join-card">
+    <view class="section-title">商家入驻</view>
+    <view class="muted">填写基本信息与资质说明后即可开店。</view>
+    <input class="input mt-16" value="{{joinForm.name}}" data-field="name" bindinput="onJoinInput" placeholder="商家名称" />
+    <picker mode="selector" range="{{categories}}" range-key="label" bindchange="onCategoryChange">
+      <view class="input mt-16">{{joinForm.categoryLabel || '请选择分类'}}</view>
+    </picker>
+    <input class="input mt-16" type="number" value="{{joinForm.minOrder}}" data-field="minOrder" bindinput="onJoinInput" placeholder="起送价" />
+    <input class="input mt-16" type="number" value="{{joinForm.deliveryFee}}" data-field="deliveryFee" bindinput="onJoinInput" placeholder="配送费" />
+    <input class="input mt-16" type="number" value="{{joinForm.avgDeliveryMinutes}}" data-field="avgDeliveryMinutes" bindinput="onJoinInput" placeholder="平均配送时长（分钟）" />
+    <input class="input mt-16" value="{{joinForm.address}}" data-field="address" bindinput="onJoinInput" placeholder="门店地址" />
+    <textarea class="textarea mt-16" value="{{joinForm.description}}" data-field="description" bindinput="onJoinInput" placeholder="主营业务 / 资质说明"></textarea>
+    <input class="input mt-16" value="{{joinForm.notice}}" data-field="notice" bindinput="onJoinInput" placeholder="公告" />
+    <button class="primary-btn action-btn" loading="{{submittingJoin}}" bindtap="submitJoin">提交入驻</button>
+  </view>
+
+  <block wx:else>
+    <view class="card shop-card">
+      <view class="shop-head">
+        <view>
+          <view class="shop-name">{{merchant.name}}</view>
+          <view class="muted">{{merchant.address}}</view>
+          <view class="muted">评分 {{merchant.rating}} · 月售 {{merchant.sales}}</view>
+        </view>
+        <view class="tag">{{merchant.category}}</view>
+      </view>
+      <view class="notice">{{merchant.notice}}</view>
+    </view>
+
+    <view class="grid-two stat-grid">
+      <view class="card stat-card">
+        <view class="stat-label">总订单</view>
+        <view class="stat-value">{{stats.totalOrders}}</view>
+      </view>
+      <view class="card stat-card">
+        <view class="stat-label">处理中</view>
+        <view class="stat-value">{{stats.activeOrders}}</view>
+      </view>
+      <view class="card stat-card">
+        <view class="stat-label">完成单</view>
+        <view class="stat-value">{{stats.completedOrders}}</view>
+      </view>
+      <view class="card stat-card">
+        <view class="stat-label">退款额</view>
+        <view class="stat-value">¥{{stats.refundAmount}}</view>
+      </view>
+    </view>
+
+    <view class="grid-two stat-grid">
+      <view class="card stat-card wide-card">
+        <view class="stat-label">销量收入</view>
+        <view class="stat-value">¥{{stats.salesAmount}}</view>
+      </view>
+      <view class="card stat-card wide-card">
+        <view class="stat-label">累计流水</view>
+        <view class="stat-value">¥{{stats.incomeAmount}}</view>
+      </view>
+    </view>
+
+    <view class="card product-editor">
+      <view class="section-title">商品管理</view>
+      <input class="input" value="{{productForm.name}}" data-field="name" bindinput="onProductInput" placeholder="商品名称" />
+      <view class="grid-two mt-16">
+        <input class="input" type="number" value="{{productForm.price}}" data-field="price" bindinput="onProductInput" placeholder="价格" />
+        <input class="input" type="number" value="{{productForm.stock}}" data-field="stock" bindinput="onProductInput" placeholder="库存" />
+      </view>
+      <view class="grid-two mt-16">
+        <input class="input" type="number" value="{{productForm.originalPrice}}" data-field="originalPrice" bindinput="onProductInput" placeholder="原价" />
+        <input class="input" value="{{productForm.image}}" data-field="image" bindinput="onProductInput" placeholder="图片 URL（可选）" />
+      </view>
+      <button class="primary-btn action-btn" bindtap="saveProduct">{{productForm.id ? '更新商品' : '新增商品'}}</button>
+      <button wx:if="{{productForm.id}}" class="ghost-btn action-btn" bindtap="resetProductForm">取消编辑</button>
+    </view>
+
+    <view class="section-title mt-24">商品列表</view>
+    <view wx:for="{{products}}" wx:key="id" class="card product-card">
+      <image class="product-image" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="product-body">
+        <view class="product-name">{{item.name}}</view>
+        <view class="muted">¥{{item.price}} · 库存 {{item.stock}} · 月售 {{item.monthlySales}}</view>
+        <view class="product-actions">
+          <button class="ghost-btn mini-action" data-id="{{item.id}}" bindtap="editProduct">编辑</button>
+          <button class="ghost-btn mini-action" data-id="{{item.id}}" data-onshelf="{{!item.onShelf}}" bindtap="toggleShelf">{{item.onShelf ? '下架' : '上架'}}</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="section-title mt-24">订单管理</view>
+    <view wx:if="{{orders.length === 0}}" class="card empty">暂无订单</view>
+    <view wx:for="{{orders}}" wx:key="id" class="card order-card">
+      <view class="order-head">
+        <view>
+          <view class="order-no">{{item.orderNo}}</view>
+          <view class="muted">{{item.createdAt}} · {{item.userName}}</view>
+        </view>
+        <view class="tag">{{item.statusLabel}}</view>
+      </view>
+      <view wx:for="{{item.items}}" wx:key="productId" class="order-item">
+        {{item.name}} x{{item.quantity}} · ¥{{item.subtotal}}
+      </view>
+      <view class="muted">实付 ¥{{item.payableAmount}} · 备注 {{item.remark || '无'}}</view>
+      <view wx:if="{{item.refund}}" class="refund-box">退款：{{item.refund.status}} / {{item.refund.reason}}</view>
+      <view class="order-actions">
+        <button wx:if="{{item.status === 'pending_accept'}}" class="primary-btn mini-action primary-mini" data-id="{{item.id}}" bindtap="acceptOrder">接单</button>
+        <button wx:if="{{item.status === 'pending_accept'}}" class="ghost-btn mini-action" data-id="{{item.id}}" bindtap="rejectOrder">拒单</button>
+        <button wx:if="{{item.status === 'accepted'}}" class="primary-btn mini-action primary-mini" data-id="{{item.id}}" bindtap="dispatchOrder">标记配送</button>
+        <button wx:if="{{item.status === 'refund_requested'}}" class="primary-btn mini-action primary-mini" data-id="{{item.id}}" data-approve="true" bindtap="handleRefund">同意退款</button>
+        <button wx:if="{{item.status === 'refund_requested'}}" class="ghost-btn mini-action" data-id="{{item.id}}" data-approve="false" bindtap="handleRefund">驳回退款</button>
+      </view>
+    </view>
+  </block>
+</view>

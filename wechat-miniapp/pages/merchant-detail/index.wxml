@@ -1,0 +1,50 @@
+<view class="page">
+  <view wx:if="{{merchant}}" class="card merchant-card">
+    <image class="merchant-cover" src="{{merchant.coverImage}}" mode="aspectFill"></image>
+    <view class="merchant-info">
+      <view class="merchant-name">{{merchant.name}}</view>
+      <view class="muted">评分 {{merchant.rating}} · 月售 {{merchant.sales}} · {{merchant.avgDeliveryMinutes}} 分钟送达</view>
+      <view class="muted">起送 ¥{{merchant.minOrder}} · 配送费 ¥{{merchant.deliveryFee}}</view>
+      <view class="merchant-desc">{{merchant.description}}</view>
+      <view class="notice">{{merchant.notice}}</view>
+    </view>
+  </view>
+
+  <view class="section-title">商品列表</view>
+  <view wx:for="{{products}}" wx:key="id" class="card product-card">
+    <image class="product-cover" src="{{item.image}}" mode="aspectFill"></image>
+    <view class="product-content">
+      <view class="product-name">{{item.name}}</view>
+      <view class="muted">月售 {{item.monthlySales}} · 评分 {{item.rating}}</view>
+      <view class="muted">库存 {{item.stock}}</view>
+      <view class="price-row">
+        <view>
+          <text class="price">¥{{item.price}}</text>
+          <text class="original-price">¥{{item.originalPrice}}</text>
+        </view>
+        <view class="stepper">
+          <button class="step-btn" data-product-id="{{item.id}}" data-delta="-1" bindtap="changeQuantity">-</button>
+          <view class="qty">{{item.cartQuantity}}</view>
+          <button class="step-btn active" data-product-id="{{item.id}}" data-delta="1" bindtap="changeQuantity">+</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{reviews.length}}" class="section-title">最新评价</view>
+  <view wx:for="{{reviews}}" wx:key="id" class="card review-card">
+    <view class="review-head">
+      <view>匿名用户 · {{item.score}} 星</view>
+      <view class="muted">{{item.createdAt}}</view>
+    </view>
+    <view class="review-content">{{item.content || '用户未填写文字评价'}}</view>
+  </view>
+
+  <view wx:if="{{cart && cart.itemCount > 0}}" class="card cart-bar sticky-bottom">
+    <view>
+      <view class="cart-total">已选 {{cart.itemCount}} 件 · 合计 ¥{{cart.payableAmount}}</view>
+      <view class="muted">商品 ¥{{cart.goodsAmount}} + 配送费 ¥{{cart.deliveryFee}}</view>
+    </view>
+    <button class="primary-btn cart-btn" bindtap="goCart">去购物车</button>
+  </view>
+</view>

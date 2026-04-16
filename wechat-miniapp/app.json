@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/auth-login/index",
+    "pages/home/index",
+    "pages/merchant-detail/index",
+    "pages/cart/index",
+    "pages/checkout/index",
+    "pages/orders/index",
+    "pages/review/index",
+    "pages/profile/index",
+    "pages/merchant-center/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "邻里即达",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f7fb",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#76809a",
+    "selectedColor": "#ff5a44",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/cart/index",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/orders/index",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于展示附近商家配送范围"
+    }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

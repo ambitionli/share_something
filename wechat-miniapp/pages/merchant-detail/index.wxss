@@ -1,0 +1,134 @@
+.merchant-card {
+  margin-bottom: 24rpx;
+}
+
+.merchant-cover {
+  width: 100%;
+  height: 320rpx;
+  border-radius: 20rpx;
+}
+
+.merchant-info {
+  margin-top: 20rpx;
+}
+
+.merchant-name {
+  font-size: 38rpx;
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+
+.merchant-desc,
+.notice {
+  margin-top: 14rpx;
+  line-height: 1.6;
+}
+
+.notice {
+  padding: 16rpx 20rpx;
+  border-radius: 18rpx;
+  background: #fff7f3;
+  color: #ff7a45;
+}
+
+.product-card {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.product-cover {
+  width: 176rpx;
+  height: 176rpx;
+  border-radius: 18rpx;
+  flex-shrink: 0;
+}
+
+.product-content {
+  flex: 1;
+}
+
+.product-name {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.price-row {
+  margin-top: 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price {
+  font-size: 34rpx;
+  color: #ff5a44;
+  font-weight: 700;
+}
+
+.original-price {
+  margin-left: 10rpx;
+  color: #a5adbd;
+  text-decoration: line-through;
+  font-size: 24rpx;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.step-btn {
+  width: 56rpx;
+  height: 56rpx;
+  line-height: 56rpx;
+  padding: 0;
+  border-radius: 50%;
+  background: #eef1f7;
+  color: #1d2433;
+}
+
+.step-btn.active {
+  background: #ff5a44;
+  color: #ffffff;
+}
+
+.qty {
+  min-width: 36rpx;
+  text-align: center;
+  font-weight: 600;
+}
+
+.review-card {
+  margin-bottom: 20rpx;
+}
+
+.review-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  margin-bottom: 12rpx;
+}
+
+.review-content {
+  line-height: 1.6;
+}
+
+.cart-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.cart-total {
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.cart-btn {
+  width: 220rpx;
+}

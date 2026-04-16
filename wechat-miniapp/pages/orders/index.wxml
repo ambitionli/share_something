@@ -1,0 +1,98 @@
+<view class="page">
+  <scroll-view class="filter-scroll" scroll-x enable-flex>
+    <view class="filter-row">
+      <view
+        wx:for="{{filters}}"
+        wx:key="id"
+        class="filter-item {{currentFilter === item.id ? 'active' : ''}}"
+        data-filter="{{item.id}}"
+        bindtap="switchFilter"
+      >
+        {{item.label}}
+      </view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{!user}}" class="card empty">
+    <view>登录后可查看订单、支付和退款进度</view>
+    <button class="primary-btn action-btn" bindtap="openLogin">去登录</button>
+  </view>
+
+  <view wx:elif="{{orders.length === 0}}" class="card empty">
+    <view>当前筛选下暂无订单，去首页下第一单吧</view>
+    <button class="ghost-btn action-btn" bindtap="openMerchantCenter">去商家中心看看</button>
+  </view>
+
+  <view wx:for="{{orders}}" wx:key="id" class="card order-card">
+    <view class="order-head">
+      <view>
+        <view class="merchant-name">{{item.merchantName}}</view>
+        <view class="muted">订单号 {{item.orderNo}}</view>
+      </view>
+      <view class="status {{item.statusClass}}">{{item.statusLabel}}</view>
+    </view>
+
+    <view wx:for="{{item.items}}" wx:key="productId" class="order-item">
+      <image class="item-cover" src="{{item.image}}" mode="aspectFill"></image>
+      <view class="item-content">
+        <view class="item-name">{{item.name}}</view>
+        <view class="muted">x{{item.quantity}}</view>
+      </view>
+      <view class="item-price">¥{{item.subtotal}}</view>
+    </view>
+
+    <view class="order-foot">
+      <view class="muted">实付 ¥{{item.payableAmount}} · {{item.createdAt}}</view>
+      <view class="action-row">
+        <button
+          wx:if="{{item.status === 'pending_payment'}}"
+          class="primary-btn mini-action"
+          data-id="{{item.id}}"
+          bindtap="payOrder"
+        >
+          立即支付
+        </button>
+        <button
+          wx:if="{{item.status === 'delivering'}}"
+          class="primary-btn mini-action"
+          data-id="{{item.id}}"
+          bindtap="confirmOrder"
+        >
+          确认收货
+        </button>
+        <button
+          wx:if="{{item.status === 'completed' && !item.reviewed}}"
+          class="primary-btn mini-action"
+          data-id="{{item.id}}"
+          bindtap="goReview"
+        >
+          去评价
+        </button>
+        <button
+          wx:if="{{item.status === 'pending_accept' || item.status === 'accepted' || item.status === 'delivering' || item.status === 'completed'}}"
+          class="ghost-btn mini-action"
+          data-id="{{item.id}}"
+          bindtap="requestRefund"
+        >
+          申请退款
+        </button>
+      </view>
+    </view>
+
+    <view wx:if="{{item.refund}}" class="refund-box">
+      <view>退款状态：{{item.refund.status}}</view>
+      <view class="muted">原因：{{item.refund.reason}}</view>
+    </view>
+
+    <view wx:if="{{focusId === item.id && item.timeline && item.timeline.length}}" class="timeline">
+      <view class="section-title timeline-title">订单轨迹</view>
+      <view wx:for="{{item.timeline}}" wx:key="at" class="timeline-item">
+        <view class="dot"></view>
+        <view class="timeline-content">
+          <view>{{item.label}}</view>
+          <view class="muted">{{item.at}} {{item.description}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

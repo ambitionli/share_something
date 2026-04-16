@@ -1,0 +1,25 @@
+<view class="page auth-page">
+  <view class="hero card">
+    <view class="hero-title">邻里即达</view>
+    <view class="hero-subtitle">本地生活服务 + 商家入驻 + 下单配送一体化演示</view>
+    <view class="tips">手机号演示验证码固定为 123456，可直接切换买家 / 商家账号登录。</view>
+  </view>
+
+  <view class="card form-card">
+    <view class="section-title">手机号登录</view>
+    <input class="input" type="number" maxlength="11" value="{{phone}}" bindinput="onPhoneInput" placeholder="请输入手机号" />
+    <input class="input mt-16" type="number" maxlength="6" value="{{code}}" bindinput="onCodeInput" placeholder="请输入验证码" />
+    <button class="primary-btn action-btn" loading="{{loading}}" bindtap="handlePhoneLogin">手机号登录</button>
+    <view class="demo-actions">
+      <button class="ghost-btn small-btn" bindtap="useBuyerDemo">买家演示账号</button>
+      <button class="ghost-btn small-btn" bindtap="useMerchantDemo">商家演示账号</button>
+    </view>
+  </view>
+
+  <view class="card extra-card">
+    <view class="section-title">微信授权登录</view>
+    <view class="muted paragraph">不依赖真实 openid，点击后将自动生成演示用户并发放新人券。</view>
+    <button class="primary-btn action-btn" loading="{{loading}}" bindtap="handleWechatLogin">微信一键授权</button>
+    <button class="ghost-btn action-btn" bindtap="resetDemoData">恢复默认演示数据</button>
+  </view>
+</view>

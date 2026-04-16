@@ -1,0 +1,37 @@
+<view class="page">
+  <view wx:if="{{!order}}" class="card empty">
+    暂无可评价订单
+  </view>
+
+  <block wx:elif="{{order}}">
+    <view class="card order-card">
+      <view class="merchant-name">{{order.merchantName}}</view>
+      <view class="muted">订单号 {{order.orderNo}} · {{order.createdAt}}</view>
+      <view wx:for="{{order.items}}" wx:key="productId" class="order-item">
+        <view>{{item.name}} × {{item.quantity}}</view>
+        <view>¥{{item.subtotal}}</view>
+      </view>
+    </view>
+
+    <view class="card form-card">
+      <view class="section-title">服务评分</view>
+      <view class="star-row">
+        <view
+          wx:for="{{starOptions}}"
+          wx:key="value"
+          class="star-chip {{item.value <= score ? 'active' : ''}}"
+          data-score="{{item.value}}"
+          bindtap="chooseScore"
+        >
+          {{item.label}}
+        </view>
+      </view>
+      <textarea class="textarea mt-20" placeholder="说说商家和配送表现吧" value="{{content}}" bindinput="onContentInput"></textarea>
+      <view class="image-row">
+        <view wx:for="{{images}}" wx:key="*this" class="image-tag">{{item}}</view>
+      </view>
+      <button class="ghost-btn add-btn" bindtap="addMockImage">添加演示图片</button>
+      <button class="primary-btn submit-btn" bindtap="submitReview">提交评价</button>
+    </view>
+  </block>
+</view>

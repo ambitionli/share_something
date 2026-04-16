@@ -1,0 +1,111 @@
+page {
+  background: #f6f7fb;
+  color: #1d2433;
+  font-size: 28rpx;
+  min-height: 100%;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24rpx;
+  box-sizing: border-box;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 24rpx;
+  padding: 24rpx;
+  box-shadow: 0 16rpx 40rpx rgba(33, 49, 89, 0.08);
+}
+
+.section-title {
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-bottom: 20rpx;
+}
+
+.muted {
+  color: #76809a;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #ff7a45, #ff4d4f);
+  color: #ffffff;
+  border-radius: 999rpx;
+  border: none;
+}
+
+.ghost-btn {
+  border: 2rpx solid #ffd2c6;
+  color: #ff5a44;
+  background: #fff7f3;
+  border-radius: 999rpx;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rpx 18rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  background: #fff2ef;
+  color: #ff5a44;
+}
+
+.status-pending,
+.status-pending_accept,
+.status-accepted {
+  color: #ff8a00;
+}
+
+.status-delivering {
+  color: #1677ff;
+}
+
+.status-completed {
+  color: #12b76a;
+}
+
+.status-refund,
+.status-refunded,
+.status-rejected,
+.status-refund_requested {
+  color: #cf1322;
+}
+
+.grid-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20rpx;
+}
+
+.input,
+.textarea {
+  width: 100%;
+  background: #f5f7fb;
+  border-radius: 18rpx;
+  padding: 22rpx 24rpx;
+  box-sizing: border-box;
+}
+
+.textarea {
+  min-height: 180rpx;
+}
+
+.sticky-bottom {
+  position: sticky;
+  bottom: 24rpx;
+}
+
+.empty {
+  text-align: center;
+  color: #97a0b5;
+  padding: 80rpx 24rpx;
+}
+
+.status-pending_payment,
+.status-pending_accept,
+.status-accepted {
+  color: #ff8a00;
+}

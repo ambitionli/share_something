@@ -1,0 +1,110 @@
+.hero-card {
+  margin-bottom: 24rpx;
+}
+
+.merchant-name {
+  font-size: 36rpx;
+  font-weight: 700;
+  margin-bottom: 10rpx;
+}
+
+.merchant-desc {
+  margin-top: 12rpx;
+  line-height: 1.6;
+}
+
+.join-form,
+.product-form,
+.stats-grid,
+.section-card {
+  margin-bottom: 24rpx;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 10rpx;
+  color: #56627a;
+}
+
+.half-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16rpx;
+}
+
+.cover-input {
+  margin-top: 16rpx;
+}
+
+.action-row {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 24rpx;
+}
+
+.half-btn {
+  flex: 1;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16rpx;
+}
+
+.stat-card {
+  background: #ffffff;
+  border-radius: 22rpx;
+  padding: 22rpx;
+  box-shadow: 0 16rpx 36rpx rgba(33, 49, 89, 0.08);
+}
+
+.stat-label {
+  color: #76809a;
+  margin-bottom: 10rpx;
+}
+
+.stat-value {
+  font-size: 38rpx;
+  font-weight: 700;
+  color: #1d2433;
+}
+
+.product-row,
+.order-row {
+  border-top: 2rpx solid #f1f4f8;
+  padding: 20rpx 0;
+}
+
+.product-row:first-child,
+.order-row:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.product-name,
+.order-no {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.product-actions,
+.order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 18rpx;
+}
+
+.tiny-btn {
+  font-size: 24rpx;
+  line-height: 60rpx;
+  padding: 0 24rpx;
+}

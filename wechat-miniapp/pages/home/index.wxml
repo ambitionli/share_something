@@ -1,0 +1,62 @@
+<view class="page">
+  <view class="card top-card">
+    <view class="top-row">
+      <view>
+        <view class="title">你好，{{user ? user.nickname : '游客'}}</view>
+        <view class="muted">餐饮 / 超市 / 药品 / 生鲜，半小时送到家</view>
+      </view>
+      <button wx:if="{{!user}}" class="ghost-btn mini-btn" bindtap="openLogin">去登录</button>
+      <button wx:else class="ghost-btn mini-btn" bindtap="openMerchantCenter">商家中心</button>
+    </view>
+    <view class="search-row">
+      <input class="input search-input" value="{{keyword}}" bindinput="onKeywordInput" placeholder="搜索商家、商品，如：卤肉饭 / 口罩" confirm-type="search" bindconfirm="handleSearch" />
+      <button class="primary-btn search-btn" bindtap="handleSearch">搜索</button>
+    </view>
+  </view>
+
+  <swiper class="banner-swiper" indicator-dots autoplay circular interval="3200">
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <view class="banner-item" style="background-image:url({{item.image}})">
+        <view class="banner-mask">
+          <view class="banner-title">{{item.title}}</view>
+          <view class="banner-subtitle">{{item.subtitle}}</view>
+        </view>
+      </view>
+    </swiper-item>
+  </swiper>
+
+  <view class="card category-card">
+    <view class="section-title">分类</view>
+    <view class="category-list">
+      <view class="category-item {{currentCategory === '' ? 'active' : ''}}" data-category="" bindtap="switchCategory">
+        <view class="emoji">✨</view>
+        <view class="category-name">全部</view>
+      </view>
+      <view wx:for="{{categories}}" wx:key="id" class="category-item {{currentCategory === item.id ? 'active' : ''}}" data-category="{{item.id}}" bindtap="switchCategory">
+        <view class="emoji">{{item.icon}}</view>
+        <view class="category-name">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="section-title merchant-title">附近商家</view>
+  <view wx:if="{{!loading && merchants.length === 0}}" class="card empty">
+    暂无符合条件的商家，试试切换分类或搜索词
+  </view>
+
+  <view wx:for="{{merchants}}" wx:for-item="merchant" wx:key="id" class="card merchant-card" data-id="{{merchant.id}}" bindtap="openMerchant">
+    <image class="merchant-cover" src="{{merchant.coverImage}}" mode="aspectFill"></image>
+    <view class="merchant-content">
+      <view class="merchant-head">
+        <view class="merchant-name">{{merchant.name}}</view>
+        <view class="tag">{{merchant.category}}</view>
+      </view>
+      <view class="muted merchant-info">评分 {{merchant.rating}} · 月售 {{merchant.sales}} · {{merchant.avgDeliveryMinutes}} 分钟</view>
+      <view class="muted merchant-info">起送 ¥{{merchant.minOrder}} · 配送费 ¥{{merchant.deliveryFee}}</view>
+      <view class="merchant-desc">{{merchant.description}}</view>
+      <view class="recommend-row">
+        <view wx:for="{{merchant.recommendProducts}}" wx:for-item="productName" wx:key="*this" class="recommend-tag">{{productName}}</view>
+      </view>
+    </view>
+  </view>
+</view>

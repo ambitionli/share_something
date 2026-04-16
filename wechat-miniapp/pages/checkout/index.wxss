@@ -1,0 +1,93 @@
+.address-picker {
+  padding: 18rpx 20rpx;
+  background: #f5f7fb;
+  border-radius: 18rpx;
+  margin-top: 16rpx;
+}
+
+.address-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  align-items: flex-start;
+}
+
+.address-name {
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.address-detail {
+  margin-top: 10rpx;
+  line-height: 1.6;
+}
+
+.small-text {
+  font-size: 24rpx;
+}
+
+.form-card,
+.amount-card,
+.item-card {
+  margin-bottom: 20rpx;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12rpx 0;
+}
+
+.summary-row.total {
+  margin-top: 8rpx;
+  padding-top: 20rpx;
+  border-top: 2rpx solid #f0f2f6;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.goods-row {
+  display: flex;
+  gap: 16rpx;
+  align-items: center;
+}
+
+.goods-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 16rpx;
+  flex-shrink: 0;
+}
+
+.goods-info {
+  flex: 1;
+}
+
+.goods-name {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.goods-meta {
+  margin-top: 10rpx;
+}
+
+.submit-card {
+  margin-top: 12rpx;
+  display: flex;
+  justify-content: space-between;
+  gap: 20rpx;
+  align-items: center;
+}
+
+.submit-price {
+  font-size: 34rpx;
+  color: #ff5a44;
+  font-weight: 700;
+  margin-top: 8rpx;
+}
+
+.submit-btn {
+  width: 240rpx;
+}
