@@ -1,0 +1,37 @@
+<view class="page">
+  <view class="card" style="background: linear-gradient(135deg, #7f5af0, #6246ea); color: #ffffff;">
+    <view style="font-size: 48rpx; font-weight: 700; margin-bottom: 12rpx;">今晚吃点啥</view>
+    <view>本地生活服务 + 商家入驻 + 配送 + 评价 + 退款的完整小程序演示。</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">快捷登录</view>
+    <input class="input" type="number" maxlength="11" placeholder="手机号" value="{{phone}}" bindinput="handlePhoneInput" />
+    <input class="input" placeholder="昵称（用于微信授权演示）" value="{{nickname}}" bindinput="handleNicknameInput" />
+    <button class="btn-primary" bindtap="loginByPhone">手机号登录 / 注册</button>
+    <view style="height: 16rpx;"></view>
+    <button class="btn-light" bindtap="loginByWechat">微信授权登录（模拟）</button>
+  </view>
+
+  <view class="card">
+    <view class="section-title">当前演示账号</view>
+    <view wx:if="{{currentUser}}">
+      <view class="space-between list-item">
+        <text>昵称</text>
+        <text>{{currentUser.nickname}}</text>
+      </view>
+      <view class="space-between list-item">
+        <text>手机号</text>
+        <text>{{currentUser.phone}}</text>
+      </view>
+      <view class="space-between list-item">
+        <text>余额</text>
+        <text>{{currentUser.balance}} 元</text>
+      </view>
+    </view>
+    <view class="action-row">
+      <button class="btn-light" bindtap="resetDemo">恢复演示数据</button>
+      <button class="btn-primary" bindtap="loginByPhone">进入首页</button>
+    </view>
+  </view>
+</view>

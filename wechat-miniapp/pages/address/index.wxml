@@ -1,0 +1,29 @@
+<view class="page">
+  <view class="card">
+    <view class="section-title">我的地址</view>
+    <view wx:if="{{!addresses.length}}" class="empty">还没有地址，先新增一个吧</view>
+    <view wx:for="{{addresses}}" wx:key="id" class="list-item">
+      <view class="space-between">
+        <view>{{item.name}} {{item.phone}}</view>
+        <text class="chip">{{item.tag}}</text>
+      </view>
+      <view class="muted" style="margin-top: 8rpx;">{{item.detail}}</view>
+      <view class="action-row">
+        <button class="btn-light" data-id="{{item.id}}" bindtap="editAddress">编辑</button>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">{{form.id ? '编辑地址' : '新增地址'}}</view>
+    <input class="input" data-key="name" placeholder="收货人" value="{{form.name}}" bindinput="bindField" />
+    <input class="input" data-key="phone" type="number" maxlength="11" placeholder="手机号" value="{{form.phone}}" bindinput="bindField" />
+    <input class="input" data-key="detail" placeholder="详细地址" value="{{form.detail}}" bindinput="bindField" />
+    <input class="input" data-key="tag" placeholder="地址标签，例如 家 / 公司" value="{{form.tag}}" bindinput="bindField" />
+    <view class="space-between" style="margin-bottom: 16rpx;">
+      <text>设为默认地址</text>
+      <switch checked="{{form.isDefault}}" bindchange="toggleDefault"></switch>
+    </view>
+    <button class="btn-primary" bindtap="saveAddress">保存地址</button>
+  </view>
+</view>

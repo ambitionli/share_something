@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/home/index",
+    "pages/merchant/index",
+    "pages/cart/index",
+    "pages/checkout/index",
+    "pages/orders/index",
+    "pages/review/index",
+    "pages/address/index",
+    "pages/profile/index",
+    "pages/merchantCenter/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "今晚吃点啥",
+    "navigationBarBackgroundColor": "#7f5af0",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f6f7fb",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#64748b",
+    "selectedColor": "#7f5af0",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/cart/index",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/orders/index",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,96 @@
+<view class="page">
+  <view wx:if="{{!center.merchant}}">
+    <view class="card">
+      <view class="section-title">商家入驻</view>
+      <input class="input" data-key="name" placeholder="商家名称" value="{{applyForm.name}}" bindinput="bindApplyField" />
+      <picker range="{{categories}}" range-key="name" value="{{categoryIndex}}" bindchange="chooseCategory">
+        <view class="input">分类：{{categories[categoryIndex] ? categories[categoryIndex].name : '请选择'}}</view>
+      </picker>
+      <textarea class="textarea" data-key="announcement" placeholder="营业说明、配送说明" value="{{applyForm.announcement}}" bindinput="bindApplyField"></textarea>
+      <textarea class="textarea" data-key="qualificationImagesText" placeholder="资质图片链接，每行一张（模拟上传）" value="{{applyForm.qualificationImagesText}}" bindinput="bindApplyField"></textarea>
+      <button class="btn-primary" bindtap="submitApplication">提交并自动审核</button>
+    </view>
+  </view>
+
+  <view wx:if="{{center.merchant}}">
+    <view class="card">
+      <view class="space-between">
+        <view>
+          <view class="section-title">{{center.merchant.name}}</view>
+          <view class="muted">{{center.merchant.announcement}}</view>
+        </view>
+        <view class="pill-status">评分 {{center.merchant.score}}</view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="section-title">数据概览</view>
+      <view class="stat-grid">
+        <view class="stat-box">
+          <view class="muted">订单数</view>
+          <view style="font-size: 42rpx; font-weight: 700;">{{center.overview.orderCount}}</view>
+        </view>
+        <view class="stat-box">
+          <view class="muted">已完成</view>
+          <view style="font-size: 42rpx; font-weight: 700;">{{center.overview.completedCount}}</view>
+        </view>
+        <view class="stat-box">
+          <view class="muted">收入</view>
+          <view style="font-size: 42rpx; font-weight: 700;">¥{{center.overview.income}}</view>
+        </view>
+        <view class="stat-box">
+          <view class="muted">退款</view>
+          <view style="font-size: 42rpx; font-weight: 700;">¥{{center.overview.refunds}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="section-title">{{productForm.id ? '编辑商品' : '新增商品'}}</view>
+      <input class="input" data-key="name" placeholder="商品名称" value="{{productForm.name}}" bindinput="bindProductField" />
+      <input class="input" data-key="description" placeholder="商品描述" value="{{productForm.description}}" bindinput="bindProductField" />
+      <input class="input" data-key="price" type="digit" placeholder="价格" value="{{productForm.price}}" bindinput="bindProductField" />
+      <input class="input" data-key="stock" type="number" placeholder="库存" value="{{productForm.stock}}" bindinput="bindProductField" />
+      <input class="input" data-key="image" placeholder="商品图片链接" value="{{productForm.image}}" bindinput="bindProductField" />
+      <button class="btn-primary" bindtap="saveProduct">保存商品</button>
+    </view>
+
+    <view class="card">
+      <view class="section-title">商品管理</view>
+      <view wx:for="{{center.products}}" wx:key="id" class="list-item">
+        <view class="space-between">
+          <view>
+            <view style="font-weight:700;">{{item.name}}</view>
+            <view class="muted">¥{{item.price}} · 库存 {{item.stock}} · {{item.onShelf ? '已上架' : '已下架'}}</view>
+          </view>
+          <view class="pill-status">{{item.monthlySales}} 销量</view>
+        </view>
+        <view class="action-row">
+          <button class="btn-light" data-id="{{item.id}}" bindtap="editProduct">编辑</button>
+          <button class="btn-primary" data-id="{{item.id}}" data-on="{{item.onShelf}}" bindtap="toggleShelf">{{item.onShelf ? '下架' : '上架'}}</button>
+        </view>
+      </view>
+    </view>
+
+    <view class="card">
+      <view class="section-title">订单管理</view>
+      <view wx:if="{{!center.orders.length}}" class="empty">暂无订单</view>
+      <view wx:for="{{center.orders}}" wx:key="id" class="list-item">
+        <view class="space-between">
+          <view>
+            <view style="font-weight:700;">{{item.orderNo}}</view>
+            <view class="muted">{{item.address.name}} · {{item.address.phone}}</view>
+          </view>
+          <view class="pill-status {{item.status === 'refund_pending' || item.status === 'refunded' ? 'danger-status' : ''}}">{{item.statusLabel}}</view>
+        </view>
+        <view class="muted" style="margin-top: 8rpx;">金额 ¥{{item.totalAmount}} · {{item.items[0].name}} 等 {{item.items.length}} 件</view>
+        <view class="action-row">
+          <button wx:if="{{item.canAccept}}" class="btn-primary" data-id="{{item.id}}" bindtap="acceptOrder">接单</button>
+          <button wx:if="{{item.canReject}}" class="btn-warn" data-id="{{item.id}}" bindtap="rejectOrder">拒单</button>
+          <button wx:if="{{item.canDeliver}}" class="btn-light" data-id="{{item.id}}" bindtap="deliverOrder">标记配送</button>
+          <button wx:if="{{item.status === 'refund_pending'}}" class="btn-warn" data-id="{{item.id}}" bindtap="processRefund">处理退款</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,65 @@
+<view class="page" wx:if="{{cart}}">
+  <view class="card">
+    <view class="space-between">
+      <view class="section-title">配送地址</view>
+      <button class="btn-light" bindtap="goAddressPage">管理地址</button>
+    </view>
+    <view wx:if="{{!addresses.length}}" class="empty">请先新增一个收货地址</view>
+    <view
+      wx:for="{{addresses}}"
+      wx:key="id"
+      class="list-item"
+      data-id="{{item.id}}"
+      bindtap="chooseAddress"
+      style="{{selectedAddressId === item.id ? 'border:2rpx solid #7f5af0;border-radius:16rpx;padding:16rpx;' : ''}}"
+    >
+      <view class="space-between">
+        <view>{{item.name}} {{item.phone}}</view>
+        <text class="chip">{{item.tag}}</text>
+      </view>
+      <view class="muted" style="margin-top: 8rpx;">{{item.detail}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">订单商品</view>
+    <view wx:for="{{cart.items}}" wx:key="productId" class="list-item">
+      <view class="space-between">
+        <view>{{item.name}} x {{item.quantity}}</view>
+        <view>¥{{item.subtotal}}</view>
+      </view>
+    </view>
+    <view class="space-between list-item">
+      <text>配送费</text>
+      <text>¥{{cart.deliveryFee}}</text>
+    </view>
+    <view class="space-between list-item">
+      <text>打包费</text>
+      <text>¥{{cart.packageFee}}</text>
+    </view>
+    <view class="space-between">
+      <text style="font-weight:700;">合计</text>
+      <text class="price">¥{{cart.totalText}}</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">备注与优惠</view>
+    <textarea class="textarea" placeholder="比如：少辣、尽快送、放门口" value="{{remark}}" bindinput="handleRemarkInput"></textarea>
+    <picker range="{{coupons}}" range-key="title" value="{{couponIndex}}" bindchange="chooseCoupon">
+      <view class="input">优惠券：{{coupons[couponIndex].title}}</view>
+    </picker>
+    <view class="space-between list-item">
+      <text>优惠抵扣</text>
+      <text class="price">-¥{{discountText}}</text>
+    </view>
+    <view class="space-between">
+      <text>应付总额</text>
+      <text class="price">¥{{payableText}}</text>
+    </view>
+  </view>
+
+  <view class="sticky-footer">
+    <button class="btn-primary" bindtap="submitOrder">提交订单</button>
+  </view>
+</view>

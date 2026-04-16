@@ -1,0 +1,60 @@
+<view class="page" wx:if="{{profile}}">
+  <view class="card" style="background: linear-gradient(135deg, #1e293b, #334155); color: #ffffff;">
+    <view style="font-size: 40rpx; font-weight: 700;">{{profile.user.nickname}}</view>
+    <view style="margin-top: 12rpx;">手机号 {{profile.user.phone}}</view>
+    <view style="margin-top: 12rpx;">余额 {{profile.user.balance}} 元</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">我的资产与权益</view>
+    <view class="space-between list-item">
+      <text>优惠券</text>
+      <text>{{profile.coupons.length}} 张</text>
+    </view>
+    <view wx:for="{{profile.coupons}}" wx:key="id" class="list-item">
+      <view class="space-between">
+        <text>{{item.title}}</text>
+        <text>满 {{item.threshold}} 减 {{item.amount}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">常用功能</view>
+    <view class="space-between list-item" bindtap="goOrders">
+      <text>我的订单</text>
+      <text class="muted">查看配送与评价 ></text>
+    </view>
+    <view class="space-between list-item" bindtap="goAddress">
+      <text>地址管理</text>
+      <text class="muted">维护收货地址 ></text>
+    </view>
+    <view class="space-between list-item" bindtap="callService">
+      <text>客服中心</text>
+      <text class="muted">联系人工客服 ></text>
+    </view>
+    <view class="space-between list-item" bindtap="goMerchantCenter">
+      <text>商家端入口</text>
+      <text class="muted">{{profile.merchant ? '管理店铺' : '申请入驻'}} ></text>
+    </view>
+    <view class="space-between list-item">
+      <text>通知设置</text>
+      <text class="muted">{{profile.settings.notifications ? '已开启' : '已关闭'}}</text>
+    </view>
+    <view class="action-row" style="justify-content:flex-start;">
+      <button class="btn-light" bindtap="toggleNotifications">{{profile.settings.notifications ? '关闭通知' : '开启通知'}}</button>
+      <button class="btn-light" bindtap="toggleDarkMode">{{profile.settings.darkMode ? '关闭深色模式' : '开启深色模式'}}</button>
+    </view>
+    <view class="space-between">
+      <text>深色模式</text>
+      <text class="muted">{{profile.settings.darkMode ? '已开启' : '已关闭'}}</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="action-row">
+      <button class="btn-light" bindtap="resetDemo">恢复演示数据</button>
+      <button class="btn-primary" bindtap="goLogin">切换账号</button>
+    </view>
+  </view>
+</view>
