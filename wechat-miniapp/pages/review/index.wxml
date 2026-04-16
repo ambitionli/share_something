@@ -1,0 +1,17 @@
+<view class="container">
+  <view class="card" wx:if="{{order}}">
+    <view class="section-title">评价订单</view>
+    <view class="muted">{{order.merchantName}}</view>
+    <view class="muted">{{order.itemSummary}}</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">星级评分</view>
+    <view class="wrap">
+      <view class="tag {{rating >= item ? 'active' : ''}}" wx:for="{{[1,2,3,4,5]}}" wx:key="*this" data-star="{{item}}" bindtap="selectStar">{{item}} 星</view>
+    </view>
+    <textarea class="textarea" value="{{content}}" placeholder="写下对商品、配送和服务的评价" bindinput="onContentInput"></textarea>
+    <textarea class="textarea" value="{{imagesText}}" placeholder="图片地址或云文件 ID，多个用英文逗号分隔" bindinput="onImagesInput"></textarea>
+    <button class="primary-btn" bindtap="submitReview">提交评价</button>
+  </view>
+</view>

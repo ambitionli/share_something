@@ -1,0 +1,37 @@
+<view class="container">
+  <view class="banner" wx:for="{{banners}}" wx:key="id">
+    <view class="section-title">{{item.title}}</view>
+    <view>{{item.subtitle}}</view>
+  </view>
+
+  <view class="card">
+    <view class="row space-between">
+      <view>
+        <view class="section-title">你好，{{currentUser.nickname}}</view>
+        <view class="muted">当前购物车 {{cartSummary.totalCount}} 件商品</view>
+      </view>
+      <button class="ghost-btn" size="mini" bindtap="resetDemoData">重置</button>
+    </view>
+    <input class="input" placeholder="搜索商家或配送说明" value="{{keywordInput}}" bindinput="onSearchInput" confirm-type="search" bindconfirm="submitSearch" />
+    <view class="wrap">
+      <view class="tag {{activeCategory === item ? 'active' : ''}}" wx:for="{{categories}}" wx:key="*this" data-category="{{item}}" bindtap="selectCategory">{{item}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">附近商家</view>
+    <block wx:if="{{merchants.length}}">
+      <view class="list-item" wx:for="{{merchants}}" wx:key="id" data-id="{{item.id}}" bindtap="openMerchant">
+        <view class="row space-between">
+          <view>
+            <view>{{item.name}}</view>
+            <view class="muted">{{item.category}} · 评分 {{item.rating}} · 月售 {{item.sales}}</view>
+            <view class="muted">配送费 {{item.deliveryFee}} 元 · 起送 {{item.minOrderAmount}} 元</view>
+          </view>
+          <view class="badge">进入</view>
+        </view>
+      </view>
+    </block>
+    <view class="empty" wx:else>没有找到符合条件的商家。</view>
+  </view>
+</view>

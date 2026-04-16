@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="card">
+    <view class="wrap">
+      <view class="tag {{activeTab === item.key ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="key" data-tab="{{item.key}}" bindtap="changeTab">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <block wx:if="{{orders.length}}">
+      <view class="list-item" wx:for="{{orders}}" wx:key="id">
+        <view class="row space-between">
+          <view><view>{{item.orderNo}}</view><view class="muted">{{item.itemSummary}}</view></view>
+          <view class="badge {{item.statusClass}}">{{item.statusText}}</view>
+        </view>
+        <view class="muted">收货地址：{{item.addressSnapshot.detail}}</view>
+        <view class="muted">退款状态：{{item.refundText}}</view>
+        <view class="row" style="gap: 12rpx; margin-top: 16rpx; flex-wrap: wrap;">
+          <button class="secondary-btn" size="mini" wx:if="{{item.canAccept}}" data-id="{{item.id}}" data-action="accept" bindtap="handleAction">接单</button>
+          <button class="warn-btn" size="mini" wx:if="{{item.canReject}}" data-id="{{item.id}}" data-action="reject" bindtap="handleAction">拒单</button>
+          <button class="primary-btn" size="mini" wx:if="{{item.canDeliver}}" data-id="{{item.id}}" data-action="deliver" bindtap="handleAction">标记配送</button>
+          <button class="secondary-btn" size="mini" wx:if="{{item.canApproveRefund}}" data-id="{{item.id}}" data-action="approveRefund" bindtap="handleAction">同意退款</button>
+          <button class="warn-btn" size="mini" wx:if="{{item.canApproveRefund}}" data-id="{{item.id}}" data-action="rejectRefund" bindtap="handleAction">拒绝退款</button>
+        </view>
+      </view>
+    </block>
+    <view class="empty" wx:else>暂无匹配订单。</view>
+  </view>
+</view>

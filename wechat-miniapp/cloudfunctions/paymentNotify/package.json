@@ -1,0 +1,7 @@
+{
+  "name": "paymentNotify",
+  "private": true,
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

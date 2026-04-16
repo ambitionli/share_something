@@ -1,0 +1,35 @@
+<view class="container">
+  <view class="card">
+    <view class="wrap">
+      <view class="tag {{activeTab === item.key ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="key" data-tab="{{item.key}}" bindtap="changeTab">{{item.label}}</view>
+    </view>
+  </view>
+
+  <view class="card">
+    <block wx:if="{{orders.length}}">
+      <view class="list-item" wx:for="{{orders}}" wx:key="id">
+        <view class="row space-between">
+          <view>
+            <view>{{item.merchantName}}</view>
+            <view class="muted">订单号 {{item.orderNo}}</view>
+          </view>
+          <view class="badge {{item.statusClass}}">{{item.statusText}}</view>
+        </view>
+        <view class="muted">{{item.itemSummary}}</view>
+        <view class="muted">地址：{{item.addressSnapshot.detail}}</view>
+        <view class="muted" wx:if="{{item.refundStatus !== 'none'}}">退款：{{item.refundText}} {{item.merchantReply}}</view>
+        <view class="row space-between" style="margin-top: 16rpx;">
+          <view class="price">{{item.totalAmount}} 元</view>
+          <view class="row" style="gap: 12rpx; flex-wrap: wrap;">
+            <button class="ghost-btn" size="mini" wx:if="{{item.canPay}}" data-id="{{item.id}}" data-action="pay" bindtap="handleAction">支付</button>
+            <button class="warn-btn" size="mini" wx:if="{{item.canPay}}" data-id="{{item.id}}" data-action="cancel" bindtap="handleAction">取消</button>
+            <button class="warn-btn" size="mini" wx:if="{{item.canRefund}}" data-id="{{item.id}}" data-action="refund" bindtap="handleAction">申请退款</button>
+            <button class="secondary-btn" size="mini" wx:if="{{item.canConfirm}}" data-id="{{item.id}}" data-action="confirm" bindtap="handleAction">确认送达</button>
+            <button class="primary-btn" size="mini" wx:if="{{item.canReview}}" data-id="{{item.id}}" data-action="review" bindtap="handleAction">去评价</button>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="empty" wx:else>当前筛选条件下暂无订单。</view>
+  </view>
+</view>

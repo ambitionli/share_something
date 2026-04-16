@@ -1,0 +1,11 @@
+{
+  "name": "neolife-local-miniapp",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test": "node --test scripts/*.test.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

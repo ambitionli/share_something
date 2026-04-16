@@ -1,0 +1,32 @@
+<view class="container" wx:if="{{merchant}}">
+  <view class="card">
+    <view class="section-title">{{merchant.name}}</view>
+    <view class="muted">{{merchant.category}} · 当前评分 {{merchant.rating}}</view>
+    <view class="muted">起送 {{merchant.minOrderAmount}} 元 · 配送 {{merchant.deliveryFee}} 元</view>
+  </view>
+
+  <view class="grid-two">
+    <view class="card"><view class="muted">总订单</view><view class="stat-number">{{stats.totalOrders}}</view></view>
+    <view class="card"><view class="muted">待处理</view><view class="stat-number">{{stats.waitingOrders}}</view></view>
+    <view class="card"><view class="muted">配送中</view><view class="stat-number">{{stats.deliveringOrders}}</view></view>
+    <view class="card"><view class="muted">退款单</view><view class="stat-number">{{stats.refundOrders}}</view></view>
+  </view>
+
+  <view class="card">
+    <view class="row space-between">
+      <view><view class="muted">已完成收入</view><view class="stat-number">{{stats.revenue}}</view></view>
+      <view><view class="muted">退款金额</view><view class="stat-number">{{stats.refundedAmount}}</view></view>
+    </view>
+    <button class="secondary-btn" bindtap="openProducts">商品管理</button>
+    <button class="primary-btn" bindtap="openOrders">订单管理</button>
+  </view>
+
+  <view class="card">
+    <view class="section-title">最近订单</view>
+    <view class="list-item" wx:for="{{recentOrders}}" wx:key="id">
+      <view class="row space-between"><view>{{item.orderNo}}</view><view class="badge {{item.statusClass}}">{{item.statusText}}</view></view>
+      <view class="muted">{{item.itemSummary}}</view>
+      <view class="muted">{{item.totalAmount}} 元</view>
+    </view>
+  </view>
+</view>

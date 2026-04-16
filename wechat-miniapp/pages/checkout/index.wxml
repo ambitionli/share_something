@@ -1,0 +1,41 @@
+<view class="container">
+  <view class="card">
+    <view class="section-title">确认订单</view>
+    <view class="list-item" wx:for="{{cartSummary.items}}" wx:key="productId">
+      <view class="row space-between">
+        <view>{{item.name}} x {{item.quantity}}</view>
+        <view class="price">{{item.amount}} 元</view>
+      </view>
+    </view>
+    <view class="row space-between"><view class="muted">配送费</view><view>{{cartSummary.deliveryFee}} 元</view></view>
+    <view class="row space-between"><view class="muted">应付金额</view><view class="price">{{cartSummary.totalAmount}} 元</view></view>
+  </view>
+
+  <view class="card">
+    <view class="row space-between">
+      <view class="section-title">收货地址</view>
+      <button class="ghost-btn" size="mini" bindtap="manageAddress">管理地址</button>
+    </view>
+    <radio-group bindchange="selectAddress">
+      <label class="list-item" wx:for="{{addresses}}" wx:key="id">
+        <view class="row space-between">
+          <view>
+            <view>{{item.contactName}} {{item.phone}}</view>
+            <view class="muted">{{item.detail}}</view>
+          </view>
+          <radio value="{{item.id}}" checked="{{item.id === selectedAddressId}}" />
+        </view>
+      </label>
+    </radio-group>
+  </view>
+
+  <view class="card">
+    <view class="section-title">备注</view>
+    <textarea class="textarea" value="{{remark}}" placeholder="口味、门禁、送达时间等备注" bindinput="onRemarkInput"></textarea>
+  </view>
+
+  <view class="fixed-bottom row space-between">
+    <view><view>支付方式：模拟微信支付</view><view class="price">{{cartSummary.totalAmount}} 元</view></view>
+    <button class="primary-btn" loading="{{submitting}}" bindtap="submitOrder">提交并支付</button>
+  </view>
+</view>

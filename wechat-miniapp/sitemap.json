@@ -1,0 +1,4 @@
+{
+  "desc": "Neolife Local sitemap",
+  "rules": [{ "action": "allow", "page": "*" }]
+}

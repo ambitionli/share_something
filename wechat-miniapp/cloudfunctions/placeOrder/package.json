@@ -1,0 +1,7 @@
+{
+  "name": "placeOrder",
+  "private": true,
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

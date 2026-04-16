@@ -1,0 +1,23 @@
+<view class="container">
+  <view class="card">
+    <view class="section-title">我的地址</view>
+    <view class="list-item" wx:for="{{addresses}}" wx:key="id">
+      <view class="row space-between">
+        <view><view>{{item.contactName}} {{item.phone}}</view><view class="muted">{{item.detail}}</view></view>
+        <view class="badge" wx:if="{{item.isDefault}}">默认</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">新增地址</view>
+    <input class="input" placeholder="联系人" data-key="contactName" value="{{form.contactName}}" bindinput="onFieldInput" />
+    <input class="input" type="number" maxlength="11" placeholder="手机号" data-key="phone" value="{{form.phone}}" bindinput="onFieldInput" />
+    <input class="input" placeholder="详细地址" data-key="detail" value="{{form.detail}}" bindinput="onFieldInput" />
+    <input class="input" placeholder="标签，例如 家 / 公司" data-key="tag" value="{{form.tag}}" bindinput="onFieldInput" />
+    <checkbox-group bindchange="onDefaultChange">
+      <label class="row"><checkbox value="default" checked="{{form.isDefault}}" /><view>设为默认地址</view></label>
+    </checkbox-group>
+    <button class="primary-btn" bindtap="saveAddress">保存地址</button>
+  </view>
+</view>

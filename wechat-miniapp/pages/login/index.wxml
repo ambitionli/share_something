@@ -1,0 +1,29 @@
+<view class="container">
+  <view class="banner">
+    <view class="section-title">Neolife Local 演示登录</view>
+    <view>支持手机号登录与微信授权登录，默认启用本地 Mock 数据。</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">手机号登录</view>
+    <input class="input" type="number" maxlength="11" value="{{phone}}" placeholder="输入手机号" bindinput="onPhoneInput" />
+    <view class="wrap">
+      <view class="tag" wx:for="{{quickAccounts}}" wx:key="phone" data-phone="{{item.phone}}" bindtap="useDemoAccount">{{item.label}}</view>
+    </view>
+    <button class="primary-btn" bindtap="loginByPhone">手机号登录</button>
+  </view>
+
+  <view class="card">
+    <view class="section-title">微信授权登录</view>
+    <input class="input" value="{{nickname}}" placeholder="输入微信昵称" bindinput="onNicknameInput" />
+    <button class="secondary-btn" bindtap="loginByWechat">微信授权登录（模拟）</button>
+  </view>
+
+  <view class="card">
+    <view class="section-title">演示说明</view>
+    <view class="muted">买家演示账号：18800000001</view>
+    <view class="muted">商家演示账号：18800000002</view>
+    <view class="muted">如需重新验收主链路，可点击下方按钮重置所有演示数据。</view>
+    <button class="ghost-btn" bindtap="resetDemoData">重置演示数据</button>
+  </view>
+</view>

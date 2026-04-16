@@ -1,0 +1,39 @@
+{
+  "entryPagePath": "pages/login/index",
+  "pages": [
+    "pages/login/index",
+    "pages/home/index",
+    "pages/merchant/index",
+    "pages/cart/index",
+    "pages/checkout/index",
+    "pages/orders/index",
+    "pages/review/index",
+    "pages/profile/index",
+    "pages/address/index",
+    "pages/merchant-entry/index",
+    "pages/merchant-products/index",
+    "pages/merchant-orders/index",
+    "pages/merchant-dashboard/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "Neolife Local",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f6f7fb",
+    "backgroundTextStyle": "light"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "tabBar": {
+    "color": "#8a8f99",
+    "selectedColor": "#1f6fff",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/home/index", "text": "首页" },
+      { "pagePath": "pages/cart/index", "text": "购物车" },
+      { "pagePath": "pages/orders/index", "text": "订单" },
+      { "pagePath": "pages/profile/index", "text": "我的" }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="card" wx:if="{{user}}">
+    <view class="section-title">{{user.nickname}}</view>
+    <view class="muted">身份：{{user.role === 'merchant' ? '商家' : '用户'}}</view>
+    <view class="muted">手机号：{{user.phone || '未绑定'}}</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">个人服务</view>
+    <view class="list-item" wx:for="{{settings}}" wx:key="key">
+      <view class="row space-between"><view>{{item.label}}</view><view class="muted">{{item.value}}</view></view>
+    </view>
+    <button class="secondary-btn" bindtap="openAddress">地址管理</button>
+  </view>
+
+  <view class="card">
+    <view class="section-title">客服与设置</view>
+    <view class="muted">客服电话：{{customerService.phone}}</view>
+    <view class="muted">在线时段：{{customerService.onlineTime}}</view>
+    <view class="muted">企业微信：{{customerService.wechat}}</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">商家功能</view>
+    <button class="ghost-btn" wx:if="{{!merchant}}" bindtap="openMerchantEntry">商家入驻</button>
+    <block wx:if="{{merchant}}">
+      <view class="muted">当前店铺：{{merchant.name}}</view>
+      <button class="secondary-btn" bindtap="openMerchantDashboard">数据概览</button>
+      <button class="secondary-btn" bindtap="openMerchantProducts">商品管理</button>
+      <button class="secondary-btn" bindtap="openMerchantOrders">订单管理</button>
+    </block>
+  </view>
+
+  <view class="card">
+    <button class="warn-btn" bindtap="logout">退出登录</button>
+    <button class="ghost-btn" bindtap="resetDemoData">重置演示数据</button>
+  </view>
+</view>

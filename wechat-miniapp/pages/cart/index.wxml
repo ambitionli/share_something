@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="card">
+    <view class="row space-between">
+      <view>
+        <view class="section-title">{{summary.merchantName || '购物车'}}</view>
+        <view class="muted">支持同一商家统一结算，避免跨店配送冲突。</view>
+      </view>
+      <button class="warn-btn" size="mini" bindtap="clearCart" wx:if="{{summary.items.length}}">清空</button>
+    </view>
+
+    <block wx:if="{{summary.items.length}}">
+      <view class="list-item" wx:for="{{summary.items}}" wx:key="productId" data-item="{{item}}">
+        <view class="row space-between">
+          <view>
+            <view>{{item.name}}</view>
+            <view class="muted">单价 {{item.price}} 元</view>
+            <view class="price">小计 {{item.amount}} 元</view>
+          </view>
+          <view class="stepper">
+            <view class="stepper-btn" data-item="{{item}}" data-delta="-1" bindtap="changeQuantity">-</view>
+            <view>{{item.quantity}}</view>
+            <view class="stepper-btn" data-item="{{item}}" data-delta="1" bindtap="changeQuantity">+</view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view class="empty" wx:else>购物车还是空的，去首页挑选商家吧。</view>
+  </view>
+
+  <view class="fixed-bottom row space-between" wx:if="{{summary.items.length}}">
+    <view>
+      <view>商品 {{summary.subtotalAmount}} 元 + 配送 {{summary.deliveryFee}} 元</view>
+      <view class="price">应付 {{summary.totalAmount}} 元</view>
+      <view class="muted">起送价 {{summary.minOrderAmount}} 元</view>
+    </view>
+    <button class="primary-btn" bindtap="goCheckout">去结算</button>
+  </view>
+</view>

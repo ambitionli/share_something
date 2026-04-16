@@ -1,0 +1,7 @@
+{
+  "name": "submitReview",
+  "private": true,
+  "dependencies": {
+    "wx-server-sdk": "latest"
+  }
+}

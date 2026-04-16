@@ -1,0 +1,19 @@
+<view class="container">
+  <view class="card" wx:if="{{merchant}}">
+    <view class="section-title">你已拥有店铺</view>
+    <view>{{merchant.name}}</view>
+    <view class="muted">{{merchant.category}} · 起送 {{merchant.minOrderAmount}} 元</view>
+    <view class="muted">配送费 {{merchant.deliveryFee}} 元</view>
+  </view>
+
+  <view class="card" wx:else>
+    <view class="section-title">商家入驻</view>
+    <input class="input" placeholder="店铺名称" data-key="name" value="{{form.name}}" bindinput="onFieldInput" />
+    <input class="input" placeholder="店铺分类" data-key="category" value="{{form.category}}" bindinput="onFieldInput" />
+    <input class="input" placeholder="资质说明或文件名" data-key="licenseText" value="{{form.licenseText}}" bindinput="onFieldInput" />
+    <input class="input" type="digit" placeholder="配送费" data-key="deliveryFee" value="{{form.deliveryFee}}" bindinput="onFieldInput" />
+    <input class="input" type="digit" placeholder="起送价" data-key="minOrderAmount" value="{{form.minOrderAmount}}" bindinput="onFieldInput" />
+    <textarea class="textarea" placeholder="店铺公告" data-key="notice" value="{{form.notice}}" bindinput="onFieldInput"></textarea>
+    <button class="primary-btn" bindtap="submitApplication">提交入驻</button>
+  </view>
+</view>

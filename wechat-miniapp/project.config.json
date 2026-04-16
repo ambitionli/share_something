@@ -1,0 +1,16 @@
+{
+  "appid": "touristappid",
+  "projectname": "neolife-local-miniapp",
+  "libVersion": "trial",
+  "setting": {
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": false,
+    "urlCheck": false,
+    "coverView": true,
+    "checkInvalidKey": true,
+    "uploadWithSourceMap": true
+  },
+  "condition": {}
+}
