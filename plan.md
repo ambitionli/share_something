@@ -564,3 +564,35 @@ sequenceDiagram
    - 并发下单同一商品（验证库存不会超卖）
    - 支付过程中商品被下架（订单正常完成）
    - 网络中断重试（接口幂等性）
+
+---
+
+## 常见问题 (FAQ)
+
+### Q: 运行期间手机浏览器需要一直开着吗？
+
+**不需要。** Flutter App 是编译为 iOS/Android **原生二进制**的移动应用，不是 H5/网页应用。安装后它作为独立 App 运行（和微信、淘宝一样），与手机浏览器无关。
+
+项目中只有 **管理后台 (`admin-web/`)** 是 React 网页应用，管理员需要通过浏览器（桌面或手机均可）访问。
+
+### Q: 可以在云端运行吗？
+
+**可以。** 项目的三个组成部分各自的部署方式如下：
+
+| 组件 | 运行位置 | 说明 |
+|---|---|---|
+| **后端服务** (FastAPI + PostgreSQL + Redis + MinIO) | ✅ 云服务器 | 使用 `docker-compose.prod.yml` 一键部署，支持阿里云 ECS、腾讯云 CVM 等任意 Linux 云服务器 |
+| **管理后台** (React Web) | ✅ 云服务器 | 随后端一起部署，通过 Nginx 反向代理对外提供服务，管理员在任意设备浏览器中访问 |
+| **Flutter App** (iOS/Android) | 📱 用户手机 | 编译打包后发布到 App Store / 各应用商店，用户下载安装后通过网络连接云端 API |
+
+**云端部署步骤概览**：
+
+1. 准备一台云服务器（推荐 2核4G 起步），安装 Docker + Docker Compose
+2. 将项目代码上传至服务器
+3. 配置 `.env` 文件（数据库密码、MinIO 密钥、支付密钥等）
+4. 运行生产环境启动命令：
+   ```bash
+   docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
+   ```
+5. 后端 API 和管理后台将通过 Nginx 在 80 端口对外提供服务
+6. 修改 Flutter App 中的 API 地址指向云服务器域名/IP，重新编译发布

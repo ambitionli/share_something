@@ -45,3 +45,15 @@ Restart policy on production services is **`unless-stopped`**. Health checks are
 - Run database migrations before or right after upgrading the backend image (e.g. `alembic upgrade head` inside the backend container or your release pipeline).
 - Replace `SECRET_KEY` and MinIO credentials in real deployments; restrict MinIO and Postgres exposure to trusted networks.
 - For TLS, terminate HTTPS at a load balancer or add a TLS-enabled reverse proxy in front of this nginx.
+
+## FAQ
+
+### 运行期间手机浏览器需要一直开着吗？
+
+不需要。Flutter App 是编译为 iOS/Android 原生二进制的移动应用，安装后作为独立 App 运行，与手机浏览器无关。只有管理后台 (`admin-web/`) 是 React 网页应用，需要浏览器访问。
+
+### 后端可以部署在云服务器吗？
+
+可以。后端全部 Docker 化，使用 `docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build` 即可在任意 Linux 云服务器（阿里云 ECS、腾讯云 CVM 等）上一键启动。Flutter App 中修改 API 地址指向云服务器域名/IP 即可。
+
+**Last updated:** 2026-04-16
