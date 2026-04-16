@@ -1,0 +1,68 @@
+.page {
+  padding-bottom: 24rpx;
+}
+
+.tabs {
+  display: flex;
+  background: #fff;
+  border-bottom: 1rpx solid #eee;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 22rpx 0;
+  font-size: 26rpx;
+  color: #666;
+}
+
+.tab.on {
+  color: #07c160;
+  font-weight: 700;
+  border-bottom: 4rpx solid #07c160;
+}
+
+.list {
+  padding: 16rpx 24rpx;
+}
+
+.ocard {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+
+.oid {
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.st {
+  color: #fa8c16;
+  font-size: 24rpx;
+}
+
+.muted {
+  color: #888;
+  font-size: 24rpx;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 12rpx;
+}
+
+.empty {
+  text-align: center;
+  color: #888;
+  padding: 80rpx 0;
+}

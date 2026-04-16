@@ -1,0 +1,39 @@
+/** app.wxss — 全局样式 */
+page {
+  background-color: #f5f6f8;
+  font-size: 28rpx;
+  color: #222;
+  box-sizing: border-box;
+}
+
+.container {
+  padding: 24rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.btn-primary {
+  background: #07c160;
+  color: #fff;
+  border-radius: 999rpx;
+}
+
+.text-muted {
+  color: #888;
+  font-size: 24rpx;
+}
+
+.price {
+  color: #e64340;
+  font-weight: 600;
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}

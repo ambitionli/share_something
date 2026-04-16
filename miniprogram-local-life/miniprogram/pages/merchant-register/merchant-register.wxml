@@ -1,0 +1,23 @@
+<view class="page">
+  <view class="field">
+    <view class="label">店铺名称</view>
+    <input class="input" value="{{name}}" placeholder="例如：邻刻达鲜厨" bindinput="onName" />
+  </view>
+  <view class="field">
+    <view class="label">经营类目</view>
+    <picker mode="selector" range="{{cats}}" range-key="label" value="{{catIndex}}" bindchange="onCat">
+      <view class="picker">{{cats[catIndex].label}}</view>
+    </picker>
+  </view>
+  <view class="field">
+    <view class="label">资质图片（演示）</view>
+    <view class="imgs">
+      <block wx:for="{{licenses}}" wx:key="*this">
+        <image class="img" src="{{item}}" mode="aspectFill" />
+      </block>
+      <view class="add" bindtap="pick" wx:if="{{licenses.length<6}}">+</view>
+    </view>
+  </view>
+  <button type="primary" bindtap="submit">提交入驻</button>
+  <view class="tip">演示环境自动审核通过；生产需人工审核与 OCR。</view>
+</view>

@@ -1,0 +1,8 @@
+<view class="page">
+  <view class="card">
+    <view class="h">在线客服（演示）</view>
+    <view class="p">工作时间：9:00 - 22:00</view>
+    <view class="p">请在微信内使用客服消息能力对接；此处为占位说明。</view>
+  </view>
+  <button open-type="contact" session-from="lnk_profile">打开客服会话（需配置）</button>
+</view>

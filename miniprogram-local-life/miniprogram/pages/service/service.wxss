@@ -1,0 +1,25 @@
+.page {
+  padding: 24rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.h {
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+
+.p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 8rpx;
+}
+
+button {
+  border-radius: 999rpx;
+}

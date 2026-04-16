@@ -1,0 +1,9 @@
+{
+  "name": "lnk_api",
+  "version": "1.0.0",
+  "description": "邻刻达本地生活 — 统一云函数 API",
+  "main": "index.js",
+  "dependencies": {
+    "wx-server-sdk": "~3.0.1"
+  }
+}

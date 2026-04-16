@@ -1,0 +1,59 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/login/login",
+    "pages/merchant/merchant",
+    "pages/cart/cart",
+    "pages/checkout/checkout",
+    "pages/orders/orders",
+    "pages/order-detail/order-detail",
+    "pages/review/review",
+    "pages/profile/profile",
+    "pages/addresses/addresses",
+    "pages/address-edit/address-edit",
+    "pages/coupons/coupons",
+    "pages/settings/settings",
+    "pages/service/service",
+    "pages/merchant-register/merchant-register",
+    "pages/merchant-dashboard/merchant-dashboard",
+    "pages/merchant-products/merchant-products",
+    "pages/merchant-product-edit/merchant-product-edit",
+    "pages/merchant-orders/merchant-orders"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "邻刻达",
+    "navigationBarBackgroundColor": "#ffffff",
+    "backgroundColor": "#f5f6f8"
+  },
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#07c160",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/tab-home.png",
+        "selectedIconPath": "assets/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/orders/orders",
+        "text": "订单",
+        "iconPath": "assets/tab-order.png",
+        "selectedIconPath": "assets/tab-order-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/tab-user.png",
+        "selectedIconPath": "assets/tab-user-active.png"
+      }
+    ]
+  },
+  "usingComponents": {},
+  "cloud": true,
+  "style": "v2",
+  "lazyCodeLoading": "requiredComponents"
+}

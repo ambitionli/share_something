@@ -1,0 +1,32 @@
+<view class="page" wx:if="{{merchant}}">
+  <view class="card" bindtap="pickAddress">
+    <view class="row-title">配送地址</view>
+    <view wx:if="{{address}}">
+      <view>{{address.name}} {{address.phone}}</view>
+      <view class="muted">{{address.region}} {{address.detail}}</view>
+    </view>
+    <view wx:else class="muted">请选择地址</view>
+  </view>
+
+  <view class="card">
+    <view class="row-title">{{merchant.name}}</view>
+    <block wx:for="{{lines}}" wx:key="productId">
+      <view class="line">
+        <text>{{item.name}}</text>
+        <text>×{{item.qty}}</text>
+        <text>¥{{item.sub}}</text>
+      </view>
+    </block>
+    <view class="row">
+      <text>配送费</text>
+      <text>¥{{merchant.deliveryFee}}</text>
+    </view>
+    <view class="row strong">
+      <text>应付</text>
+      <text class="price">¥{{total}}</text>
+    </view>
+  </view>
+
+  <button class="btn" type="primary" bindtap="submit" disabled="{{!address}}">模拟支付并下单</button>
+  <view class="hint">支付为模拟：服务端校验金额与库存后扣减库存并生成订单。</view>
+</view>

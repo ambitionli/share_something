@@ -1,0 +1,119 @@
+.page {
+  padding-bottom: 140rpx;
+}
+
+.head {
+  background: #fff;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.title {
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.meta {
+  display: flex;
+  gap: 24rpx;
+  color: #666;
+  font-size: 24rpx;
+  margin-top: 8rpx;
+}
+
+.plist {
+  padding: 0 24rpx;
+}
+
+.prow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.pname {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.prow2 {
+  display: flex;
+  gap: 16rpx;
+  align-items: baseline;
+  margin-top: 8rpx;
+}
+
+.price {
+  color: #e64340;
+  font-weight: 600;
+}
+
+.muted {
+  color: #888;
+  font-size: 24rpx;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+}
+
+.stepper .btn {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  border-radius: 8rpx;
+  background: #f5f5f5;
+  font-size: 32rpx;
+}
+
+.stepper .num {
+  min-width: 40rpx;
+  text-align: center;
+}
+
+.bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  border-top: 1rpx solid #eee;
+  display: flex;
+  align-items: center;
+  padding: 16rpx 24rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+}
+
+.bar-left {
+  flex: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 12rpx;
+}
+
+.cart-ico {
+  font-size: 28rpx;
+}
+
+.bar-price {
+  color: #e64340;
+  font-size: 32rpx;
+  font-weight: 700;
+}
+
+.bar-btn {
+  background: #07c160;
+  color: #fff;
+  border-radius: 999rpx;
+  padding: 0 40rpx;
+  height: 72rpx;
+  line-height: 72rpx;
+  font-size: 28rpx;
+}

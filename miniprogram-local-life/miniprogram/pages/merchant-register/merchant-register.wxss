@@ -1,0 +1,57 @@
+.page {
+  padding: 24rpx;
+}
+
+.field {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.input {
+  width: 100%;
+}
+
+.picker {
+  padding: 12rpx 0;
+  color: #333;
+}
+
+.imgs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.img,
+.add {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  background: #f2f3f5;
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  color: #999;
+}
+
+button {
+  border-radius: 999rpx;
+}
+
+.tip {
+  margin-top: 16rpx;
+  color: #999;
+  font-size: 22rpx;
+  line-height: 1.5;
+}

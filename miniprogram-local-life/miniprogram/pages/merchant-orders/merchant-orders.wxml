@@ -1,0 +1,31 @@
+<view class="page">
+  <view class="tabs">
+    <view class="tab {{active===item.key?'on':''}}" wx:for="{{tabs}}" wx:key="key" data-key="{{item.key}}" bindtap="onTab">
+      {{item.label}}
+    </view>
+  </view>
+
+  <block wx:for="{{orders}}" wx:key="_id">
+    <view class="card">
+      <view class="row">
+        <text class="oid">{{item._id}}</text>
+        <text class="st">{{item.statusText}}</text>
+      </view>
+      <view class="muted">¥{{item.amountYuan}}</view>
+
+      <view class="ops" wx:if="{{item.status==='pending_accept'}}">
+        <button size="mini" type="primary" data-id="{{item._id}}" bindtap="accept">接单</button>
+        <button size="mini" data-id="{{item._id}}" bindtap="reject">拒单</button>
+      </view>
+      <view class="ops" wx:if="{{item.status==='delivering'}}">
+        <button size="mini" type="primary" data-id="{{item._id}}" bindtap="deliver">标记送达/完成</button>
+      </view>
+      <view class="ops" wx:if="{{item.status==='refunding'}}">
+        <button size="mini" type="primary" data-id="{{item._id}}" data-ok="{{true}}" bindtap="refund">同意退款</button>
+        <button size="mini" data-id="{{item._id}}" data-ok="{{false}}" bindtap="refund">拒绝退款</button>
+      </view>
+    </view>
+  </block>
+
+  <view wx:if="{{!orders.length}}" class="empty">暂无订单</view>
+</view>

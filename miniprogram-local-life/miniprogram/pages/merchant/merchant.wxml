@@ -1,0 +1,41 @@
+<view class="page" wx:if="{{merchant}}">
+  <view class="head">
+    <view class="title">{{merchant.name}}</view>
+    <view class="meta">
+      <text>{{merchant.rating}} 分</text>
+      <text>月售 {{merchant.monthlySales}}+</text>
+    </view>
+    <view class="meta">
+      <text>配送费 ¥{{merchant.deliveryFee}}</text>
+      <text>起送 ¥{{merchant.minOrderAmount}}</text>
+    </view>
+  </view>
+
+  <view class="plist">
+    <block wx:for="{{products}}" wx:key="_id">
+      <view class="prow">
+        <view class="pinfo">
+          <view class="pname">{{item.name}}</view>
+          <view class="prow2">
+            <text class="price">¥{{item.price}}</text>
+            <text class="muted">已售 {{item.sales}}</text>
+          </view>
+          <view class="muted" wx:if="{{item.status!=='on_shelf'}}">已下架</view>
+        </view>
+        <view class="stepper" wx:if="{{item.status==='on_shelf'}}">
+          <text class="btn" data-id="{{item._id}}" bindtap="dec">-</text>
+          <text class="num">{{cart[item._id]||0}}</text>
+          <text class="btn" data-id="{{item._id}}" bindtap="inc">+</text>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <view class="bar safe-bottom">
+    <view class="bar-left" bindtap="goCart">
+      <text class="cart-ico">购物车</text>
+      <text class="bar-price">¥{{subtotal}}</text>
+    </view>
+    <button class="bar-btn" bindtap="goCart">去结算</button>
+  </view>
+</view>

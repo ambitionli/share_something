@@ -1,0 +1,31 @@
+<view class="page" wx:if="{{merchant}}">
+  <view class="hero">
+    <view class="name">{{merchant.name}}</view>
+    <view class="muted">类目 {{merchant.category}} · 评分 {{merchant.rating}}</view>
+  </view>
+
+  <view class="stats">
+    <view class="cell">
+      <view class="n">{{stats.sales}}</view>
+      <view class="s">成交单</view>
+    </view>
+    <view class="cell">
+      <view class="n">¥{{revenue}}</view>
+      <view class="s">营业额</view>
+    </view>
+    <view class="cell">
+      <view class="n">{{stats.refunds}}</view>
+      <view class="s">退款单</view>
+    </view>
+  </view>
+
+  <view class="menu">
+    <view class="item" bindtap="goProducts">商品管理</view>
+    <view class="item" bindtap="goOrders">订单管理</view>
+  </view>
+</view>
+
+<view wx:else class="empty">
+  <view>您还不是商家</view>
+  <button type="primary" bindtap="goReg">去入驻</button>
+</view>

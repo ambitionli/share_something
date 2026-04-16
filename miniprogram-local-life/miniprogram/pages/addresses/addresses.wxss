@@ -1,0 +1,55 @@
+.page {
+  padding: 24rpx;
+  padding-bottom: 140rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 22rpx;
+  margin-bottom: 16rpx;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  font-weight: 700;
+}
+
+.tag {
+  font-size: 22rpx;
+  color: #07c160;
+  border: 1rpx solid #b7eb8f;
+  padding: 2rpx 10rpx;
+  border-radius: 8rpx;
+}
+
+.muted {
+  color: #666;
+  margin-top: 8rpx;
+  font-size: 26rpx;
+}
+
+.ops {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 12rpx;
+}
+
+.empty {
+  text-align: center;
+  color: #888;
+  padding: 80rpx 0;
+}
+
+.add {
+  position: fixed;
+  left: 24rpx;
+  right: 24rpx;
+  bottom: calc(24rpx + env(safe-area-inset-bottom));
+  border-radius: 999rpx;
+}

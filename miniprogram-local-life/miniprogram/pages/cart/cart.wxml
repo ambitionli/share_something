@@ -1,0 +1,50 @@
+<view class="page" wx:if="{{merchant}}">
+  <view class="card">
+    <view class="mname">{{merchant.name}}</view>
+  </view>
+
+  <view class="list">
+    <block wx:for="{{lines}}" wx:key="productId">
+      <view class="line">
+        <view class="left">
+          <view class="pname">{{item.name}}</view>
+          <view class="sub">¥{{item.price}} × {{item.qty}}</view>
+        </view>
+        <view class="stepper">
+          <text class="btn" data-id="{{item.productId}}" bindtap="dec">-</text>
+          <text class="num">{{item.qty}}</text>
+          <text class="btn" data-id="{{item.productId}}" bindtap="inc">+</text>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{!lines.length}}" class="empty">购物车是空的</view>
+  </view>
+
+  <view class="card">
+    <view class="row">
+      <text>商品小计</text>
+      <text>¥{{subtotal}}</text>
+    </view>
+    <view class="row">
+      <text>配送费</text>
+      <text>¥{{merchant.deliveryFee}}</text>
+    </view>
+    <view class="row strong">
+      <text>合计</text>
+      <text class="price">¥{{total}}</text>
+    </view>
+  </view>
+
+  <view class="card">
+    <view class="label">备注</view>
+    <textarea
+      class="ta"
+      placeholder="口味、忌口等（选填）"
+      value="{{remark}}"
+      maxlength="200"
+      bindinput="onRemark"
+    />
+  </view>
+
+  <button class="pay" type="primary" bindtap="checkout" disabled="{{!lines.length}}">去结算</button>
+</view>

@@ -1,0 +1,50 @@
+.page {
+  padding: 24rpx;
+  padding-bottom: 48rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8rpx;
+}
+
+.st {
+  color: #fa8c16;
+  font-weight: 700;
+}
+
+.muted {
+  color: #888;
+  font-size: 24rpx;
+}
+
+.h {
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  gap: 12rpx;
+  font-size: 26rpx;
+  margin-bottom: 8rpx;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+}
+
+.actions button {
+  border-radius: 999rpx;
+}

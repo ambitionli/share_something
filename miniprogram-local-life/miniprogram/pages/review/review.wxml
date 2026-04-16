@@ -1,0 +1,23 @@
+<view class="page">
+  <view class="card">
+    <view class="label">星级</view>
+    <slider min="1" max="5" step="1" value="{{rating}}" show-value bindchange="onRating" />
+  </view>
+
+  <view class="card">
+    <view class="label">文字评价</view>
+    <textarea class="ta" maxlength="500" placeholder="分享你的体验" value="{{content}}" bindinput="onContent" />
+  </view>
+
+  <view class="card">
+    <view class="label">图片（最多 6 张）</view>
+    <view class="imgs">
+      <block wx:for="{{images}}" wx:key="*this">
+        <image class="img" src="{{item}}" mode="aspectFill" />
+      </block>
+      <view class="add" bindtap="pickImage" wx:if="{{images.length<6}}">+</view>
+    </view>
+  </view>
+
+  <button type="primary" bindtap="submit">提交评价</button>
+</view>

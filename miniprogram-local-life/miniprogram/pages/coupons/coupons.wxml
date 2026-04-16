@@ -1,0 +1,11 @@
+<view class="page">
+  <view class="card" wx:for="{{coupons}}" wx:key="id">
+    <view class="row">
+      <text class="amt">¥{{item.amount}}</text>
+      <text class="name">{{item.name}}</text>
+    </view>
+    <view class="muted">{{item.rule}}</view>
+    <view class="muted">有效期至 {{item.expire}}</view>
+  </view>
+  <view class="tip">演示数据：实际券核销由云函数与订单联动扩展。</view>
+</view>

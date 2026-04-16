@@ -1,0 +1,27 @@
+.page {
+  padding: 24rpx;
+}
+
+.field {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+  margin-bottom: 16rpx;
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.input {
+  width: 100%;
+}
+
+.picker {
+  padding: 12rpx 0;
+}
+
+button {
+  border-radius: 999rpx;
+}

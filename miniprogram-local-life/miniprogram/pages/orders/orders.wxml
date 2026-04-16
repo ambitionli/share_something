@@ -1,0 +1,61 @@
+<view class="page">
+  <view class="tabs">
+    <view
+      class="tab {{active===item.key?'on':''}}"
+      wx:for="{{tabs}}"
+      wx:key="key"
+      data-key="{{item.key}}"
+      bindtap="onTab"
+    >
+      {{item.label}}
+    </view>
+  </view>
+
+  <view class="list">
+    <block wx:for="{{orders}}" wx:key="_id">
+      <view class="ocard" data-id="{{item._id}}" bindtap="openDetail">
+        <view class="row">
+          <text class="oid">订单 {{item._id}}</text>
+          <text class="st">{{item.statusText}}</text>
+        </view>
+        <view class="muted">¥{{item.amountYuan}} · {{item.timeText}}</view>
+        <view class="actions" catchtap="noop">
+          <button
+            wx:if="{{item.status==='pending_pay'}}"
+            size="mini"
+            type="primary"
+            data-id="{{item._id}}"
+            bindtap="pay"
+          >
+            去支付
+          </button>
+          <button
+            wx:if="{{item.status==='pending_pay'}}"
+            size="mini"
+            data-id="{{item._id}}"
+            bindtap="cancel"
+          >
+            取消
+          </button>
+          <button
+            wx:if="{{item.status==='pending_accept' || item.status==='delivering'}}"
+            size="mini"
+            data-id="{{item._id}}"
+            bindtap="refund"
+          >
+            申请退款
+          </button>
+          <button
+            wx:if="{{item.status==='completed'}}"
+            size="mini"
+            data-id="{{item._id}}"
+            bindtap="goReview"
+          >
+            评价
+          </button>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{!orders.length}}" class="empty">暂无订单</view>
+  </view>
+</view>

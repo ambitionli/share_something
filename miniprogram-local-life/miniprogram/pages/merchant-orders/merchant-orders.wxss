@@ -1,0 +1,66 @@
+.page {
+  padding-bottom: 24rpx;
+}
+
+.tabs {
+  display: flex;
+  background: #fff;
+  border-bottom: 1rpx solid #eee;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 18rpx 0;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.tab.on {
+  color: #07c160;
+  font-weight: 700;
+  border-bottom: 4rpx solid #07c160;
+}
+
+.card {
+  margin: 16rpx 24rpx;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 20rpx;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.oid {
+  font-size: 22rpx;
+  color: #333;
+  word-break: break-all;
+  padding-right: 12rpx;
+}
+
+.st {
+  color: #fa8c16;
+  font-size: 24rpx;
+}
+
+.muted {
+  color: #888;
+  font-size: 24rpx;
+  margin-top: 8rpx;
+}
+
+.ops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+  margin-top: 12rpx;
+}
+
+.empty {
+  text-align: center;
+  color: #888;
+  padding: 80rpx 0;
+}

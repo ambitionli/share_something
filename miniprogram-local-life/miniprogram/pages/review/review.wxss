@@ -1,0 +1,50 @@
+.page {
+  padding: 24rpx;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+}
+
+.label {
+  font-weight: 600;
+  margin-bottom: 12rpx;
+}
+
+.ta {
+  width: 100%;
+  min-height: 160rpx;
+  background: #f7f8fa;
+  border-radius: 12rpx;
+  padding: 16rpx;
+  box-sizing: border-box;
+}
+
+.imgs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}
+
+.img,
+.add {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 12rpx;
+  background: #f2f3f5;
+}
+
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48rpx;
+  color: #999;
+}
+
+button {
+  border-radius: 999rpx;
+}

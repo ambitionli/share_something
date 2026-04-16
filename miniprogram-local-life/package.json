@@ -1,0 +1,8 @@
+{
+  "name": "lnk-miniprogram-local-life",
+  "private": true,
+  "description": "邻刻达本地生活小程序（云开发）",
+  "scripts": {
+    "test": "node tests/validators.test.js"
+  }
+}

@@ -1,0 +1,14 @@
+<view class="page">
+  <block wx:for="{{products}}" wx:key="_id">
+    <view class="row" data-id="{{item._id}}" bindtap="edit">
+      <view class="left">
+        <view class="name">{{item.name}}</view>
+        <view class="sub">¥{{item.price}} · 库存 {{item.stock}} · 销量 {{item.sales}}</view>
+        <view class="tag" wx:if="{{item.status!=='on_shelf'}}">已下架</view>
+      </view>
+      <view class="go">编辑</view>
+    </view>
+  </block>
+  <view wx:if="{{!products.length}}" class="empty">暂无商品</view>
+  <button class="fab" type="primary" bindtap="add">新增商品</button>
+</view>

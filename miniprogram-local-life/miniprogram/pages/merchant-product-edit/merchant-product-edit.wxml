@@ -1,0 +1,21 @@
+<view class="page">
+  <view class="field">
+    <view class="label">商品名称</view>
+    <input class="input" value="{{name}}" bindinput="onName" placeholder="名称" />
+  </view>
+  <view class="field">
+    <view class="label">价格（元）</view>
+    <input class="input" type="digit" value="{{price}}" bindinput="onPrice" />
+  </view>
+  <view class="field">
+    <view class="label">库存</view>
+    <input class="input" type="number" value="{{stock}}" bindinput="onStock" />
+  </view>
+  <view class="field">
+    <view class="label">状态</view>
+    <picker mode="selector" range="{{statuses}}" range-key="label" value="{{statusIndex}}" bindchange="onStatus">
+      <view class="picker">{{statuses[statusIndex].label}}</view>
+    </picker>
+  </view>
+  <button type="primary" bindtap="save">保存</button>
+</view>

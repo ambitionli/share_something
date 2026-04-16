@@ -1,0 +1,48 @@
+.page {
+  padding: 24rpx;
+  padding-bottom: 140rpx;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 22rpx;
+  margin-bottom: 12rpx;
+}
+
+.name {
+  font-weight: 700;
+}
+
+.sub {
+  color: #888;
+  font-size: 24rpx;
+  margin-top: 6rpx;
+}
+
+.tag {
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: #999;
+}
+
+.go {
+  color: #07c160;
+}
+
+.empty {
+  text-align: center;
+  color: #888;
+  padding: 80rpx 0;
+}
+
+.fab {
+  position: fixed;
+  left: 24rpx;
+  right: 24rpx;
+  bottom: calc(24rpx + env(safe-area-inset-bottom));
+  border-radius: 999rpx;
+}

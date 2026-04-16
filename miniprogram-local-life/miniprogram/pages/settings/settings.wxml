@@ -1,0 +1,7 @@
+<view class="page">
+  <view class="item">
+    <text>清除本地缓存（购物车）</text>
+    <button size="mini" bindtap="clearCart">清除</button>
+  </view>
+  <view class="muted">云侧订单与地址不受影响。</view>
+</view>

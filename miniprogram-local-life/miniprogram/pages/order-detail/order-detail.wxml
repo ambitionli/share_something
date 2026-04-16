@@ -1,0 +1,35 @@
+<view class="page" wx:if="{{order}}">
+  <view class="card">
+    <view class="row">
+      <text>状态</text>
+      <text class="st">{{statusText}}</text>
+    </view>
+    <view class="row muted">订单号 {{order._id}}</view>
+    <view class="row muted">金额 ¥{{amountYuan}}</view>
+  </view>
+
+  <view class="card">
+    <view class="h">配送信息</view>
+    <view>{{order.address.name}} {{order.address.phone}}</view>
+    <view class="muted">{{order.address.region}} {{order.address.detail}}</view>
+    <view class="muted" wx:if="{{order.remark}}">备注：{{order.remark}}</view>
+  </view>
+
+  <view class="card">
+    <view class="h">商品明细</view>
+    <block wx:for="{{order.items}}" wx:key="productId">
+      <view class="line">
+        <text>{{item.name}}</text>
+        <text>×{{item.qty}}</text>
+        <text>¥{{item.lineYuan}}</text>
+      </view>
+    </block>
+  </view>
+
+  <view class="actions">
+    <button wx:if="{{order.status==='pending_pay'}}" type="primary" bindtap="pay">模拟支付</button>
+    <button wx:if="{{order.status==='pending_pay'}}" bindtap="cancel">取消订单</button>
+    <button wx:if="{{order.status==='pending_accept' || order.status==='delivering'}}" bindtap="refund">申请退款</button>
+    <button wx:if="{{order.status==='completed'}}" type="primary" bindtap="goReview">去评价</button>
+  </view>
+</view>
