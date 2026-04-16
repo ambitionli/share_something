@@ -1,0 +1,6 @@
+{
+  "name": "haojin-delivery-cloudfunctions",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloud functions for the Haojin native mini program demo."
+}
