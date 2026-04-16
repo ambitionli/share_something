@@ -1,0 +1,46 @@
+<view class="container">
+  <view wx:if="{{cart.items.length}}">
+    <view class="card merchant-card">
+      <text class="merchant-name">{{cart.merchant.name}}</text>
+      <text class="subtle">配送费 ￥{{cart.merchant.deliveryFee}} · 起送 ￥{{cart.merchant.minOrderAmount}}</text>
+    </view>
+
+    <view class="list-gap">
+      <view wx:for="{{cart.items}}" wx:key="productId" class="card item-card">
+        <view class="row space-between item-row">
+          <view class="item-main">
+            <text class="item-name">{{item.name}}</text>
+            <text class="subtle">￥{{item.price}} / {{item.unit}}</text>
+          </view>
+          <view class="stepper">
+            <button size="mini" class="ghost-btn" data-id="{{item.productId}}" data-delta="-1" bindtap="changeCount">-</button>
+            <text class="count">{{item.quantity}}</text>
+            <button size="mini" class="secondary-btn" data-id="{{item.productId}}" data-delta="1" bindtap="changeCount">+</button>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="card form-card">
+      <text class="form-label">订单备注</text>
+      <textarea class="form-textarea" value="{{remarkDraft}}" placeholder="口味、门禁、是否需要餐具等" bindinput="onRemarkInput"></textarea>
+      <button class="ghost-btn save-btn" bindtap="saveRemark">保存备注</button>
+    </view>
+
+    <view class="bottom-bar row space-between">
+      <view>
+        <text class="price">￥{{cart.subtotal}}</text>
+        <text class="subtle"> 共 {{cart.itemCount}} 件</text>
+      </view>
+      <view class="row">
+        <button class="ghost-btn mr-12" bindtap="clearCart">清空</button>
+        <button class="primary-btn" bindtap="goCheckout">去结算</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="card empty-state">
+    购物车还是空的，快去首页挑点喜欢的吧。
+    <button class="primary-btn empty-btn" bindtap="goHome">去逛逛</button>
+  </view>
+</view>

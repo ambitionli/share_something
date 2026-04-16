@@ -1,0 +1,28 @@
+<view class="container">
+  <scroll-view scroll-x enhanced class="tab-scroll">
+    <view class="row">
+      <view wx:for="{{filters}}" wx:key="id" class="tab-item {{item.activeClass}}" data-id="{{item.id}}" bindtap="selectFilter">{{item.name}}</view>
+    </view>
+  </scroll-view>
+
+  <view class="list-gap">
+    <block wx:if="{{orders.length}}">
+      <view wx:for="{{orders}}" wx:key="id" class="card order-card">
+        <view class="row space-between">
+          <text class="order-no">{{item.orderNo}}</text>
+          <text class="status-pill">{{item.statusLabel}}</text>
+        </view>
+        <text class="subtle">用户 {{item.userId}} · 实付 ￥{{item.totals.total}}</text>
+        <text class="subtle">{{item.address.contactName}} {{item.address.phone}}</text>
+        <text class="subtle">{{item.address.detail}}</text>
+        <view class="row action-row">
+          <button wx:if="{{item.canAccept}}" size="mini" class="primary-btn" data-id="{{item.id}}" bindtap="accept">接单</button>
+          <button wx:if="{{item.canReject}}" size="mini" class="warning-btn" data-id="{{item.id}}" bindtap="reject">拒单</button>
+          <button wx:if="{{item.canDeliver}}" size="mini" class="secondary-btn" data-id="{{item.id}}" bindtap="deliver">标记配送</button>
+          <button wx:if="{{item.canRefundProcess}}" size="mini" class="secondary-btn" data-id="{{item.id}}" bindtap="refund">处理退款</button>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="card empty-state">当前筛选下暂无订单。</view>
+  </view>
+</view>

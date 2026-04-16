@@ -1,0 +1,15 @@
+<view class="container">
+  <view class="card form-card">
+    <view class="form-group"><text class="form-label">商品名称</text><input class="form-input" data-key="name" value="{{form.name}}" bindinput="onInput" /></view>
+    <view class="form-group"><text class="form-label">商品描述</text><textarea class="form-textarea" data-key="description" value="{{form.description}}" bindinput="onInput"></textarea></view>
+    <view class="form-group"><text class="form-label">价格</text><input class="form-input" type="digit" data-key="price" value="{{form.price}}" bindinput="onInput" /></view>
+    <view class="form-group"><text class="form-label">原价</text><input class="form-input" type="digit" data-key="originPrice" value="{{form.originPrice}}" bindinput="onInput" /></view>
+    <view class="form-group"><text class="form-label">库存</text><input class="form-input" type="number" data-key="stock" value="{{form.stock}}" bindinput="onInput" /></view>
+    <view class="form-group"><text class="form-label">单位</text><input class="form-input" data-key="unit" value="{{form.unit}}" bindinput="onInput" /></view>
+    <text class="form-label">分类</text>
+    <view class="row category-wrap">
+      <view wx:for="{{categories}}" wx:key="id" class="category-chip {{item.activeClass}}" data-id="{{item.id}}" bindtap="selectCategory">{{item.name}}</view>
+    </view>
+    <button class="primary-btn submit-btn" bindtap="save">保存商品</button>
+  </view>
+</view>

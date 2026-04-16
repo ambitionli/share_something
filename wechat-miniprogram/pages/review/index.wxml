@@ -1,0 +1,22 @@
+<view class="container" wx:if="{{detail}}">
+  <view class="card form-card">
+    <text class="section-title">评价 {{detail.merchant.name}}</text>
+    <text class="subtle">订单 {{detail.order.orderNo}}</text>
+
+    <view class="rating-row">
+      <text wx:for="{{stars}}" wx:key="value" class="star {{item.activeClass}}" data-value="{{item.value}}" bindtap="chooseRating">★</text>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">文字评价</text>
+      <textarea class="form-textarea" value="{{content}}" bindinput="onContentInput"></textarea>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">图片（演示用逗号分隔）</text>
+      <input class="form-input" value="{{imagesText}}" bindinput="onImagesInput" />
+    </view>
+
+    <button class="primary-btn" bindtap="submit">提交评价</button>
+  </view>
+</view>

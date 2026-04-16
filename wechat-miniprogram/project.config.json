@@ -1,0 +1,23 @@
+{
+  "appid": "touristappid",
+  "projectname": "linli-jida-miniapp",
+  "compileType": "miniprogram",
+  "libVersion": "3.6.7",
+  "miniprogramRoot": "./",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "coverView": true,
+    "showShadowRootInWxmlPanel": true,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": true,
+    "useApiHook": true
+  },
+  "condition": {}
+}

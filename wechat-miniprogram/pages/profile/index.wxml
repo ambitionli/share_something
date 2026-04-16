@@ -1,0 +1,23 @@
+<view class="container" wx:if="{{profile}}">
+  <view class="card profile-card">
+    <text class="nickname">{{profile.user.nickname}}</text>
+    <text class="subtle">{{profile.user.phoneText}} · 余额 ￥{{profile.summary.balance}}</text>
+  </view>
+
+  <view class="grid-2 stats-grid">
+    <view class="card stat-card"><text class="stat-value">{{profile.summary.orderCount}}</text><text class="subtle">订单</text></view>
+    <view class="card stat-card"><text class="stat-value">{{profile.summary.couponCount}}</text><text class="subtle">优惠券</text></view>
+    <view class="card stat-card"><text class="stat-value">{{profile.summary.addressCount}}</text><text class="subtle">地址</text></view>
+    <view class="card stat-card"><text class="stat-value">￥{{profile.summary.balance}}</text><text class="subtle">余额</text></view>
+  </view>
+
+  <view class="list-gap">
+    <button class="ghost-btn" bindtap="goOrders">我的订单</button>
+    <button class="ghost-btn" bindtap="goAddresses">地址管理</button>
+    <button class="ghost-btn" bindtap="goCoupons">优惠券</button>
+    <button class="ghost-btn" bindtap="goMerchant">商家中心</button>
+    <button class="ghost-btn" bindtap="callSupport">联系客服</button>
+    <button class="ghost-btn" bindtap="goSettings">设置</button>
+    <button class="danger-btn" bindtap="logout">退出登录</button>
+  </view>
+</view>

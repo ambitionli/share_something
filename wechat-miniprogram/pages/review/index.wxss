@@ -1,0 +1,13 @@
+.rating-row {
+  margin: 24rpx 0;
+}
+
+.star {
+  font-size: 48rpx;
+  color: #d1d5db;
+  margin-right: 14rpx;
+}
+
+.star-active {
+  color: #f59e0b;
+}

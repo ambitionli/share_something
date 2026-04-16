@@ -1,0 +1,12 @@
+<view class="container">
+  <view class="card form-card">
+    <text class="section-title">运行模式</text>
+    <switch checked="{{useCloud}}" bindchange="onCloudChange" />
+    <text class="subtle">关闭时使用本地 Demo 数据；打开后调用云函数。</text>
+  </view>
+
+  <view class="card form-card">
+    <text class="section-title">数据管理</text>
+    <button class="warning-btn" bindtap="resetDemo">重置演示数据</button>
+  </view>
+</view>

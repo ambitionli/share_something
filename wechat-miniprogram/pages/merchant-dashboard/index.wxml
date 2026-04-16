@@ -1,0 +1,36 @@
+<view class="container" wx:if="{{dashboard}}">
+  <view class="card hero-card">
+    <text class="merchant-name">{{dashboard.merchant.name}}</text>
+    <text class="subtle">{{dashboard.merchant.intro}}</text>
+    <text class="subtle">{{dashboard.statusText}}</text>
+  </view>
+
+  <view class="grid-2 stats-grid">
+    <view class="card stat-card"><text class="stat-value">￥{{dashboard.stats.grossIncome}}</text><text class="subtle">累计收入</text></view>
+    <view class="card stat-card"><text class="stat-value">{{dashboard.stats.completedOrders}}</text><text class="subtle">完成订单</text></view>
+    <view class="card stat-card"><text class="stat-value">{{dashboard.stats.pendingOrders}}</text><text class="subtle">待接单</text></view>
+    <view class="card stat-card"><text class="stat-value">￥{{dashboard.stats.refundAmount}}</text><text class="subtle">退款金额</text></view>
+  </view>
+
+  <view class="card section-card">
+    <view class="row space-between">
+      <text class="section-title">热销商品</text>
+      <button size="mini" class="ghost-btn" bindtap="goProducts">商品管理</button>
+    </view>
+    <view wx:for="{{dashboard.hotProducts}}" wx:key="id" class="hot-item row space-between">
+      <text>{{item.name}}</text>
+      <text class="subtle">销量 {{item.sales}}</text>
+    </view>
+  </view>
+
+  <view class="card section-card">
+    <view class="row space-between">
+      <text class="section-title">最新订单</text>
+      <button size="mini" class="secondary-btn" bindtap="goOrders">订单管理</button>
+    </view>
+    <view wx:for="{{dashboard.latestOrders}}" wx:key="id" class="hot-item row space-between">
+      <text>{{item.orderNo}}</text>
+      <text class="status-pill">{{item.statusLabel}}</text>
+    </view>
+  </view>
+</view>

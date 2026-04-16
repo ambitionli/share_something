@@ -1,0 +1,9 @@
+{
+  "desc": "邻里即达小程序 sitemap",
+  "rules": [
+    {
+      "action": "allow",
+      "page": "*"
+    }
+  ]
+}

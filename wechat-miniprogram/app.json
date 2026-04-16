@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/login/index",
+    "pages/home/index",
+    "pages/store/index",
+    "pages/cart/index",
+    "pages/checkout/index",
+    "pages/orders/index",
+    "pages/order-detail/index",
+    "pages/review/index",
+    "pages/profile/index",
+    "pages/address/index",
+    "pages/coupons/index",
+    "pages/settings/index",
+    "pages/merchant-apply/index",
+    "pages/merchant-dashboard/index",
+    "pages/merchant-products/index",
+    "pages/merchant-product-form/index",
+    "pages/merchant-orders/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTitleText": "邻里即达",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#f5f7fb"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

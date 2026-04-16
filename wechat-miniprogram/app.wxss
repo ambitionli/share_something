@@ -1,0 +1,160 @@
+page {
+  min-height: 100%;
+  background: #f5f7fb;
+  color: #1f2937;
+  font-size: 28rpx;
+}
+
+view,
+text,
+button,
+input,
+textarea,
+scroll-view,
+swiper,
+swiper-item,
+image {
+  box-sizing: border-box;
+}
+
+button {
+  border-radius: 24rpx;
+  font-size: 28rpx;
+}
+
+.container {
+  padding: 24rpx;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 28rpx;
+  box-shadow: 0 10rpx 30rpx rgba(15, 23, 42, 0.06);
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  margin-bottom: 20rpx;
+}
+
+.subtle {
+  color: #6b7280;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #2563eb, #7c3aed);
+  color: #ffffff;
+}
+
+.secondary-btn {
+  background: #eef2ff;
+  color: #3730a3;
+}
+
+.warning-btn {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.danger-btn {
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+.ghost-btn {
+  background: #ffffff;
+  color: #374151;
+  border: 2rpx solid #d1d5db;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 22rpx;
+  margin-right: 12rpx;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10rpx 18rpx;
+  border-radius: 999rpx;
+  font-size: 22rpx;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20rpx;
+}
+
+.form-card {
+  padding: 24rpx;
+}
+
+.form-group {
+  margin-bottom: 20rpx;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: 24rpx;
+  color: #4b5563;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  background: #f8fafc;
+  border-radius: 20rpx;
+  padding: 22rpx;
+}
+
+.form-textarea {
+  min-height: 180rpx;
+}
+
+.empty-state {
+  padding: 80rpx 32rpx;
+  text-align: center;
+  color: #6b7280;
+}
+
+.bottom-bar {
+  position: sticky;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 20rpx 24rpx calc(20rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -10rpx 30rpx rgba(15, 23, 42, 0.08);
+}
+
+.list-gap > view,
+.list-gap > navigator,
+.list-gap > button {
+  margin-bottom: 20rpx;
+}
+
+.list-gap > view:last-child,
+.list-gap > navigator:last-child,
+.list-gap > button:last-child {
+  margin-bottom: 0;
+}

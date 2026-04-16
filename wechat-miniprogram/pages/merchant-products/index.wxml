@@ -1,0 +1,19 @@
+<view class="container">
+  <button class="primary-btn add-btn" bindtap="addProduct">新增商品</button>
+  <view class="list-gap">
+    <view wx:for="{{products}}" wx:key="id" class="card product-card">
+      <view class="row space-between">
+        <view>
+          <text class="product-name">{{item.name}}</text>
+          <text class="subtle">￥{{item.price}} · 库存 {{item.stock}} · 销量 {{item.sales}}</text>
+        </view>
+        <text class="status-pill">{{item.statusLabel}}</text>
+      </view>
+      <text class="subtle">{{item.description}}</text>
+      <view class="row action-row">
+        <button size="mini" class="ghost-btn" data-id="{{item.id}}" bindtap="editProduct">编辑</button>
+        <button size="mini" class="secondary-btn" data-id="{{item.id}}" bindtap="toggleStatus">上/下架</button>
+      </view>
+    </view>
+  </view>
+</view>

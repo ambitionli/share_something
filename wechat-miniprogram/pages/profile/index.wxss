@@ -1,0 +1,22 @@
+.profile-card,
+.stat-card {
+  padding: 24rpx;
+}
+
+.nickname {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+
+.stats-grid {
+  margin: 24rpx 0;
+}
+
+.stat-value {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-bottom: 10rpx;
+}

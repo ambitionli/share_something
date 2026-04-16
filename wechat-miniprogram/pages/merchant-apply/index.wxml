@@ -1,0 +1,13 @@
+<view class="container">
+  <view class="card form-card">
+    <text class="section-title">商家入驻</text>
+    <view class="form-group"><text class="form-label">商家名称</text><input class="form-input" data-key="name" value="{{form.name}}" bindinput="onInput" /></view>
+    <view class="form-group"><text class="form-label">商家介绍</text><textarea class="form-textarea" data-key="intro" value="{{form.intro}}" bindinput="onInput"></textarea></view>
+    <view class="form-group"><text class="form-label">资质图片（演示文本）</text><input class="form-input" data-key="licenseImagesText" value="{{form.licenseImagesText}}" bindinput="onInput" /></view>
+    <text class="form-label">商家分类</text>
+    <view class="row category-wrap">
+      <view wx:for="{{categories}}" wx:key="id" class="category-chip {{item.activeClass}}" data-id="{{item.id}}" bindtap="selectCategory">{{item.name}}</view>
+    </view>
+    <button class="primary-btn submit-btn" bindtap="submit">提交入驻</button>
+  </view>
+</view>

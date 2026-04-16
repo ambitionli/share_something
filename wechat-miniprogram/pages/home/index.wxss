@@ -1,0 +1,76 @@
+.topbar,
+.search-card,
+.category-card,
+.merchant-card {
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.top-actions button {
+  margin-left: 12rpx;
+}
+
+.welcome {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.banner-swiper {
+  height: 240rpx;
+  overflow: hidden;
+  margin-bottom: 24rpx;
+}
+
+.banner-item {
+  height: 240rpx;
+  padding: 36rpx;
+  color: #ffffff;
+}
+
+.banner-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 700;
+  margin-bottom: 14rpx;
+}
+
+.banner-subtitle {
+  display: block;
+  opacity: 0.9;
+}
+
+.category-chip {
+  padding: 14rpx 24rpx;
+  border-radius: 999rpx;
+  background: #f3f4f6;
+  color: #4b5563;
+  margin-right: 16rpx;
+}
+
+.category-chip-active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.section-row {
+  margin-bottom: 16rpx;
+}
+
+.merchant-name {
+  display: block;
+  font-size: 32rpx;
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+
+.merchant-tags {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.merchant-info,
+.merchant-notice {
+  display: block;
+  margin-top: 16rpx;
+}

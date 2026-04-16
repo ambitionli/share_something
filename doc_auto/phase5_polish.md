@@ -1,6 +1,6 @@
 # Phase 5 — Polish & deployment
 
-**Last updated:** 2026-03-20
+**Last updated:** 2026-04-16
 
 ## Docker — development
 
@@ -45,3 +45,20 @@ Restart policy on production services is **`unless-stopped`**. Health checks are
 - Run database migrations before or right after upgrading the backend image (e.g. `alembic upgrade head` inside the backend container or your release pipeline).
 - Replace `SECRET_KEY` and MinIO credentials in real deployments; restrict MinIO and Postgres exposure to trusted networks.
 - For TLS, terminate HTTPS at a load balancer or add a TLS-enabled reverse proxy in front of this nginx.
+
+
+## WeChat native mini-program delivery addendum
+
+A new self-contained native WeChat mini-program delivery project was added under `wechat-miniprogram/`.
+
+### Highlights
+- Tourist AppID project config for direct import in WeChat DevTools
+- Demo mode with local persistence for offline acceptance and walkthroughs
+- Self-contained cloud function folders (`cloudfunctions/*/lib`) so deployment does not depend on project-root shared files
+- Importable archive generated at `/workspace/wechat-miniprogram.zip`
+
+### Verification notes
+- Business engine tests and acceptance scripts live in `wechat-miniprogram/tests/`
+- Cloud function packaging risk was removed by vendoring `engine.js`, `seed.js`, and `constants.js` into each cloud function folder
+
+**Modification timestamp:** 2026-04-16 16:15 UTC

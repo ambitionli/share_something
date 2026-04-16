@@ -1,0 +1,63 @@
+<view class="container">
+  <view class="card topbar row space-between">
+    <view>
+      <text class="welcome">你好，{{session.displayName}}</text>
+      <text class="subtle">今天想吃点什么？</text>
+    </view>
+    <view class="row top-actions">
+      <button size="mini" class="ghost-btn" bindtap="goOrders">订单</button>
+      <button size="mini" class="secondary-btn" bindtap="goProfile">我的</button>
+    </view>
+  </view>
+
+  <view class="card search-card">
+    <input class="form-input" value="{{keyword}}" placeholder="搜索商家 / 菜品 / 活动" bindinput="onKeywordInput" confirm-type="search" bindconfirm="onSearch" />
+  </view>
+
+  <swiper class="banner-swiper card" indicator-dots autoplay circular>
+    <block wx:for="{{banners}}" wx:key="id">
+      <swiper-item>
+        <view class="banner-item" style="background: linear-gradient(135deg, {{item.theme}}, #111827);">
+          <text class="banner-title">{{item.title}}</text>
+          <text class="banner-subtitle">{{item.subtitle}}</text>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="card category-card">
+    <text class="section-title">服务分类</text>
+    <scroll-view scroll-x enhanced class="category-scroll">
+      <view class="row">
+        <block wx:for="{{categories}}" wx:key="id">
+          <view class="category-chip {{item.activeClass}}" data-id="{{item.id}}" bindtap="onSelectCategory">{{item.name}}</view>
+        </block>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="row space-between section-row">
+    <text class="section-title">附近商家</text>
+    <button size="mini" class="ghost-btn" bindtap="goMerchant">商家入驻 / 工作台</button>
+  </view>
+
+  <view class="list-gap">
+    <block wx:if="{{merchants.length}}">
+      <view wx:for="{{merchants}}" wx:key="id" class="card merchant-card" data-id="{{item.id}}" bindtap="openStore">
+        <view class="row space-between">
+          <view>
+            <text class="merchant-name">{{item.name}}</text>
+            <view class="merchant-tags">
+              <text class="chip" wx:for="{{item.tags}}" wx:key="*this" wx:for-item="tag">{{tag}}</text>
+            </view>
+          </view>
+          <view class="status-pill">评分 {{item.score}}</view>
+        </view>
+        <text class="merchant-info">月售 {{item.monthlySales}} · 配送费 ￥{{item.deliveryFee}} · 起送 ￥{{item.minOrderAmount}}</text>
+        <text class="subtle">{{item.avgDeliveryTime}} · {{item.distance}}</text>
+        <text class="merchant-notice">{{item.notice}}</text>
+      </view>
+    </block>
+    <view wx:else class="empty-state card">没有找到匹配商家，试试别的关键词。</view>
+  </view>
+</view>

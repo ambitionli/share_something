@@ -1,0 +1,62 @@
+<view class="container" wx:if="{{cart.items.length}}">
+  <view class="card section-card selectable" bindtap="chooseAddress">
+    <view class="row space-between">
+      <text class="section-title">收货地址</text>
+      <text class="subtle">切换</text>
+    </view>
+    <view wx:if="{{hasPreviewAddress}}">
+      <text class="address-name">{{previewAddress.contactName}} {{previewAddress.phone}}</text>
+      <text class="address-detail">{{previewAddress.tag}} · {{previewAddress.detail}}</text>
+    </view>
+    <view wx:else class="subtle">请选择收货地址</view>
+  </view>
+
+  <view class="card section-card">
+    <text class="section-title">商品清单</text>
+    <view wx:for="{{cart.items}}" wx:key="productId" class="order-item row space-between">
+      <view>
+        <text>{{item.name}}</text>
+        <text class="subtle"> x {{item.quantity}}</text>
+      </view>
+      <text>￥{{item.amount}}</text>
+    </view>
+  </view>
+
+  <view class="card section-card selectable" bindtap="chooseCoupon">
+    <view class="row space-between">
+      <text class="section-title">优惠券</text>
+      <text class="subtle">{{couponActionText}}</text>
+    </view>
+    <text class="subtle" wx:if="{{selectedCouponId}}">当前优惠券 ID：{{selectedCouponId}}</text>
+    <text class="subtle" wx:else>可用优惠券 {{coupons.length}} 张</text>
+  </view>
+
+  <view class="card form-card">
+    <text class="form-label">订单备注</text>
+    <textarea class="form-textarea" value="{{remark}}" placeholder="例如：不要辣、放门口、需要纸袋" bindinput="onRemarkInput"></textarea>
+  </view>
+
+  <view class="card section-card">
+    <text class="section-title">支付方式</text>
+    <view class="payment-list">
+      <view wx:for="{{paymentMethods}}" wx:key="id" class="payment-item {{item.activeClass}}" data-id="{{item.id}}" bindtap="selectPayment">{{item.name}}</view>
+    </view>
+  </view>
+
+  <view class="card section-card" wx:if="{{preview}}">
+    <text class="section-title">金额明细</text>
+    <view class="money-row row space-between"><text>商品小计</text><text>￥{{preview.subtotal}}</text></view>
+    <view class="money-row row space-between"><text>配送费</text><text>￥{{preview.deliveryFee}}</text></view>
+    <view class="money-row row space-between"><text>优惠抵扣</text><text>-￥{{preview.discount}}</text></view>
+    <view class="money-row row space-between total-row"><text>应付金额</text><text class="price">￥{{preview.total}}</text></view>
+  </view>
+
+  <view class="bottom-bar row space-between" wx:if="{{preview}}">
+    <button class="ghost-btn" bindtap="createOnly">仅创建订单</button>
+    <button class="primary-btn" bindtap="createAndPay">创建并支付</button>
+  </view>
+</view>
+
+<view wx:else class="container">
+  <view class="card empty-state">购物车为空，无法进入结算。</view>
+</view>

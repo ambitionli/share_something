@@ -1,0 +1,81 @@
+.header,
+.product-card,
+.review-card {
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.name {
+  display: block;
+  font-size: 38rpx;
+  font-weight: 700;
+  margin-bottom: 12rpx;
+}
+
+.notice {
+  display: block;
+  margin: 18rpx 0;
+}
+
+.product-row {
+  align-items: flex-start;
+}
+
+.product-main {
+  flex: 1;
+  padding-right: 20rpx;
+}
+
+.product-name {
+  display: block;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.product-desc,
+.product-extra,
+.current-count,
+.review-content {
+  display: block;
+  margin-top: 10rpx;
+  color: #4b5563;
+}
+
+.price-row {
+  margin-top: 14rpx;
+}
+
+.price {
+  color: #dc2626;
+  font-size: 34rpx;
+  font-weight: 700;
+}
+
+.origin {
+  margin-left: 12rpx;
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+.stepper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.stepper button {
+  margin-bottom: 10rpx;
+}
+
+.count {
+  margin-bottom: 10rpx;
+  font-weight: 700;
+}
+
+.buy-btn {
+  width: 140rpx;
+}
+
+.review-title {
+  margin: 12rpx 0 20rpx;
+}

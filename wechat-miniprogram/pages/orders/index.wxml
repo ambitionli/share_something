@@ -1,0 +1,29 @@
+<view class="container">
+  <scroll-view scroll-x enhanced class="tab-scroll">
+    <view class="row">
+      <view wx:for="{{tabs}}" wx:key="id" class="tab-item {{item.activeClass}}" data-id="{{item.id}}" bindtap="selectTab">{{item.name}}</view>
+    </view>
+  </scroll-view>
+
+  <view class="list-gap">
+    <block wx:if="{{orders.length}}">
+      <view wx:for="{{orders}}" wx:key="id" class="card order-card">
+        <view class="row space-between">
+          <text class="order-no">{{item.orderNo}}</text>
+          <text class="status-pill">{{item.statusLabel}}</text>
+        </view>
+        <text class="merchant">{{item.merchantName}}</text>
+        <text class="subtle">共 {{item.itemCount}} 件商品，实付 ￥{{item.totals.total}}</text>
+        <text class="subtle">下单时间：{{item.createdAt}}</text>
+        <view class="row action-row">
+          <button size="mini" class="ghost-btn" data-id="{{item.id}}" bindtap="openDetail">详情</button>
+          <button wx:if="{{item.canPay}}" size="mini" class="primary-btn" data-id="{{item.id}}" bindtap="payOrder">去支付</button>
+          <button wx:if="{{item.canRefund}}" size="mini" class="warning-btn" data-id="{{item.id}}" bindtap="refundOrder">退款</button>
+          <button wx:if="{{item.canComplete}}" size="mini" class="secondary-btn" data-id="{{item.id}}" bindtap="completeOrder">确认完成</button>
+          <button wx:if="{{item.canReview}}" size="mini" class="secondary-btn" data-id="{{item.id}}" bindtap="reviewOrder">去评价</button>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="card empty-state">当前筛选下还没有订单。</view>
+  </view>
+</view>

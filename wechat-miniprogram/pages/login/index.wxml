@@ -1,0 +1,26 @@
+<view class="container login-page">
+  <view class="hero card">
+    <text class="title">邻里即达</text>
+    <text class="desc">本地生活服务 + 商家入驻 + 配送到家</text>
+    <text class="tips">支持 Demo 模式直接验收完整业务链路</text>
+  </view>
+
+  <view class="card form-card">
+    <view class="form-group">
+      <text class="form-label">手机号</text>
+      <input class="form-input" value="{{phone}}" type="number" maxlength="11" placeholder="请输入手机号" bindinput="onPhoneInput" />
+    </view>
+    <view class="form-group">
+      <text class="form-label">昵称</text>
+      <input class="form-input" value="{{nickname}}" placeholder="请输入昵称" bindinput="onNicknameInput" />
+    </view>
+    <button class="primary-btn" bindtap="loginAsBuyer">手机号登录 / 注册</button>
+    <button class="secondary-btn mt-16" bindtap="loginWithWechat">微信授权登录（演示）</button>
+  </view>
+
+  <view class="card actions">
+    <text class="section-title">快速体验</text>
+    <button class="ghost-btn" bindtap="useBuyerDemo">进入买家演示账号</button>
+    <button class="ghost-btn mt-16" bindtap="useMerchantDemo">进入商家演示账号</button>
+  </view>
+</view>

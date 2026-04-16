@@ -1,0 +1,36 @@
+.tab-scroll {
+  white-space: nowrap;
+  margin-bottom: 24rpx;
+}
+
+.tab-item {
+  padding: 16rpx 24rpx;
+  border-radius: 999rpx;
+  background: #f3f4f6;
+  margin-right: 16rpx;
+}
+
+.tab-item-active {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.order-card {
+  padding: 24rpx;
+}
+
+.order-no,
+.merchant {
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.order-no {
+  font-weight: 700;
+}
+
+.action-row {
+  margin-top: 20rpx;
+  flex-wrap: wrap;
+  gap: 12rpx;
+}

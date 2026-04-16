@@ -1,0 +1,18 @@
+.hero-card,
+.stat-card,
+.section-card {
+  padding: 24rpx;
+  margin-bottom: 24rpx;
+}
+
+.merchant-name,
+.stat-value {
+  display: block;
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-bottom: 10rpx;
+}
+
+.hot-item {
+  margin-top: 16rpx;
+}

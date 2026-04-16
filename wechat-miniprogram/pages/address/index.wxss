@@ -1,0 +1,18 @@
+.address-card {
+  padding: 24rpx;
+}
+
+.address-name,
+.address-detail {
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.address-name {
+  font-weight: 700;
+}
+
+.action-row {
+  flex-wrap: wrap;
+  gap: 12rpx;
+}

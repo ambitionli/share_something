@@ -1,0 +1,56 @@
+<view class="container" wx:if="{{detail}}">
+  <view class="card detail-card">
+    <view class="row space-between">
+      <text class="order-no">{{detail.order.orderNo}}</text>
+      <text class="status-pill">{{detail.order.statusLabel}}</text>
+    </view>
+    <text class="merchant-name">{{detail.merchant.name}}</text>
+    <text class="subtle">配送费 ￥{{detail.merchant.deliveryFee}} · 起送 ￥{{detail.merchant.minOrderAmount}}</text>
+  </view>
+
+  <view class="card detail-card">
+    <text class="section-title">配送信息</text>
+    <text class="row-text">{{detail.order.safeAddress.contactName}} {{detail.order.safeAddress.phone}}</text>
+    <text class="row-text">{{detail.order.safeAddress.tag}} · {{detail.order.safeAddress.detail}}</text>
+    <text class="row-text" wx:if="{{detail.order.courier}}">骑手：{{detail.order.courier.name}} / {{detail.order.courier.phone}}</text>
+    <text class="row-text" wx:if="{{detail.order.remark}}">备注：{{detail.order.remark}}</text>
+  </view>
+
+  <view class="card detail-card">
+    <text class="section-title">商品明细</text>
+    <view wx:for="{{detail.order.items}}" wx:key="productId" class="row space-between item-row">
+      <view>
+        <text>{{item.productName}}</text>
+        <text class="subtle"> x {{item.quantity}}</text>
+      </view>
+      <text>￥{{item.amount}}</text>
+    </view>
+    <view class="money-box">
+      <view class="row space-between"><text>商品小计</text><text>￥{{detail.order.totals.subtotal}}</text></view>
+      <view class="row space-between"><text>配送费</text><text>￥{{detail.order.totals.deliveryFee}}</text></view>
+      <view class="row space-between"><text>优惠抵扣</text><text>-￥{{detail.order.totals.discount}}</text></view>
+      <view class="row space-between total-row"><text>实付金额</text><text class="price">￥{{detail.order.totals.total}}</text></view>
+    </view>
+  </view>
+
+  <view class="card detail-card">
+    <text class="section-title">订单时间线</text>
+    <view wx:for="{{detail.order.timeline}}" wx:key="at" class="timeline-item">
+      <text class="timeline-label">{{item.label}}</text>
+      <text class="subtle">{{item.at}}</text>
+    </view>
+  </view>
+
+  <view class="card detail-card" wx:if="{{detail.review}}">
+    <text class="section-title">我的评价</text>
+    <text class="row-text">{{detail.review.rating}} 星</text>
+    <text class="row-text">{{detail.review.content}}</text>
+  </view>
+
+  <view class="bottom-bar row space-between">
+    <button wx:if="{{detail.order.canPay}}" class="primary-btn" bindtap="payOrder">立即支付</button>
+    <button wx:if="{{detail.order.canRefund}}" class="warning-btn" bindtap="refundOrder">申请退款</button>
+    <button wx:if="{{detail.order.canComplete}}" class="secondary-btn" bindtap="completeOrder">确认完成</button>
+    <button wx:if="{{detail.order.canReview}}" class="secondary-btn" bindtap="reviewOrder">去评价</button>
+  </view>
+</view>

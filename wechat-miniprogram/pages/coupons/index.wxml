@@ -1,0 +1,14 @@
+<view class="container">
+  <button wx:if="{{isSelectMode}}" class="ghost-btn clear-btn" bindtap="clearCoupon">本次不使用优惠券</button>
+  <view class="list-gap">
+    <view wx:for="{{coupons}}" wx:key="id" class="card coupon-card">
+      <view class="row space-between">
+        <text class="coupon-title">{{item.title}}</text>
+        <text class="status-pill">{{item.statusLabel}}</text>
+      </view>
+      <text class="coupon-amount">立减 ￥{{item.amount}}</text>
+      <text class="subtle">满 ￥{{item.minSpend}} 可用 · 截止 {{item.expiry}}</text>
+      <button wx:if="{{item.canSelect}}" size="mini" class="primary-btn select-btn" data-id="{{item.id}}" bindtap="selectCoupon">立即使用</button>
+    </view>
+  </view>
+</view>
