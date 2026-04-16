@@ -48,6 +48,16 @@
 npm test
 ```
 
+## 打包为 zip（可选）
+
+在仓库根目录执行：
+
+```bash
+zip -r miniprogram-local-life.zip miniprogram-local-life
+```
+
+（`miniprogram-local-life.zip` 已加入根目录 `.gitignore`，便于本地分发而不进版本库。）
+
 ## 说明
 
 - **支付**为 `order_pay` 模拟支付，非真实微信支付；接入生产需替换为微信支付统一下单 + 支付回调云函数。
