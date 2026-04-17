@@ -1,0 +1,36 @@
+<view class="page auth-page">
+  <view class="hero card">
+    <view class="hero-title">好近到家</view>
+    <view class="hero-subtitle">本地生活服务小程序，默认已内置演示数据与完整验收链路。</view>
+  </view>
+
+  <view class="card form-card">
+    <view class="section-title">快速演示账号</view>
+    <view class="quick-actions">
+      <button
+        wx:for="{{demoUsers}}"
+        wx:key="id"
+        class="ghost-btn secondary quick-btn"
+        data-phone="{{item.phone}}"
+        data-nickname="{{item.nickname}}"
+        bindtap="useDemoUser"
+      >
+        {{item.label}}
+      </button>
+    </view>
+  </view>
+
+  <view class="card form-card">
+    <view class="section-title">手机号登录</view>
+    <view class="field">
+      <text class="field-label">手机号</text>
+      <input class="field-input" type="number" maxlength="11" value="{{phone}}" data-field="phone" bindinput="onInput" />
+    </view>
+    <view class="field">
+      <text class="field-label">昵称</text>
+      <input class="field-input" value="{{nickname}}" data-field="nickname" bindinput="onInput" />
+    </view>
+    <button class="primary-btn" bindtap="submitPhoneLogin">手机号登录</button>
+    <button class="ghost-btn secondary" bindtap="submitWechatLogin">微信授权登录（模拟）</button>
+  </view>
+</view>

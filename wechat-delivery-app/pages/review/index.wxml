@@ -1,0 +1,34 @@
+<view class="page review-page" wx:if="{{order}}">
+  <view class="card">
+    <view class="section-title">评价订单</view>
+    <view class="muted">{{order.merchant.name}} · {{order.orderNo}}</view>
+  </view>
+
+  <view class="card">
+    <view class="section-title">星级评分</view>
+    <view class="star-row">
+      <view
+        wx:for="{{[1,2,3,4,5]}}"
+        wx:key="*this"
+        class="star-item {{item <= rating ? 'active' : ''}}"
+        data-rating="{{item}}"
+        bindtap="chooseRating"
+      >
+        {{item}} 星
+      </view>
+    </view>
+    <textarea
+      class="review-input"
+      placeholder="请写下真实感受，至少 5 个字"
+      maxlength="120"
+      value="{{content}}"
+      data-field="content"
+      bindinput="onContentInput"
+    />
+    <view class="image-list">
+      <view class="image-tag" wx:for="{{images}}" wx:key="*this">{{item}}</view>
+    </view>
+    <button class="ghost-btn secondary" bindtap="addMockImage">添加示例图片</button>
+    <button class="primary-btn submit-btn" bindtap="submitReview">提交评价</button>
+  </view>
+</view>

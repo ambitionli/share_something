@@ -1,0 +1,65 @@
+.auth-page {
+  padding-top: 60rpx;
+}
+
+.hero {
+  background: linear-gradient(135deg, #2b62ff, #6b8eff);
+  color: #ffffff;
+  margin-bottom: 24rpx;
+}
+
+.hero-title {
+  font-size: 52rpx;
+  font-weight: 700;
+  margin-bottom: 16rpx;
+}
+
+.hero-subtitle {
+  line-height: 1.6;
+  opacity: 0.92;
+}
+
+.field {
+  margin-bottom: 24rpx;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 12rpx;
+  color: #4c5368;
+}
+
+.field-input {
+  height: 88rpx;
+  padding: 0 24rpx;
+  background: #f4f6fb;
+  border-radius: 20rpx;
+}
+
+.secondary {
+  margin-top: 20rpx;
+}
+
+.demo-switcher {
+  margin-top: 28rpx;
+}
+
+.demo-title {
+  font-size: 26rpx;
+  color: #4c5368;
+  margin-bottom: 16rpx;
+}
+
+.demo-buttons {
+  display: flex;
+  gap: 16rpx;
+}
+
+.demo-btn {
+  flex: 1;
+  margin: 0;
+  background: #f4f6fb;
+  color: #2b62ff;
+  border-radius: 20rpx;
+  font-size: 26rpx;
+}
