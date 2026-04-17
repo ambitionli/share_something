@@ -1,0 +1,117 @@
+.toolbar {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
+}
+
+.toolbar-btn {
+  flex: 1;
+  margin: 0;
+}
+
+.merchant-overview {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20rpx;
+}
+
+.merchant-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-bottom: 10rpx;
+}
+
+.field {
+  margin-bottom: 20rpx;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 10rpx;
+  color: #4c5368;
+}
+
+.field-input,
+.field-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #f4f6fb;
+  border-radius: 20rpx;
+  padding: 0 24rpx;
+}
+
+.field-input {
+  height: 84rpx;
+}
+
+.field-textarea {
+  min-height: 160rpx;
+  padding: 20rpx 24rpx;
+}
+
+.split {
+  display: flex;
+  gap: 16rpx;
+}
+
+.split-item {
+  flex: 1;
+}
+
+.switch-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 18rpx 0 24rpx;
+}
+
+.list-card {
+  padding: 22rpx 0;
+  border-bottom: 1rpx solid #eef1f8;
+}
+
+.list-card:last-child {
+  border-bottom: none;
+}
+
+.list-header,
+.list-actions,
+.inline-tags {
+  display: flex;
+}
+
+.list-header {
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16rpx;
+  margin-bottom: 12rpx;
+}
+
+.list-title {
+  font-size: 30rpx;
+  font-weight: 600;
+  margin-bottom: 8rpx;
+}
+
+.inline-tags {
+  flex-wrap: wrap;
+  gap: 10rpx;
+  margin-top: 12rpx;
+}
+
+.list-actions {
+  gap: 14rpx;
+  margin-top: 18rpx;
+}
+
+.list-btn {
+  flex: 1;
+  margin: 0;
+  line-height: 72rpx;
+  font-size: 24rpx;
+}
+
+.section-gap {
+  margin-top: 24rpx;
+}

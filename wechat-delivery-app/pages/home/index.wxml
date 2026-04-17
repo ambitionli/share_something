@@ -1,0 +1,52 @@
+<view class="page">
+  <view class="search-bar card">
+    <input class="search-input" placeholder="搜索商家或商品" value="{{keyword}}" bindinput="onSearchInput" />
+  </view>
+
+  <swiper class="banner-swiper" indicator-dots autoplay circular>
+    <block wx:for="{{banners}}" wx:key="id">
+      <swiper-item>
+        <view class="banner-item card">
+          <view class="banner-title">{{item.title}}</view>
+          <view class="banner-subtitle">{{item.subtitle}}</view>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <scroll-view class="category-scroll" scroll-x>
+    <view class="category-list">
+      <block wx:for="{{categories}}" wx:key="id">
+        <view class="category-item {{activeCategory === item.id ? 'category-item-active' : ''}}" data-id="{{item.id}}" bindtap="switchCategory">
+          {{item.name}}
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+
+  <view class="section-title">附近好店</view>
+  <block wx:if="{{merchants.length}}">
+    <block wx:for="{{merchants}}" wx:key="id">
+      <view class="merchant-card card" data-id="{{item.id}}" bindtap="openMerchant">
+        <view class="merchant-header">
+          <view class="logo">{{item.logoText}}</view>
+          <view class="merchant-main">
+            <view class="merchant-name">{{item.name}}</view>
+            <view class="muted">{{item.notice}}</view>
+          </view>
+        </view>
+        <view class="merchant-meta">
+          <text>评分 {{item.rating}}</text>
+          <text>月售 {{item.monthlySales}}</text>
+          <text>配送 ¥{{item.deliveryFee}}</text>
+          <text>起送 ¥{{item.minOrderAmount}}</text>
+        </view>
+        <view class="merchant-footer">
+          <text class="tag">{{item.bannerText}}</text>
+          <text class="muted">{{item.productCount}} 件商品可售</text>
+        </view>
+      </view>
+    </block>
+  </block>
+  <view wx:else class="empty">暂无符合条件的商家</view>
+</view>
