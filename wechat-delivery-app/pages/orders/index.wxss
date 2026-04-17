@@ -1,0 +1,64 @@
+.tab-scroll {
+  white-space: nowrap;
+  margin-bottom: 24rpx;
+}
+
+.tab-list {
+  display: inline-flex;
+}
+
+.tab-item {
+  padding: 14rpx 26rpx;
+  margin-right: 14rpx;
+  border-radius: 999rpx;
+  background: #ffffff;
+  color: #4c5368;
+}
+
+.tab-item-active {
+  background: #2b62ff;
+  color: #ffffff;
+}
+
+.order-card {
+  margin-bottom: 20rpx;
+}
+
+.order-header,
+.order-item,
+.order-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-name {
+  font-size: 30rpx;
+  font-weight: 600;
+}
+
+.order-time {
+  margin: 14rpx 0 18rpx;
+}
+
+.order-item {
+  padding: 10rpx 0;
+  color: #4c5368;
+}
+
+.order-footer {
+  margin-top: 20rpx;
+  padding-top: 18rpx;
+  border-top: 1rpx solid #f0f2f7;
+}
+
+.mini-btn {
+  height: 64rpx;
+  line-height: 64rpx;
+  padding: 0 28rpx;
+  border-radius: 999rpx;
+  background: #eef3ff;
+  color: #2b62ff;
+  font-size: 24rpx;
+  margin: 0;
+}
