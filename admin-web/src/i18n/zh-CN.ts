@@ -71,6 +71,26 @@ export interface TranslationResources {
     shipSuccess: string;
     columnId: string;
   };
+  webviz: {
+    menu: string;
+    title: string;
+    subtitle: string;
+    play: string;
+    pause: string;
+    reset: string;
+    time: string;
+    sceneReplay: string;
+    telemetry: string;
+    speed: string;
+    steering: string;
+    points: string;
+    lidarPointCloud: string;
+    nearField: string;
+    highIntensity: string;
+    obstacleTracking: string;
+    cameraPlayback: string;
+    detected: string;
+  };
   orderStatus: {
     pending: string;
     paid: string;
@@ -173,6 +193,26 @@ export const zhCN: TranslationResources = {
     pay: '去支付',
     shipSuccess: '发货成功',
     columnId: 'ID',
+  },
+  webviz: {
+    menu: '自动驾驶 Webviz',
+    title: '自动驾驶回放 Webviz',
+    subtitle: '回放车辆道路行驶、路侧建筑、障碍物、激光雷达点云与多路 camera 画面。',
+    play: '播放',
+    pause: '暂停',
+    reset: '重置',
+    time: '时间',
+    sceneReplay: '道路场景回放',
+    telemetry: '车辆遥测',
+    speed: '速度',
+    steering: '转角',
+    points: '点云数',
+    lidarPointCloud: '激光雷达点云',
+    nearField: '近场点',
+    highIntensity: '高反射点',
+    obstacleTracking: '障碍物追踪',
+    cameraPlayback: '周视 camera 回放',
+    detected: '识别目标',
   },
   orderStatus: {
     pending: '待付款',
