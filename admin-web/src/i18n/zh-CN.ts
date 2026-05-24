@@ -71,6 +71,78 @@ export interface TranslationResources {
     shipSuccess: string;
     columnId: string;
   };
+  webviz: {
+    menu: string;
+    title: string;
+    subtitle: string;
+    statusReplay: string;
+    statusPaused: string;
+    sceneTitle: string;
+    playbackTitle: string;
+    obstacleTitle: string;
+    cameraTitle: string;
+    play: string;
+    pause: string;
+    cameraOk: string;
+    cameraFeeds: {
+      front: { name: string; position: string };
+      left: { name: string; position: string };
+      right: { name: string; position: string };
+      rear: { name: string; position: string };
+    };
+    cameraLabels: {
+      frontRoad: string;
+      leftCurb: string;
+      rightCurb: string;
+      rearRoad: string;
+    };
+    cameraDescriptions: {
+      frontClear: string;
+      frontPedestrian: string;
+      leftCurb: string;
+      rightStation: string;
+      rightPedestrian: string;
+      rearRoad: string;
+    };
+    alerts: {
+      pedestrianCrosswalk: string;
+      vruCandidate: string;
+    };
+    buildings: {
+      officeA: string;
+      mall: string;
+      hotel: string;
+      parkTower: string;
+      station: string;
+      depot: string;
+    };
+    obstacles: {
+      labels: {
+        truck: string;
+        pedestrian: string;
+        cone: string;
+        barrier: string;
+        sedan: string;
+      };
+      types: {
+        vehicle: string;
+        pedestrian: string;
+        barrier: string;
+        cone: string;
+      };
+      risks: {
+        low: string;
+        medium: string;
+        high: string;
+      };
+    };
+    stats: {
+      frames: string;
+      lidarPoints: string;
+      cameras: string;
+      speed: string;
+    };
+  };
   orderStatus: {
     pending: string;
     paid: string;
@@ -173,6 +245,78 @@ export const zhCN: TranslationResources = {
     pay: '去支付',
     shipSuccess: '发货成功',
     columnId: 'ID',
+  },
+  webviz: {
+    menu: '自动驾驶 WebViz',
+    title: '自动驾驶数据回放',
+    subtitle: '同步回放自车轨迹、激光雷达点云、障碍物和四路相机感知画面',
+    statusReplay: '回放中',
+    statusPaused: '已暂停',
+    sceneTitle: '道路与点云俯视图',
+    playbackTitle: '时间轴控制',
+    obstacleTitle: '障碍物列表',
+    cameraTitle: '周视相机画面',
+    play: '播放',
+    pause: '暂停',
+    cameraOk: '正常',
+    cameraFeeds: {
+      front: { name: '前视', position: '前视 120°' },
+      left: { name: '左视', position: '左侧广角' },
+      right: { name: '右视', position: '右侧广角' },
+      rear: { name: '后视', position: '后视' },
+    },
+    cameraLabels: {
+      frontRoad: '前方道路',
+      leftCurb: '左侧路缘',
+      rightCurb: '右侧路缘',
+      rearRoad: '后方道路',
+    },
+    cameraDescriptions: {
+      frontClear: '车道清晰，前方有卡车',
+      frontPedestrian: '前方卡车与右侧路缘行人进入视野',
+      leftCurb: '建筑立面、停车带与低速施工锥',
+      rightStation: '站点入口与人行道',
+      rightPedestrian: '行人与站点入口可见',
+      rearRoad: '后车保持在安全包络外',
+    },
+    alerts: {
+      pedestrianCrosswalk: '行人进入横穿区域',
+      vruCandidate: '弱势交通参与者候选',
+    },
+    buildings: {
+      officeA: '办公楼 A',
+      mall: '商场',
+      hotel: '酒店',
+      parkTower: '公园塔楼',
+      station: '站点',
+      depot: '车库',
+    },
+    obstacles: {
+      labels: {
+        truck: '卡车',
+        pedestrian: '行人',
+        cone: '锥桶',
+        barrier: '路障',
+        sedan: '轿车',
+      },
+      types: {
+        vehicle: '车辆',
+        pedestrian: '行人',
+        barrier: '路障',
+        cone: '锥桶',
+      },
+      risks: {
+        low: '低风险',
+        medium: '中风险',
+        high: '高风险',
+      },
+    },
+    stats: {
+      frames: '回放帧',
+      lidarPoints: '当前点云',
+      cameras: '相机路数',
+      speed: '自车速度',
+    },
   },
   orderStatus: {
     pending: '待付款',
