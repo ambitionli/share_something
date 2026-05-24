@@ -2,10 +2,14 @@ export type LaneSide = 'left' | 'right' | 'center';
 
 export type SceneObjectKind = 'vehicle' | 'pedestrian' | 'cone' | 'barrier' | 'cyclist';
 
+export type SceneObjectLabelKey = 'leadCar' | 'roadCone' | 'pedestrian' | 'workZoneBarrier' | 'cyclist';
+
+export type CameraNameKey = 'frontWide' | 'frontNarrow' | 'leftSide' | 'rightSide';
+
 export interface SceneObject {
   id: string;
   kind: SceneObjectKind;
-  label: string;
+  labelKey: SceneObjectLabelKey;
   x: number;
   y: number;
   side: LaneSide;
@@ -45,7 +49,7 @@ export interface ReplayFrame {
 
 export interface CameraFeed {
   id: string;
-  name: string;
+  nameKey: CameraNameKey;
   direction: 'front' | 'rear' | 'left' | 'right';
 }
 
@@ -62,10 +66,10 @@ export interface SceneSummary {
 }
 
 const cameras: CameraFeed[] = [
-  { id: 'front-wide', name: 'Front Wide Camera', direction: 'front' },
-  { id: 'front-narrow', name: 'Front Narrow Camera', direction: 'front' },
-  { id: 'left-side', name: 'Left Side Camera', direction: 'left' },
-  { id: 'right-side', name: 'Right Side Camera', direction: 'right' },
+  { id: 'front-wide', nameKey: 'frontWide', direction: 'front' },
+  { id: 'front-narrow', nameKey: 'frontNarrow', direction: 'front' },
+  { id: 'left-side', nameKey: 'leftSide', direction: 'left' },
+  { id: 'right-side', nameKey: 'rightSide', direction: 'right' },
 ];
 
 export const autonomyReplay: AutonomyReplay = {
@@ -76,9 +80,9 @@ export const autonomyReplay: AutonomyReplay = {
       timestamp: 0,
       vehicle: { x: 0, y: 0, headingDeg: 0, speedKph: 18 },
       obstacles: [
-        { id: 'lead-car', kind: 'vehicle', label: 'Lead car', x: 0.8, y: 35, side: 'center', risk: 'medium' },
-        { id: 'left-cone', kind: 'cone', label: 'Road cone', x: -5.2, y: 18, side: 'left', risk: 'low' },
-        { id: 'right-ped', kind: 'pedestrian', label: 'Pedestrian', x: 6.4, y: 42, side: 'right', risk: 'high' },
+        { id: 'lead-car', kind: 'vehicle', labelKey: 'leadCar', x: 0.8, y: 35, side: 'center', risk: 'medium' },
+        { id: 'left-cone', kind: 'cone', labelKey: 'roadCone', x: -5.2, y: 18, side: 'left', risk: 'low' },
+        { id: 'right-ped', kind: 'pedestrian', labelKey: 'pedestrian', x: 6.4, y: 42, side: 'right', risk: 'high' },
       ],
       lidarClusters: [
         { id: 'pc-lead-car-0', objectId: 'lead-car', x: 0.8, y: 35, radius: 3.8, pointCount: 52, intensity: 0.82 },
@@ -90,10 +94,10 @@ export const autonomyReplay: AutonomyReplay = {
       timestamp: 1.2,
       vehicle: { x: 0.2, y: 14, headingDeg: 1.5, speedKph: 26 },
       obstacles: [
-        { id: 'lead-car', kind: 'vehicle', label: 'Lead car', x: 1, y: 48, side: 'center', risk: 'medium' },
-        { id: 'left-cone', kind: 'cone', label: 'Road cone', x: -5.5, y: 31, side: 'left', risk: 'low' },
-        { id: 'right-ped', kind: 'pedestrian', label: 'Pedestrian', x: 6.1, y: 53, side: 'right', risk: 'high' },
-        { id: 'right-barrier', kind: 'barrier', label: 'Work-zone barrier', x: 5.4, y: 25, side: 'right', risk: 'medium' },
+        { id: 'lead-car', kind: 'vehicle', labelKey: 'leadCar', x: 1, y: 48, side: 'center', risk: 'medium' },
+        { id: 'left-cone', kind: 'cone', labelKey: 'roadCone', x: -5.5, y: 31, side: 'left', risk: 'low' },
+        { id: 'right-ped', kind: 'pedestrian', labelKey: 'pedestrian', x: 6.1, y: 53, side: 'right', risk: 'high' },
+        { id: 'right-barrier', kind: 'barrier', labelKey: 'workZoneBarrier', x: 5.4, y: 25, side: 'right', risk: 'medium' },
       ],
       lidarClusters: [
         { id: 'pc-lead-car-1', objectId: 'lead-car', x: 1, y: 48, radius: 3.9, pointCount: 58, intensity: 0.84 },
@@ -106,10 +110,10 @@ export const autonomyReplay: AutonomyReplay = {
       timestamp: 2.4,
       vehicle: { x: -0.2, y: 30, headingDeg: -1, speedKph: 31 },
       obstacles: [
-        { id: 'lead-car', kind: 'vehicle', label: 'Lead car', x: 0.6, y: 63, side: 'center', risk: 'medium' },
-        { id: 'left-cone', kind: 'cone', label: 'Road cone', x: -5.1, y: 43, side: 'left', risk: 'low' },
-        { id: 'right-ped', kind: 'pedestrian', label: 'Pedestrian', x: 5.8, y: 62, side: 'right', risk: 'high' },
-        { id: 'right-barrier', kind: 'barrier', label: 'Work-zone barrier', x: 5.6, y: 39, side: 'right', risk: 'medium' },
+        { id: 'lead-car', kind: 'vehicle', labelKey: 'leadCar', x: 0.6, y: 63, side: 'center', risk: 'medium' },
+        { id: 'left-cone', kind: 'cone', labelKey: 'roadCone', x: -5.1, y: 43, side: 'left', risk: 'low' },
+        { id: 'right-ped', kind: 'pedestrian', labelKey: 'pedestrian', x: 5.8, y: 62, side: 'right', risk: 'high' },
+        { id: 'right-barrier', kind: 'barrier', labelKey: 'workZoneBarrier', x: 5.6, y: 39, side: 'right', risk: 'medium' },
       ],
       lidarClusters: [
         { id: 'pc-lead-car-2', objectId: 'lead-car', x: 0.6, y: 63, radius: 4, pointCount: 61, intensity: 0.85 },
@@ -122,11 +126,11 @@ export const autonomyReplay: AutonomyReplay = {
       timestamp: 3.6,
       vehicle: { x: 0.3, y: 45, headingDeg: 0.5, speedKph: 34 },
       obstacles: [
-        { id: 'lead-car', kind: 'vehicle', label: 'Lead car', x: 0.9, y: 78, side: 'center', risk: 'medium' },
-        { id: 'left-cone', kind: 'cone', label: 'Road cone', x: -5.3, y: 59, side: 'left', risk: 'low' },
-        { id: 'right-ped', kind: 'pedestrian', label: 'Pedestrian', x: 5.3, y: 73, side: 'right', risk: 'high' },
-        { id: 'right-barrier', kind: 'barrier', label: 'Work-zone barrier', x: 5.7, y: 54, side: 'right', risk: 'medium' },
-        { id: 'left-cyclist', kind: 'cyclist', label: 'Cyclist', x: -4.4, y: 70, side: 'left', risk: 'medium' },
+        { id: 'lead-car', kind: 'vehicle', labelKey: 'leadCar', x: 0.9, y: 78, side: 'center', risk: 'medium' },
+        { id: 'left-cone', kind: 'cone', labelKey: 'roadCone', x: -5.3, y: 59, side: 'left', risk: 'low' },
+        { id: 'right-ped', kind: 'pedestrian', labelKey: 'pedestrian', x: 5.3, y: 73, side: 'right', risk: 'high' },
+        { id: 'right-barrier', kind: 'barrier', labelKey: 'workZoneBarrier', x: 5.7, y: 54, side: 'right', risk: 'medium' },
+        { id: 'left-cyclist', kind: 'cyclist', labelKey: 'cyclist', x: -4.4, y: 70, side: 'left', risk: 'medium' },
       ],
       lidarClusters: [
         { id: 'pc-lead-car-3', objectId: 'lead-car', x: 0.9, y: 78, radius: 4.2, pointCount: 63, intensity: 0.86 },
@@ -140,11 +144,11 @@ export const autonomyReplay: AutonomyReplay = {
       timestamp: 4.8,
       vehicle: { x: -0.1, y: 61, headingDeg: -0.7, speedKph: 29 },
       obstacles: [
-        { id: 'lead-car', kind: 'vehicle', label: 'Lead car', x: 0.4, y: 93, side: 'center', risk: 'medium' },
-        { id: 'left-cone', kind: 'cone', label: 'Road cone', x: -5.4, y: 75, side: 'left', risk: 'low' },
-        { id: 'right-ped', kind: 'pedestrian', label: 'Pedestrian', x: 5, y: 84, side: 'right', risk: 'high' },
-        { id: 'right-barrier', kind: 'barrier', label: 'Work-zone barrier', x: 5.8, y: 70, side: 'right', risk: 'medium' },
-        { id: 'left-cyclist', kind: 'cyclist', label: 'Cyclist', x: -4.1, y: 86, side: 'left', risk: 'medium' },
+        { id: 'lead-car', kind: 'vehicle', labelKey: 'leadCar', x: 0.4, y: 93, side: 'center', risk: 'medium' },
+        { id: 'left-cone', kind: 'cone', labelKey: 'roadCone', x: -5.4, y: 75, side: 'left', risk: 'low' },
+        { id: 'right-ped', kind: 'pedestrian', labelKey: 'pedestrian', x: 5, y: 84, side: 'right', risk: 'high' },
+        { id: 'right-barrier', kind: 'barrier', labelKey: 'workZoneBarrier', x: 5.8, y: 70, side: 'right', risk: 'medium' },
+        { id: 'left-cyclist', kind: 'cyclist', labelKey: 'cyclist', x: -4.1, y: 86, side: 'left', risk: 'medium' },
       ],
       lidarClusters: [
         { id: 'pc-lead-car-4', objectId: 'lead-car', x: 0.4, y: 93, radius: 4.2, pointCount: 64, intensity: 0.87 },
@@ -158,10 +162,10 @@ export const autonomyReplay: AutonomyReplay = {
       timestamp: 6,
       vehicle: { x: 0.1, y: 76, headingDeg: 0.2, speedKph: 24 },
       obstacles: [
-        { id: 'lead-car', kind: 'vehicle', label: 'Lead car', x: 0.5, y: 108, side: 'center', risk: 'low' },
-        { id: 'right-ped', kind: 'pedestrian', label: 'Pedestrian', x: 4.7, y: 97, side: 'right', risk: 'medium' },
-        { id: 'right-barrier', kind: 'barrier', label: 'Work-zone barrier', x: 5.9, y: 85, side: 'right', risk: 'medium' },
-        { id: 'left-cyclist', kind: 'cyclist', label: 'Cyclist', x: -3.8, y: 101, side: 'left', risk: 'medium' },
+        { id: 'lead-car', kind: 'vehicle', labelKey: 'leadCar', x: 0.5, y: 108, side: 'center', risk: 'low' },
+        { id: 'right-ped', kind: 'pedestrian', labelKey: 'pedestrian', x: 4.7, y: 97, side: 'right', risk: 'medium' },
+        { id: 'right-barrier', kind: 'barrier', labelKey: 'workZoneBarrier', x: 5.9, y: 85, side: 'right', risk: 'medium' },
+        { id: 'left-cyclist', kind: 'cyclist', labelKey: 'cyclist', x: -3.8, y: 101, side: 'left', risk: 'medium' },
       ],
       lidarClusters: [
         { id: 'pc-lead-car-5', objectId: 'lead-car', x: 0.5, y: 108, radius: 4.1, pointCount: 60, intensity: 0.84 },

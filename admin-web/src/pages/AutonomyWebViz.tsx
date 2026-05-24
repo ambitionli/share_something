@@ -108,7 +108,7 @@ function renderLidarPoint(point: LidarPoint, vehicleY: number) {
   );
 }
 
-function renderObstacle(object: SceneObject, frame: ReplayFrame) {
+function renderObstacle(object: SceneObject, frame: ReplayFrame, label: string) {
   const point = toScenePoint(object.x, object.y, frame.vehicle.y);
 
   return (
@@ -124,7 +124,7 @@ function renderObstacle(object: SceneObject, frame: ReplayFrame) {
         strokeOpacity={0.35}
       />
       <text x={point.x + 18} y={point.y - 16} fill="#e2e8f0" fontSize="13" fontWeight={600}>
-        {object.label}
+        {label}
       </text>
     </g>
   );
@@ -140,6 +140,38 @@ function cameraObjects(camera: CameraFeed, frame: ReplayFrame) {
   }
 
   return frame.obstacles.filter((object) => object.y >= frame.vehicle.y);
+}
+
+function cameraNameKeyPath(camera: CameraFeed) {
+  switch (camera.nameKey) {
+    case 'frontWide':
+      return 'autonomy.cameraFeeds.frontWide' as const;
+    case 'frontNarrow':
+      return 'autonomy.cameraFeeds.frontNarrow' as const;
+    case 'leftSide':
+      return 'autonomy.cameraFeeds.leftSide' as const;
+    case 'rightSide':
+      return 'autonomy.cameraFeeds.rightSide' as const;
+    default:
+      return 'autonomy.cameraFeeds.frontWide' as const;
+  }
+}
+
+function objectLabelKeyPath(object: SceneObject) {
+  switch (object.labelKey) {
+    case 'leadCar':
+      return 'autonomy.objectLabels.leadCar' as const;
+    case 'roadCone':
+      return 'autonomy.objectLabels.roadCone' as const;
+    case 'pedestrian':
+      return 'autonomy.objectLabels.pedestrian' as const;
+    case 'workZoneBarrier':
+      return 'autonomy.objectLabels.workZoneBarrier' as const;
+    case 'cyclist':
+      return 'autonomy.objectLabels.cyclist' as const;
+    default:
+      return 'autonomy.objectLabels.leadCar' as const;
+  }
 }
 
 function cameraBackground(camera: CameraFeed, timestamp: number): CSSProperties {
@@ -163,7 +195,7 @@ function CameraPanel({ camera, frame }: { camera: CameraFeed; frame: ReplayFrame
       title={
         <Space>
           <VideoCameraOutlined />
-          <span>{camera.name}</span>
+          <span>{t(cameraNameKeyPath(camera))}</span>
         </Space>
       }
       style={{ background: '#0f172a', borderColor: '#1e293b' }}
@@ -180,7 +212,7 @@ function CameraPanel({ camera, frame }: { camera: CameraFeed; frame: ReplayFrame
         <Space size={6} wrap style={{ position: 'absolute', left: 12, right: 12, bottom: 12 }}>
           {objects.slice(0, 3).map((object) => (
             <Tag key={object.id} color={object.risk === 'high' ? 'red' : object.risk === 'medium' ? 'gold' : 'green'}>
-              {object.label}
+              {t(objectLabelKeyPath(object))}
             </Tag>
           ))}
         </Space>
@@ -246,7 +278,7 @@ export default function AutonomyWebViz() {
         </Col>
         <Col xs={24} md={8}>
           <Card>
-            <Statistic title={t('autonomy.stats.obstacles')} value={summary.activeObstacleCount} suffix={`/ ${summary.cameraCount} cams`} />
+            <Statistic title={t('autonomy.stats.obstacles')} value={summary.activeObstacleCount} suffix={t('autonomy.stats.cameraSuffix', { count: summary.cameraCount })} />
           </Card>
         </Col>
       </Row>
@@ -323,7 +355,7 @@ export default function AutonomyWebViz() {
                 <circle cx={CAR_X} cy={CAR_Y} r={74} fill="none" stroke="#38bdf8" strokeOpacity={0.22} />
                 <circle cx={CAR_X} cy={CAR_Y} r={136} fill="none" stroke="#38bdf8" strokeOpacity={0.18} />
                 {points.map((point) => renderLidarPoint(point, frame.vehicle.y))}
-                {frame.obstacles.map((object) => renderObstacle(object, frame))}
+                {frame.obstacles.map((object) => renderObstacle(object, frame, t(objectLabelKeyPath(object))))}
 
                 <g transform={`translate(${CAR_X} ${CAR_Y}) rotate(${frame.vehicle.headingDeg})`}>
                   <rect x={-22} y={-42} width={44} height={84} rx={12} fill="#6366f1" />

@@ -47,6 +47,7 @@ export interface TranslationResources {
       speed: string;
       points: string;
       obstacles: string;
+      cameraSuffix: string;
     };
     scene: {
       title: string;
@@ -55,6 +56,19 @@ export interface TranslationResources {
     camera: {
       replay: string;
       objects: string;
+    };
+    cameraFeeds: {
+      frontWide: string;
+      frontNarrow: string;
+      leftSide: string;
+      rightSide: string;
+    };
+    objectLabels: {
+      leadCar: string;
+      roadCone: string;
+      pedestrian: string;
+      workZoneBarrier: string;
+      cyclist: string;
     };
   };
   company: {
@@ -174,6 +188,7 @@ export const zhCN: TranslationResources = {
       speed: '自车速度',
       points: 'LiDAR 点数',
       obstacles: '障碍物',
+      cameraSuffix: '/ {{count}} 路相机',
     },
     scene: {
       title: '道路与点云场景',
@@ -182,6 +197,19 @@ export const zhCN: TranslationResources = {
     camera: {
       replay: '录像回放',
       objects: '目标',
+    },
+    cameraFeeds: {
+      frontWide: '前广角相机',
+      frontNarrow: '前窄角相机',
+      leftSide: '左侧相机',
+      rightSide: '右侧相机',
+    },
+    objectLabels: {
+      leadCar: '前车',
+      roadCone: '锥桶',
+      pedestrian: '行人',
+      workZoneBarrier: '施工护栏',
+      cyclist: '骑行者',
     },
   },
   company: {

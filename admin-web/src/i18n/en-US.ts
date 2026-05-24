@@ -49,6 +49,7 @@ export const enUS: TranslationResources = {
       speed: 'Ego speed',
       points: 'LiDAR points',
       obstacles: 'Obstacles',
+      cameraSuffix: '/ {{count}} cams',
     },
     scene: {
       title: 'Road and point-cloud scene',
@@ -57,6 +58,19 @@ export const enUS: TranslationResources = {
     camera: {
       replay: 'Video replay',
       objects: 'objects',
+    },
+    cameraFeeds: {
+      frontWide: 'Front Wide Camera',
+      frontNarrow: 'Front Narrow Camera',
+      leftSide: 'Left Side Camera',
+      rightSide: 'Right Side Camera',
+    },
+    objectLabels: {
+      leadCar: 'Lead car',
+      roadCone: 'Road cone',
+      pedestrian: 'Pedestrian',
+      workZoneBarrier: 'Work-zone barrier',
+      cyclist: 'Cyclist',
     },
   },
   company: {

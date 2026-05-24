@@ -20,7 +20,7 @@
 | `admin-web/src/utils/autonomyReplay.test.ts` | 回放数据与点云采样单元测试 |
 | `admin-web/src/App.tsx` | 注册 `/autonomy-webviz` 路由 |
 | `admin-web/src/components/AdminLayout.tsx` | 侧边栏新增“自动驾驶回放”入口 |
-| `admin-web/src/i18n/zh-CN.ts` / `en-US.ts` | 新增 `autonomy.*` 中英文文案 |
+| `admin-web/src/i18n/zh-CN.ts` / `en-US.ts` | 新增 `autonomy.*` 中英文文案，包含相机名与障碍物标签 |
 
 ## 测试
 
@@ -30,4 +30,5 @@
 
 ## 修改记录
 
+- 2026-05-24：将相机名、障碍物标签和相机数量后缀纳入 i18n；更新时间戳：2026-05-24 06:49 UTC。
 - 2026-05-24：新增自动驾驶 WebViz 回放页面和模拟传感器数据；更新时间戳：2026-05-24 06:43 UTC。

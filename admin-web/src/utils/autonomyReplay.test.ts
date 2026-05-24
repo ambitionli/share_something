@@ -43,4 +43,22 @@ describe('autonomy replay data', () => {
     expect(points[0]).toEqual({ id: 'pc-lead-car-4-0', x: 4.6, y: 93, intensity: 0.87 });
     expect(points[215].id).toBe('pc-left-cyclist-4-33');
   });
+
+  it('stores translation keys for visible replay labels', () => {
+    expect(autonomyReplay.cameras.map((camera) => camera.nameKey)).toEqual([
+      'frontWide',
+      'frontNarrow',
+      'leftSide',
+      'rightSide',
+    ]);
+
+    const frame = getFrameAtTime(autonomyReplay, 4.8);
+    expect(frame.obstacles.map((object) => object.labelKey)).toEqual([
+      'leadCar',
+      'roadCone',
+      'pedestrian',
+      'workZoneBarrier',
+      'cyclist',
+    ]);
+  });
 });
