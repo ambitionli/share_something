@@ -33,6 +33,30 @@ export interface TranslationResources {
     todayOrders: string;
     revenue: string;
   };
+  autonomy: {
+    menu: string;
+    title: string;
+    subtitle: string;
+    badge: string;
+    controls: {
+      play: string;
+      pause: string;
+      timeline: string;
+    };
+    stats: {
+      speed: string;
+      points: string;
+      obstacles: string;
+    };
+    scene: {
+      title: string;
+      lidar: string;
+    };
+    camera: {
+      replay: string;
+      objects: string;
+    };
+  };
   company: {
     title: string;
     description: string;
@@ -135,6 +159,30 @@ export const zhCN: TranslationResources = {
     totalUsers: '用户总数',
     todayOrders: '今日订单',
     revenue: '营收',
+  },
+  autonomy: {
+    menu: '自动驾驶回放',
+    title: '自动驾驶 WebViz 回放',
+    subtitle: '同步展示道路场景、车辆轨迹、建筑物、障碍物、LiDAR 点云与四路相机回放。',
+    badge: '传感器回放',
+    controls: {
+      play: '播放',
+      pause: '暂停',
+      timeline: '回放时间轴',
+    },
+    stats: {
+      speed: '自车速度',
+      points: 'LiDAR 点数',
+      obstacles: '障碍物',
+    },
+    scene: {
+      title: '道路与点云场景',
+      lidar: 'LiDAR 点云',
+    },
+    camera: {
+      replay: '录像回放',
+      objects: '目标',
+    },
   },
   company: {
     title: '标题',

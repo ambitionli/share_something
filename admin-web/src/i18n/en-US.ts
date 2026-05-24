@@ -35,6 +35,30 @@ export const enUS: TranslationResources = {
     todayOrders: "Today's orders",
     revenue: 'Revenue',
   },
+  autonomy: {
+    menu: 'Autonomy replay',
+    title: 'Autonomous Driving WebViz Replay',
+    subtitle: 'Replay a synchronized road scene with ego vehicle motion, buildings, obstacles, LiDAR point clouds, and four camera feeds.',
+    badge: 'Sensor replay',
+    controls: {
+      play: 'Play',
+      pause: 'Pause',
+      timeline: 'Replay timeline',
+    },
+    stats: {
+      speed: 'Ego speed',
+      points: 'LiDAR points',
+      obstacles: 'Obstacles',
+    },
+    scene: {
+      title: 'Road and point-cloud scene',
+      lidar: 'LiDAR cloud',
+    },
+    camera: {
+      replay: 'Video replay',
+      objects: 'objects',
+    },
+  },
   company: {
     title: 'Title',
     description: 'Description',
