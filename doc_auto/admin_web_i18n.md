@@ -1,6 +1,6 @@
 # admin-web 国际化（i18next）
 
-> 最后更新：2026-03-20（`orders.*` 扩展：订单管理页文案）
+> 最后更新：2026-05-24（`webviz.*` 扩展：自动驾驶回放 Webviz 页面文案）
 
 ## 说明
 
@@ -22,3 +22,7 @@ function Example() {
 ```
 
 切换语言：`i18n.changeLanguage('en-US')`（从 `admin-web/src/i18n` 导入默认导出的 `i18n`）。
+
+## 修改记录
+
+- 2026-05-24：新增 `webviz.*` 文案，用于自动驾驶回放 Webviz 菜单、标题、HUD 统计、radar detections 与播放控制。

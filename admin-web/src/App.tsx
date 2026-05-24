@@ -10,6 +10,7 @@ import Products from './pages/Products';
 import Company from './pages/Company';
 import Users from './pages/Users';
 import Orders from './pages/Orders';
+import AutonomousWebviz from './pages/AutonomousWebviz';
 import { useAuthStore } from './stores/auth';
 import { useEffect } from 'react';
 
@@ -18,9 +19,11 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (!isLoggedIn) {
-      loadUser().catch(() => {});
+      loadUser().catch((error: unknown) => {
+        console.warn('Failed to load current admin user.', error);
+      });
     }
-  }, []);
+  }, [isLoggedIn, loadUser]);
 
   const token = localStorage.getItem('admin_token');
   if (!token) {
@@ -45,6 +48,7 @@ export default function App() {
             <Route path="company" element={<Company />} />
             <Route path="users" element={<Users />} />
             <Route path="orders" element={<Orders />} />
+            <Route path="webviz" element={<AutonomousWebviz />} />
           </Route>
         </Routes>
       </BrowserRouter>

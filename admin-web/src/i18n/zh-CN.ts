@@ -33,6 +33,42 @@ export interface TranslationResources {
     todayOrders: string;
     revenue: string;
   };
+  webviz: {
+    menu: string;
+    title: string;
+    subtitle: string;
+    speed: string;
+    obstacles: string;
+    lidarPoints: string;
+    radarDetections: string;
+    nearestObstacle: string;
+    play: string;
+    pause: string;
+    frame: string;
+    cameras: string;
+    bevTitle: string;
+    bevAria: string;
+    building: string;
+    ego: string;
+    recording: string;
+    objects: string;
+    cameraFront: string;
+    cameraLeft: string;
+    cameraRight: string;
+    cameraRear: string;
+    obstacleSedan: string;
+    obstaclePedestrian: string;
+    obstacleCones: string;
+    obstacleBarrier: string;
+    obstacleCyclist: string;
+    obstacleShortVehicle: string;
+    obstacleShortPedestrian: string;
+    obstacleShortCone: string;
+    obstacleShortBarrier: string;
+    obstacleShortCyclist: string;
+    fov: string;
+    degreeUnit: string;
+  };
   company: {
     title: string;
     description: string;
@@ -135,6 +171,42 @@ export const zhCN: TranslationResources = {
     totalUsers: '用户总数',
     todayOrders: '今日订单',
     revenue: '营收',
+  },
+  webviz: {
+    menu: '自动驾驶 Webviz',
+    title: '自动驾驶回放 Webviz',
+    subtitle: '回放车端融合感知：道路、车辆轨迹、建筑物、障碍物、激光雷达点云与四路 camera 录像。',
+    speed: '车速',
+    obstacles: '障碍物',
+    lidarPoints: '点云点数',
+    radarDetections: '雷达目标',
+    nearestObstacle: '最近障碍物',
+    play: '播放',
+    pause: '暂停',
+    frame: '帧',
+    cameras: '路 Camera',
+    bevTitle: 'LiDAR / Radar / BEV',
+    bevAria: '自动驾驶回放鸟瞰图',
+    building: '建筑',
+    ego: '主车',
+    recording: '录制中',
+    objects: '个目标',
+    cameraFront: '前视 Camera',
+    cameraLeft: '左视 Camera',
+    cameraRight: '右视 Camera',
+    cameraRear: '后视 Camera',
+    obstacleSedan: '前方慢车',
+    obstaclePedestrian: '右侧行人',
+    obstacleCones: '施工锥桶',
+    obstacleBarrier: '路障',
+    obstacleCyclist: '左侧骑行者',
+    obstacleShortVehicle: '车',
+    obstacleShortPedestrian: '人',
+    obstacleShortCone: '锥',
+    obstacleShortBarrier: '障',
+    obstacleShortCyclist: '骑',
+    fov: '视场角',
+    degreeUnit: '度',
   },
   company: {
     title: '标题',
