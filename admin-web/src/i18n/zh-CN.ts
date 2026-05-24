@@ -90,6 +90,48 @@ export interface TranslationResources {
     obstacleTracking: string;
     cameraPlayback: string;
     detected: string;
+    radarDetections: string;
+    radarTargets: string;
+    approaching: string;
+    closestRange: string;
+    risk: {
+      danger: string;
+      watch: string;
+      clear: string;
+    };
+    obstacleKinds: {
+      vehicle: string;
+      pedestrian: string;
+      cone: string;
+      barrier: string;
+    };
+    obstacles: {
+      leadVehicle: string;
+      constructionCone: string;
+      pedestrian: string;
+      roadBarrier: string;
+      pedestrianCrossing: string;
+      parkedVehicle: string;
+      laneCone: string;
+    };
+    cameras: {
+      front: string;
+      left: string;
+      right: string;
+      rear: string;
+    };
+    cameraObjects: {
+      leadCar: string;
+      trafficCone: string;
+      buildingFacade: string;
+      parkingVehicle: string;
+      pedestrian: string;
+      roadSign: string;
+      followingCar: string;
+      laneMarker: string;
+      roadBarrier: string;
+      laneCone: string;
+    };
   };
   orderStatus: {
     pending: string;
@@ -213,6 +255,48 @@ export const zhCN: TranslationResources = {
     obstacleTracking: '障碍物追踪',
     cameraPlayback: '周视 camera 回放',
     detected: '识别目标',
+    radarDetections: '毫米波雷达目标',
+    radarTargets: '雷达目标',
+    approaching: '接近目标',
+    closestRange: '最近距离',
+    risk: {
+      danger: '高风险',
+      watch: '关注',
+      clear: '正常',
+    },
+    obstacleKinds: {
+      vehicle: '车辆',
+      pedestrian: '行人',
+      cone: '锥桶',
+      barrier: '护栏',
+    },
+    obstacles: {
+      leadVehicle: '前车',
+      constructionCone: '施工锥桶',
+      pedestrian: '行人',
+      roadBarrier: '道路护栏',
+      pedestrianCrossing: '横穿行人',
+      parkedVehicle: '路边停放车辆',
+      laneCone: '车道锥桶',
+    },
+    cameras: {
+      front: '前视 Camera',
+      left: '左视 Camera',
+      right: '右视 Camera',
+      rear: '后视 Camera',
+    },
+    cameraObjects: {
+      leadCar: '前车',
+      trafficCone: '交通锥',
+      buildingFacade: '建筑立面',
+      parkingVehicle: '停放车辆',
+      pedestrian: '行人',
+      roadSign: '道路标志',
+      followingCar: '后车',
+      laneMarker: '车道线',
+      roadBarrier: '道路护栏',
+      laneCone: '车道锥桶',
+    },
   },
   orderStatus: {
     pending: '待付款',

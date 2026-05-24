@@ -8,7 +8,10 @@ import {
   getReplayFrame,
   replayFrames,
   summarizePointCloud,
+  summarizeRadarDetections,
+  type CameraObjectKey,
   type CameraDirection,
+  type ObstacleKind,
   type ObstacleRisk,
 } from '../utils/autonomousReplay';
 
@@ -27,24 +30,51 @@ const cameraGradients: Record<CameraDirection, string> = {
   rear: 'linear-gradient(135deg, #431407 0%, #ea580c 54%, #fed7aa 100%)',
 };
 
-function riskLabel(risk: ObstacleRisk): string {
-  if (risk === 'danger') {
-    return '高风险';
-  }
-
-  if (risk === 'watch') {
-    return '关注';
-  }
-
-  return '正常';
-}
-
 export default function AutonomousWebviz() {
   const { t } = useTranslation();
   const [frameIndex, setFrameIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const currentFrame = getReplayFrame(replayFrames, frameIndex);
   const pointCloudSummary = useMemo(() => summarizePointCloud(currentFrame.lidarPoints), [currentFrame]);
+  const radarSummary = useMemo(() => summarizeRadarDetections(currentFrame.radarDetections), [currentFrame]);
+  const riskLabels: Record<ObstacleRisk, string> = {
+    danger: t('webviz.risk.danger'),
+    watch: t('webviz.risk.watch'),
+    clear: t('webviz.risk.clear'),
+  };
+  const obstacleKindLabels: Record<ObstacleKind, string> = {
+    vehicle: t('webviz.obstacleKinds.vehicle'),
+    pedestrian: t('webviz.obstacleKinds.pedestrian'),
+    cone: t('webviz.obstacleKinds.cone'),
+    barrier: t('webviz.obstacleKinds.barrier'),
+  };
+  const obstacleLabels: Record<string, string> = {
+    'obs-lead-car': t('webviz.obstacles.leadVehicle'),
+    'obs-cone-right': t('webviz.obstacles.constructionCone'),
+    'obs-ped-left': t('webviz.obstacles.pedestrian'),
+    'obs-barrier': t('webviz.obstacles.roadBarrier'),
+    'obs-ped-right': t('webviz.obstacles.pedestrianCrossing'),
+    'obs-parked-left': t('webviz.obstacles.parkedVehicle'),
+    'obs-cone-left': t('webviz.obstacles.laneCone'),
+  };
+  const cameraLabels: Record<CameraDirection, string> = {
+    front: t('webviz.cameras.front'),
+    left: t('webviz.cameras.left'),
+    right: t('webviz.cameras.right'),
+    rear: t('webviz.cameras.rear'),
+  };
+  const cameraObjectLabels: Record<CameraObjectKey, string> = {
+    leadCar: t('webviz.cameraObjects.leadCar'),
+    trafficCone: t('webviz.cameraObjects.trafficCone'),
+    buildingFacade: t('webviz.cameraObjects.buildingFacade'),
+    parkingVehicle: t('webviz.cameraObjects.parkingVehicle'),
+    pedestrian: t('webviz.cameraObjects.pedestrian'),
+    roadSign: t('webviz.cameraObjects.roadSign'),
+    followingCar: t('webviz.cameraObjects.followingCar'),
+    laneMarker: t('webviz.cameraObjects.laneMarker'),
+    roadBarrier: t('webviz.cameraObjects.roadBarrier'),
+    laneCone: t('webviz.cameraObjects.laneCone'),
+  };
 
   useEffect(() => {
     if (!isPlaying) {
@@ -115,7 +145,8 @@ export default function AutonomousWebviz() {
               <div style={{ position: 'relative', minHeight: 520, overflow: 'hidden', borderRadius: 18, background: '#0f172a' }}>
                 <RoadScene frameIndex={frameIndex} />
                 <LidarOverlay frameIndex={frameIndex} />
-                <ObstacleOverlay frameIndex={frameIndex} />
+                <RadarOverlay frameIndex={frameIndex} />
+                <ObstacleOverlay frameIndex={frameIndex} obstacleKindLabels={obstacleKindLabels} />
                 <EgoVehicle headingDeg={currentFrame.egoPose.headingDeg} />
               </div>
             </Card>
@@ -165,6 +196,51 @@ export default function AutonomousWebviz() {
                 </div>
               </Card>
 
+              <Card title={t('webviz.radarDetections')}>
+                <Row gutter={[12, 12]}>
+                  <Col span={8}>
+                    <Statistic title={t('webviz.radarTargets')} value={radarSummary.total} />
+                  </Col>
+                  <Col span={8}>
+                    <Statistic title={t('webviz.approaching')} value={radarSummary.approaching} />
+                  </Col>
+                  <Col span={8}>
+                    <Statistic title={t('webviz.closestRange')} value={radarSummary.closestRangeMeters} suffix="m" />
+                  </Col>
+                </Row>
+                <div style={{ marginTop: 16, height: 150, position: 'relative', overflow: 'hidden', borderRadius: 14, background: 'radial-gradient(circle at 50% 100%, rgba(34,197,94,0.34), #020617 62%)' }}>
+                  {[0, 1, 2].map((ring) => (
+                    <div
+                      key={`radar-ring-${ring}`}
+                      style={{
+                        position: 'absolute',
+                        left: `${18 + ring * 12}%`,
+                        right: `${18 + ring * 12}%`,
+                        bottom: -38 - ring * 22,
+                        height: 140 + ring * 44,
+                        border: '1px solid rgba(34, 197, 94, 0.32)',
+                        borderRadius: '50% 50% 0 0',
+                      }}
+                    />
+                  ))}
+                  {currentFrame.radarDetections.map((detection) => (
+                    <span
+                      key={detection.id}
+                      style={{
+                        position: 'absolute',
+                        left: `${50 + detection.azimuthDeg * 1.5}%`,
+                        bottom: `${12 + Math.max(0, 56 - detection.rangeMeters) * 1.8}%`,
+                        width: 10 + detection.confidence * 8,
+                        height: 10 + detection.confidence * 8,
+                        borderRadius: '50%',
+                        background: detection.relativeVelocityKph < 0 ? '#fb923c' : '#22c55e',
+                        boxShadow: '0 0 18px rgba(251, 146, 60, 0.75)',
+                      }}
+                    />
+                  ))}
+                </div>
+              </Card>
+
               <Card title={t('webviz.obstacleTracking')}>
                 <Space direction="vertical" size={12} style={{ width: '100%' }}>
                   {currentFrame.obstacles.map((obstacle) => {
@@ -173,11 +249,11 @@ export default function AutonomousWebviz() {
                     return (
                       <div key={obstacle.id} style={{ display: 'flex', justifyContent: 'space-between', gap: 12, paddingBottom: 12, borderBottom: '1px solid #f1f5f9' }}>
                         <div>
-                          <Text strong>{obstacle.label}</Text>
-                          <div><Text type="secondary">{obstacle.kind} · {obstacle.velocityKph} km/h</Text></div>
+                          <Text strong>{obstacleLabels[obstacle.id]}</Text>
+                          <div><Text type="secondary">{obstacleKindLabels[obstacle.kind]} · {obstacle.velocityKph} km/h</Text></div>
                         </div>
                         <div style={{ textAlign: 'right' }}>
-                          <Tag color={riskColors[risk]}>{riskLabel(risk)}</Tag>
+                          <Tag color={riskColors[risk]}>{riskLabels[risk]}</Tag>
                           <div><Text>{obstacle.distanceMeters} m</Text></div>
                         </div>
                       </div>
@@ -196,15 +272,15 @@ export default function AutonomousWebviz() {
                 <div style={{ borderRadius: 16, overflow: 'hidden', background: '#020617', border: '1px solid #1e293b' }}>
                   <div style={{ height: 160, position: 'relative', background: cameraGradients[camera.direction] }}>
                     <div style={{ position: 'absolute', inset: 16, border: '1px solid rgba(255,255,255,0.4)', borderRadius: 12 }} />
-                    <div style={{ position: 'absolute', left: 28, right: 28, bottom: 30, height: 42, transform: 'skewX(-16deg)', background: 'rgba(15, 23, 42, 0.55)' }} />
-                    <div style={{ position: 'absolute', left: '42%', bottom: 34, width: 46, height: 24, borderRadius: 6, background: 'rgba(248, 250, 252, 0.75)' }} />
-                    <Text style={{ position: 'absolute', left: 16, top: 12, color: '#fff', fontWeight: 600 }}>{camera.label}</Text>
+                    <div style={{ position: 'absolute', left: 28, right: 28, bottom: 30 + camera.sceneShift % 18, height: 42, transform: 'skewX(-16deg)', background: 'rgba(15, 23, 42, 0.55)' }} />
+                    <div style={{ position: 'absolute', left: `${34 + camera.sceneShift % 22}%`, bottom: 34, width: 46, height: 24, borderRadius: 6, background: 'rgba(248, 250, 252, 0.75)' }} />
+                    <Text style={{ position: 'absolute', left: 16, top: 12, color: '#fff', fontWeight: 600 }}>{cameraLabels[camera.direction]}</Text>
                     <Text style={{ position: 'absolute', right: 16, top: 12, color: '#dbeafe' }}>{camera.exposure}</Text>
                   </div>
                   <div style={{ padding: 12 }}>
                     <Text type="secondary">{t('webviz.detected')}: </Text>
-                    {camera.detectedObjects.map((object) => (
-                      <Tag key={object} color="geekblue">{object}</Tag>
+                    {camera.detectedObjectKeys.map((objectKey) => (
+                      <Tag key={objectKey} color="geekblue">{cameraObjectLabels[objectKey]}</Tag>
                     ))}
                   </div>
                 </div>
@@ -285,7 +361,38 @@ function LidarOverlay({ frameIndex }: { frameIndex: number }) {
   );
 }
 
-function ObstacleOverlay({ frameIndex }: { frameIndex: number }) {
+function RadarOverlay({ frameIndex }: { frameIndex: number }) {
+  const frame = getReplayFrame(replayFrames, frameIndex);
+
+  return (
+    <>
+      {frame.radarDetections.map((detection) => (
+        <div
+          key={detection.id}
+          style={{
+            position: 'absolute',
+            left: `${50 + detection.azimuthDeg * 1.1}%`,
+            top: `${80 - detection.rangeMeters * 1.35}%`,
+            width: 24,
+            height: 24,
+            borderRadius: '50%',
+            border: '2px solid rgba(251, 146, 60, 0.92)',
+            boxShadow: '0 0 18px rgba(251, 146, 60, 0.7)',
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+      ))}
+    </>
+  );
+}
+
+function ObstacleOverlay({
+  frameIndex,
+  obstacleKindLabels,
+}: {
+  frameIndex: number;
+  obstacleKindLabels: Record<ObstacleKind, string>;
+}) {
   const frame = getReplayFrame(replayFrames, frameIndex);
 
   return (
@@ -311,7 +418,7 @@ function ObstacleOverlay({ frameIndex }: { frameIndex: number }) {
               fontSize: 12,
             }}
           >
-            {obstacle.label}
+            {obstacleKindLabels[obstacle.kind]}
           </div>
         );
       })}

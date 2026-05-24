@@ -4,6 +4,18 @@ export type ObstacleKind = 'vehicle' | 'pedestrian' | 'cone' | 'barrier';
 
 export type CameraDirection = 'front' | 'left' | 'right' | 'rear';
 
+export type CameraObjectKey =
+  | 'leadCar'
+  | 'trafficCone'
+  | 'buildingFacade'
+  | 'parkingVehicle'
+  | 'pedestrian'
+  | 'roadSign'
+  | 'followingCar'
+  | 'laneMarker'
+  | 'roadBarrier'
+  | 'laneCone';
+
 export interface LidarPoint {
   x: number;
   y: number;
@@ -14,7 +26,6 @@ export interface LidarPoint {
 export interface Obstacle {
   id: string;
   kind: ObstacleKind;
-  label: string;
   distanceMeters: number;
   laneOffsetMeters: number;
   velocityKph: number;
@@ -22,9 +33,17 @@ export interface Obstacle {
 
 export interface CameraFeed {
   direction: CameraDirection;
-  label: string;
   exposure: string;
-  detectedObjects: string[];
+  sceneShift: number;
+  detectedObjectKeys: CameraObjectKey[];
+}
+
+export interface RadarDetection {
+  id: string;
+  rangeMeters: number;
+  azimuthDeg: number;
+  relativeVelocityKph: number;
+  confidence: number;
 }
 
 export interface ReplayFrame {
@@ -38,6 +57,7 @@ export interface ReplayFrame {
     headingDeg: number;
   };
   lidarPoints: LidarPoint[];
+  radarDetections: RadarDetection[];
   obstacles: Obstacle[];
   cameraFeeds: CameraFeed[];
 }
@@ -48,12 +68,53 @@ export interface PointCloudSummary {
   highIntensity: number;
 }
 
-const cameraFeeds: CameraFeed[] = [
-  { direction: 'front', label: 'Front Camera', exposure: 'HDR 32ms', detectedObjects: ['lead car', 'traffic cone'] },
-  { direction: 'left', label: 'Left Camera', exposure: 'Auto 28ms', detectedObjects: ['building facade', 'parking vehicle'] },
-  { direction: 'right', label: 'Right Camera', exposure: 'Auto 30ms', detectedObjects: ['pedestrian', 'road sign'] },
-  { direction: 'rear', label: 'Rear Camera', exposure: 'HDR 34ms', detectedObjects: ['following car', 'lane marker'] },
-];
+export interface RadarSummary {
+  total: number;
+  approaching: number;
+  closestRangeMeters: number;
+}
+
+function buildCameraFeeds(frameOffset: number): CameraFeed[] {
+  const objectFrames: CameraObjectKey[][] = [
+    ['leadCar', 'trafficCone'],
+    ['buildingFacade', 'parkingVehicle'],
+    ['pedestrian', 'roadSign'],
+    ['followingCar', 'laneMarker'],
+  ];
+
+  return [
+    { direction: 'front', exposure: `HDR ${32 + frameOffset * 2}ms`, sceneShift: frameOffset * 8, detectedObjectKeys: objectFrames[(frameOffset + 0) % objectFrames.length] },
+    { direction: 'left', exposure: `Auto ${28 + frameOffset}ms`, sceneShift: frameOffset * 11 + 5, detectedObjectKeys: objectFrames[(frameOffset + 1) % objectFrames.length] },
+    { direction: 'right', exposure: `Auto ${30 + frameOffset}ms`, sceneShift: frameOffset * 9 + 10, detectedObjectKeys: objectFrames[(frameOffset + 2) % objectFrames.length] },
+    { direction: 'rear', exposure: `HDR ${34 + frameOffset * 2}ms`, sceneShift: frameOffset * 7 + 15, detectedObjectKeys: objectFrames[(frameOffset + 3) % objectFrames.length] },
+  ];
+}
+
+function buildRadarDetections(frameOffset: number): RadarDetection[] {
+  return [
+    {
+      id: 'radar-lead-car',
+      rangeMeters: 28 - frameOffset * 3,
+      azimuthDeg: 1 + frameOffset * 0.4,
+      relativeVelocityKph: -4 + frameOffset,
+      confidence: 0.91,
+    },
+    {
+      id: 'radar-right-obstacle',
+      rangeMeters: 18 - frameOffset * 2,
+      azimuthDeg: 16 - frameOffset,
+      relativeVelocityKph: -1,
+      confidence: 0.84,
+    },
+    {
+      id: 'radar-left-parked',
+      rangeMeters: 34 + frameOffset,
+      azimuthDeg: -21 + frameOffset * 0.8,
+      relativeVelocityKph: 0,
+      confidence: 0.78,
+    },
+  ];
+}
 
 function buildPointCloud(frameOffset: number): LidarPoint[] {
   return Array.from({ length: 56 }, (_, index) => {
@@ -79,12 +140,13 @@ export const replayFrames: ReplayFrame[] = [
     steeringDeg: 0,
     egoPose: { x: 0, y: 0, headingDeg: 0 },
     lidarPoints: buildPointCloud(0),
+    radarDetections: buildRadarDetections(0),
     obstacles: [
-      { id: 'obs-lead-car', kind: 'vehicle', label: 'Lead vehicle', distanceMeters: 24, laneOffsetMeters: 0.3, velocityKph: 16 },
-      { id: 'obs-cone-right', kind: 'cone', label: 'Construction cone', distanceMeters: 13, laneOffsetMeters: 2.4, velocityKph: 0 },
-      { id: 'obs-ped-left', kind: 'pedestrian', label: 'Pedestrian', distanceMeters: 18, laneOffsetMeters: -3.2, velocityKph: 4 },
+      { id: 'obs-lead-car', kind: 'vehicle', distanceMeters: 24, laneOffsetMeters: 0.3, velocityKph: 16 },
+      { id: 'obs-cone-right', kind: 'cone', distanceMeters: 13, laneOffsetMeters: 2.4, velocityKph: 0 },
+      { id: 'obs-ped-left', kind: 'pedestrian', distanceMeters: 18, laneOffsetMeters: -3.2, velocityKph: 4 },
     ],
-    cameraFeeds,
+    cameraFeeds: buildCameraFeeds(0),
   },
   {
     id: 'frame-002',
@@ -93,12 +155,13 @@ export const replayFrames: ReplayFrame[] = [
     steeringDeg: -2,
     egoPose: { x: 18, y: -0.2, headingDeg: -1 },
     lidarPoints: buildPointCloud(1),
+    radarDetections: buildRadarDetections(1),
     obstacles: [
-      { id: 'obs-lead-car', kind: 'vehicle', label: 'Lead vehicle', distanceMeters: 19, laneOffsetMeters: 0.2, velocityKph: 15 },
-      { id: 'obs-cone-right', kind: 'cone', label: 'Construction cone', distanceMeters: 8, laneOffsetMeters: 2.2, velocityKph: 0 },
-      { id: 'obs-barrier', kind: 'barrier', label: 'Road barrier', distanceMeters: 16, laneOffsetMeters: 3.4, velocityKph: 0 },
+      { id: 'obs-lead-car', kind: 'vehicle', distanceMeters: 19, laneOffsetMeters: 0.2, velocityKph: 15 },
+      { id: 'obs-cone-right', kind: 'cone', distanceMeters: 8, laneOffsetMeters: 2.2, velocityKph: 0 },
+      { id: 'obs-barrier', kind: 'barrier', distanceMeters: 16, laneOffsetMeters: 3.4, velocityKph: 0 },
     ],
-    cameraFeeds,
+    cameraFeeds: buildCameraFeeds(1),
   },
   {
     id: 'frame-003',
@@ -107,12 +170,13 @@ export const replayFrames: ReplayFrame[] = [
     steeringDeg: 3,
     egoPose: { x: 36, y: 0.1, headingDeg: 2 },
     lidarPoints: buildPointCloud(2),
+    radarDetections: buildRadarDetections(2),
     obstacles: [
-      { id: 'obs-lead-car', kind: 'vehicle', label: 'Lead vehicle', distanceMeters: 15, laneOffsetMeters: 0.1, velocityKph: 17 },
-      { id: 'obs-ped-right', kind: 'pedestrian', label: 'Pedestrian crossing', distanceMeters: 6, laneOffsetMeters: 1.8, velocityKph: 5 },
-      { id: 'obs-parked-left', kind: 'vehicle', label: 'Parked vehicle', distanceMeters: 21, laneOffsetMeters: -3.1, velocityKph: 0 },
+      { id: 'obs-lead-car', kind: 'vehicle', distanceMeters: 15, laneOffsetMeters: 0.1, velocityKph: 17 },
+      { id: 'obs-ped-right', kind: 'pedestrian', distanceMeters: 6, laneOffsetMeters: 1.8, velocityKph: 5 },
+      { id: 'obs-parked-left', kind: 'vehicle', distanceMeters: 21, laneOffsetMeters: -3.1, velocityKph: 0 },
     ],
-    cameraFeeds,
+    cameraFeeds: buildCameraFeeds(2),
   },
   {
     id: 'frame-004',
@@ -121,12 +185,13 @@ export const replayFrames: ReplayFrame[] = [
     steeringDeg: 1,
     egoPose: { x: 54, y: 0, headingDeg: 1 },
     lidarPoints: buildPointCloud(3),
+    radarDetections: buildRadarDetections(3),
     obstacles: [
-      { id: 'obs-lead-car', kind: 'vehicle', label: 'Lead vehicle', distanceMeters: 22, laneOffsetMeters: 0.4, velocityKph: 20 },
-      { id: 'obs-barrier', kind: 'barrier', label: 'Road barrier', distanceMeters: 10, laneOffsetMeters: 3, velocityKph: 0 },
-      { id: 'obs-cone-left', kind: 'cone', label: 'Lane cone', distanceMeters: 12, laneOffsetMeters: -2.2, velocityKph: 0 },
+      { id: 'obs-lead-car', kind: 'vehicle', distanceMeters: 22, laneOffsetMeters: 0.4, velocityKph: 20 },
+      { id: 'obs-barrier', kind: 'barrier', distanceMeters: 10, laneOffsetMeters: 3, velocityKph: 0 },
+      { id: 'obs-cone-left', kind: 'cone', distanceMeters: 12, laneOffsetMeters: -2.2, velocityKph: 0 },
     ],
-    cameraFeeds,
+    cameraFeeds: buildCameraFeeds(3),
   },
 ];
 
@@ -160,6 +225,21 @@ export function summarizePointCloud(points: readonly LidarPoint[]): PointCloudSu
       };
     },
     { total: 0, nearField: 0, highIntensity: 0 },
+  );
+}
+
+export function summarizeRadarDetections(detections: readonly RadarDetection[]): RadarSummary {
+  if (detections.length === 0) {
+    return { total: 0, approaching: 0, closestRangeMeters: 0 };
+  }
+
+  return detections.reduce<RadarSummary>(
+    (summary, detection) => ({
+      total: summary.total + 1,
+      approaching: summary.approaching + (detection.relativeVelocityKph < 0 ? 1 : 0),
+      closestRangeMeters: Math.min(summary.closestRangeMeters, detection.rangeMeters),
+    }),
+    { total: 0, approaching: 0, closestRangeMeters: Number.POSITIVE_INFINITY },
   );
 }
 

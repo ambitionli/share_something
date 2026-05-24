@@ -9,7 +9,7 @@
   - `en-US.ts`：英文文案（实现同一接口）
   - `index.ts`：i18next + `react-i18next` 初始化（默认语言 `zh-CN`），并扩展 `i18next` 的 `CustomTypeOptions` 以便 `t()` 有类型提示
 - 入口：`admin-web/src/main.tsx` 中 `import './i18n'` 在应用启动前完成初始化
-- 新增 `webviz.*` 文案用于 `/autonomous-webviz` 页面：菜单标题、播放控制、道路场景、激光雷达、障碍物追踪、车辆遥测与 camera 回放标签。
+- 新增 `webviz.*` 文案用于 `/autonomous-webviz` 页面：菜单标题、播放控制、道路场景、激光雷达、毫米波雷达、障碍物追踪、车辆遥测与 camera 回放标签；障碍物类型、风险等级、camera 方向和识别目标也在 i18n 中维护。
 
 ## 使用
 
@@ -26,4 +26,5 @@ function Example() {
 
 ## 修改记录
 
+- 2026-05-24：扩展 `webviz.*` 的 radar、风险等级、障碍物、camera 与识别目标文案说明（修改时间：2026-05-24 06:46 UTC）。
 - 2026-05-24：补充 `webviz.*` 中英文文案说明（修改时间：2026-05-24 06:42 UTC）。

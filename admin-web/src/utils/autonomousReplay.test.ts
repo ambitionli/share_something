@@ -4,6 +4,7 @@ import {
   formatPlaybackTime,
   getReplayFrame,
   replayFrames,
+  summarizeRadarDetections,
   summarizePointCloud,
 } from './autonomousReplay';
 
@@ -28,6 +29,23 @@ describe('autonomous replay helpers', () => {
     expect(summary.total).toBe(3);
     expect(summary.nearField).toBe(2);
     expect(summary.highIntensity).toBe(2);
+  });
+
+  it('keeps camera feeds frame-specific during playback', () => {
+    expect(replayFrames[0].cameraFeeds[0].sceneShift).not.toBe(replayFrames[1].cameraFeeds[0].sceneShift);
+    expect(replayFrames[0].cameraFeeds[0].detectedObjectKeys).not.toEqual(replayFrames[1].cameraFeeds[0].detectedObjectKeys);
+  });
+
+  it('summarizes radar detections by closest range and approaching targets', () => {
+    const summary = summarizeRadarDetections([
+      { id: 'radar-1', rangeMeters: 18, azimuthDeg: -4, relativeVelocityKph: -8, confidence: 0.9 },
+      { id: 'radar-2', rangeMeters: 42, azimuthDeg: 6, relativeVelocityKph: 3, confidence: 0.7 },
+      { id: 'radar-3', rangeMeters: 11, azimuthDeg: 1, relativeVelocityKph: -2, confidence: 0.82 },
+    ]);
+
+    expect(summary.total).toBe(3);
+    expect(summary.approaching).toBe(2);
+    expect(summary.closestRangeMeters).toBe(11);
   });
 
   it('classifies obstacle risk by nearest distance', () => {
