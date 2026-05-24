@@ -2,6 +2,15 @@ export type ObstacleRisk = 'danger' | 'watch' | 'clear';
 
 export type ObstacleKind = 'vehicle' | 'pedestrian' | 'cone' | 'barrier';
 
+export type ObstacleId =
+  | 'obs-lead-car'
+  | 'obs-cone-right'
+  | 'obs-ped-left'
+  | 'obs-barrier'
+  | 'obs-ped-right'
+  | 'obs-parked-left'
+  | 'obs-cone-left';
+
 export type CameraDirection = 'front' | 'left' | 'right' | 'rear';
 
 export type CameraObjectKey =
@@ -24,7 +33,7 @@ export interface LidarPoint {
 }
 
 export interface Obstacle {
-  id: string;
+  id: ObstacleId;
   kind: ObstacleKind;
   distanceMeters: number;
   laneOffsetMeters: number;

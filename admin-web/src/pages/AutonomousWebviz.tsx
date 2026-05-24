@@ -11,6 +11,7 @@ import {
   summarizeRadarDetections,
   type CameraObjectKey,
   type CameraDirection,
+  type ObstacleId,
   type ObstacleKind,
   type ObstacleRisk,
 } from '../utils/autonomousReplay';
@@ -48,7 +49,7 @@ export default function AutonomousWebviz() {
     cone: t('webviz.obstacleKinds.cone'),
     barrier: t('webviz.obstacleKinds.barrier'),
   };
-  const obstacleLabels: Record<string, string> = {
+  const obstacleLabels: Record<ObstacleId, string> = {
     'obs-lead-car': t('webviz.obstacles.leadVehicle'),
     'obs-cone-right': t('webviz.obstacles.constructionCone'),
     'obs-ped-left': t('webviz.obstacles.pedestrian'),
