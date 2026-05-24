@@ -1,6 +1,6 @@
 # admin-web 国际化（i18next）
 
-> 最后更新：2026-03-20（`orders.*` 扩展：订单管理页文案）
+> 最后更新：2026-05-24（`webviz.*` 扩展：自动驾驶回放 Webviz 文案）
 
 ## 说明
 
@@ -9,6 +9,7 @@
   - `en-US.ts`：英文文案（实现同一接口）
   - `index.ts`：i18next + `react-i18next` 初始化（默认语言 `zh-CN`），并扩展 `i18next` 的 `CustomTypeOptions` 以便 `t()` 有类型提示
 - 入口：`admin-web/src/main.tsx` 中 `import './i18n'` 在应用启动前完成初始化
+- 新增 `webviz.*` 文案用于 `/autonomous-webviz` 页面：菜单标题、播放控制、道路场景、激光雷达、障碍物追踪、车辆遥测与 camera 回放标签。
 
 ## 使用
 
@@ -22,3 +23,7 @@ function Example() {
 ```
 
 切换语言：`i18n.changeLanguage('en-US')`（从 `admin-web/src/i18n` 导入默认导出的 `i18n`）。
+
+## 修改记录
+
+- 2026-05-24：补充 `webviz.*` 中英文文案说明（修改时间：2026-05-24 06:42 UTC）。
