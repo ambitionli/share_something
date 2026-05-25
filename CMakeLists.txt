@@ -18,7 +18,9 @@ add_library(aeb_demo_core
   src/common/latest_frame_buffer.cpp
   src/algorithm/simple_aeb_algorithm.cpp
   src/transport/annex_b_parser.cpp
+  src/transport/udp_packet.cpp
   src/transport/udp_frame_reassembler.cpp
+  src/transport/udp_h264_receiver.cpp
 )
 
 target_include_directories(aeb_demo_core
@@ -86,4 +88,8 @@ if(AEB_DEMO_BUILD_TESTING)
   add_executable(test_udp_frame_reassembler tests/test_udp_frame_reassembler.cpp)
   target_link_libraries(test_udp_frame_reassembler PRIVATE aeb_demo_core)
   add_test(NAME test_udp_frame_reassembler COMMAND test_udp_frame_reassembler)
+
+  add_executable(test_udp_packet tests/test_udp_packet.cpp)
+  target_link_libraries(test_udp_packet PRIVATE aeb_demo_core)
+  add_test(NAME test_udp_packet COMMAND test_udp_packet)
 endif()

@@ -31,4 +31,14 @@ struct AebUdpPacket {
   std::vector<std::uint8_t> payload;
 };
 
+bool WritePacketHeader(
+    const AebUdpPacketHeader& header,
+    std::uint8_t* output,
+    std::size_t output_size);
+
+bool DeserializeUdpPacket(
+    const std::uint8_t* data,
+    std::size_t data_size,
+    AebUdpPacket* packet);
+
 }  // namespace aeb_demo
