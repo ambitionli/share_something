@@ -18,6 +18,7 @@ add_library(aeb_demo_core
   src/common/latest_frame_buffer.cpp
   src/algorithm/simple_aeb_algorithm.cpp
   src/transport/annex_b_parser.cpp
+  src/transport/udp_frame_reassembler.cpp
 )
 
 target_include_directories(aeb_demo_core
@@ -81,4 +82,8 @@ if(AEB_DEMO_BUILD_TESTING)
   add_executable(test_annex_b_parser tests/test_annex_b_parser.cpp)
   target_link_libraries(test_annex_b_parser PRIVATE aeb_demo_core)
   add_test(NAME test_annex_b_parser COMMAND test_annex_b_parser)
+
+  add_executable(test_udp_frame_reassembler tests/test_udp_frame_reassembler.cpp)
+  target_link_libraries(test_udp_frame_reassembler PRIVATE aeb_demo_core)
+  add_test(NAME test_udp_frame_reassembler COMMAND test_udp_frame_reassembler)
 endif()

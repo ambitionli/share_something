@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <vector>
 
 namespace aeb_demo {
 
@@ -24,5 +25,10 @@ struct AebUdpPacketHeader {
 #pragma pack(pop)
 
 static_assert(sizeof(AebUdpPacketHeader) == 36U, "Unexpected UDP packet header size");
+
+struct AebUdpPacket {
+  AebUdpPacketHeader header;
+  std::vector<std::uint8_t> payload;
+};
 
 }  // namespace aeb_demo
