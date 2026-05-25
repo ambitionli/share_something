@@ -1,0 +1,27 @@
+aeb_demo_node:
+  ros__parameters:
+    udp:
+      listen_ip: "0.0.0.0"
+      port: 5600
+      receive_buffer_bytes: 4194304
+      receive_timeout_ms: 10
+
+    video:
+      width: 1920
+      height: 1536
+      fps: 30
+      codec: "h264"
+      all_i_frame: true
+
+    decoder:
+      backend: "gstreamer_nvv4l2decoder"
+      low_latency: true
+
+    aeb:
+      roi_x: 480
+      roi_y: 768
+      roi_width: 960
+      roi_height: 600
+      dark_pixel_threshold: 80
+      brake_ratio_threshold: 0.65
+      trigger_confirm_frames: 3

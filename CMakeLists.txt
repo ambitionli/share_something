@@ -70,6 +70,51 @@ if(AEB_DEMO_ENABLE_GSTREAMER)
   )
 endif()
 
+if(AEB_DEMO_ENABLE_ROS2)
+  find_package(ament_cmake REQUIRED)
+  find_package(rclcpp REQUIRED)
+  find_package(std_msgs REQUIRED)
+
+  add_executable(aeb_demo_node
+    src/node/aeb_demo_node.cpp
+  )
+
+  target_link_libraries(aeb_demo_node
+    PRIVATE
+      aeb_demo_core
+  )
+
+  if(AEB_DEMO_ENABLE_GSTREAMER)
+    target_link_libraries(aeb_demo_node
+      PRIVATE
+        aeb_demo_gstreamer_decoder
+    )
+    target_compile_definitions(aeb_demo_node
+      PRIVATE
+        AEB_DEMO_ENABLE_GSTREAMER=1
+    )
+  endif()
+
+  ament_target_dependencies(aeb_demo_node
+    rclcpp
+    std_msgs
+  )
+
+  install(TARGETS
+    aeb_demo_node
+    aeb_udp_h264_sender
+    DESTINATION lib/${PROJECT_NAME}
+  )
+
+  install(DIRECTORY
+    config
+    launch
+    DESTINATION share/${PROJECT_NAME}
+  )
+
+  ament_package()
+endif()
+
 if(AEB_DEMO_BUILD_TESTING)
   enable_testing()
 
