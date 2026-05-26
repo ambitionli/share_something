@@ -17,6 +17,8 @@ endif()
 add_library(aeb_demo_core
   src/common/latest_frame_buffer.cpp
   src/algorithm/simple_aeb_algorithm.cpp
+  src/algorithm/calibrated_aeb_algorithm.cpp
+  src/common/camera_calibration.cpp
   src/transport/annex_b_parser.cpp
   src/transport/udp_packet.cpp
   src/transport/udp_frame_reassembler.cpp
@@ -125,6 +127,14 @@ if(AEB_DEMO_BUILD_TESTING)
   add_executable(test_simple_aeb_algorithm tests/test_simple_aeb_algorithm.cpp)
   target_link_libraries(test_simple_aeb_algorithm PRIVATE aeb_demo_core)
   add_test(NAME test_simple_aeb_algorithm COMMAND test_simple_aeb_algorithm)
+
+  add_executable(test_camera_calibration tests/test_camera_calibration.cpp)
+  target_link_libraries(test_camera_calibration PRIVATE aeb_demo_core)
+  add_test(NAME test_camera_calibration COMMAND test_camera_calibration)
+
+  add_executable(test_calibrated_aeb_algorithm tests/test_calibrated_aeb_algorithm.cpp)
+  target_link_libraries(test_calibrated_aeb_algorithm PRIVATE aeb_demo_core)
+  add_test(NAME test_calibrated_aeb_algorithm COMMAND test_calibrated_aeb_algorithm)
 
   add_executable(test_annex_b_parser tests/test_annex_b_parser.cpp)
   target_link_libraries(test_annex_b_parser PRIVATE aeb_demo_core)

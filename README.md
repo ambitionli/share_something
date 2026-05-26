@@ -10,7 +10,7 @@ H.264 all-I-frame file or camera encoder
   -> UdpH264Receiver
   -> GStreamer nvv4l2decoder hardware decode
   -> NV12/YUV frame
-  -> SimpleAebAlgorithm
+  -> CalibratedAebAlgorithm
   -> /aeb/decision
 ```
 
@@ -66,12 +66,30 @@ The packet protocol is intentionally simple for demo use:
 
 ## AEB Algorithm Scope
 
-The first demo algorithm is a deterministic ROI luma rule over the Y plane:
+The calibrated demo algorithm is a deterministic ground-projected ROI rule over the Y plane:
 
-1. Select the forward ROI.
-2. Count pixels darker than `dark_pixel_threshold`.
-3. Compute dark-pixel ratio.
-4. Trigger AEB only after `trigger_confirm_frames` consecutive risky frames.
-5. Fail safe on invalid ROI.
+1. Load camera intrinsics from `config/camera_intrinsic.yaml`.
+2. Load camera mounting extrinsics from `config/camera_extrinsic.yaml`.
+3. Select the forward ROI.
+4. Project each ROI image row onto the ground plane using `fx/fy/cx/cy`, camera height, and pitch.
+5. Count dark Y-plane pixels whose projected longitudinal distance is within `near_obstacle_distance_m`.
+6. Trigger AEB only after `trigger_confirm_frames` consecutive risky frames.
+7. Fail safe on invalid calibration, invalid frame layout, or invalid ROI.
+
+Supported calibration file keys:
+
+```yaml
+# camera_intrinsic.yaml
+image_width: 1920
+image_height: 1536
+fx: 1100.0
+fy: 1100.0
+cx: 960.0
+cy: 768.0
+
+# camera_extrinsic.yaml
+camera_height_m: 1.4
+pitch_down_deg: 8.0
+```
 
 This is a pipeline and integration demo, not a production AEB perception model.

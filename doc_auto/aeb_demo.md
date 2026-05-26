@@ -1,6 +1,6 @@
 # AEB Demo 自动记录
 
-> 最后更新：2026-05-25 14:52 UTC
+> 最后更新：2026-05-26 02:03 UTC
 
 ## 目标
 
@@ -18,7 +18,7 @@
 - `common`：帧类型、AEB 决策、latest-frame buffer。
 - `transport`：Annex-B H.264 I 帧解析、UDP debug packet、UDP receiver、frame reassembler。
 - `decoder`：H.264 decoder 抽象与 Orin GStreamer 硬解码后端。
-- `algorithm`：可测试的 ROI luma AEB 规则算法。
+- `algorithm`：可测试的 ROI luma AEB 规则算法，以及使用相机内外参进行地面投影的 calibrated AEB 算法。
 - `node`：ROS2 节点骨架。
 - `tools`：H.264 文件 UDP debug sender。
 
@@ -28,10 +28,22 @@
 
 - latest-frame buffer。
 - simple AEB algorithm。
+- camera calibration loader。
+- calibrated AEB algorithm。
 - Annex-B parser。
 - UDP frame reassembler。
 - UDP packet deserialize。
 
+## 标定文件
+
+新增支持：
+
+- `config/camera_intrinsic.yaml`：`image_width`、`image_height`、`fx`、`fy`、`cx`、`cy`。
+- `config/camera_extrinsic.yaml`：`camera_height_m`、`pitch_down_deg` 或 `pitch_down_rad`。
+
+Calibrated AEB 算法会用内参和相机安装高度/俯仰角，将 ROI 行投影到地面纵向距离，只统计近距离范围内的暗像素风险。
+
 ## 修改时间
 
 - 2026-05-25 14:52 UTC：创建 AEB demo 架构、核心库、UDP debug sender、Orin/ROS2 可选骨架。
+- 2026-05-26 02:03 UTC：新增相机内外参文件加载、地面投影、calibrated AEB 算法和对应测试。

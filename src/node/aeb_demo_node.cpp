@@ -1,4 +1,5 @@
-#include "aeb_demo/algorithm/simple_aeb_algorithm.hpp"
+#include "aeb_demo/algorithm/calibrated_aeb_algorithm.hpp"
+#include "aeb_demo/common/camera_calibration.hpp"
 #include "aeb_demo/transport/udp_h264_receiver.hpp"
 
 #if defined(AEB_DEMO_ENABLE_GSTREAMER)
@@ -31,9 +32,11 @@ class AebDemoNode final : public rclcpp::Node {
  public:
   AebDemoNode()
       : Node("aeb_demo_node"),
-        receiver_(BuildReceiverConfig()),
-        algorithm_(BuildAebConfig()) {
+        receiver_(BuildReceiverConfig()) {
     publisher_ = create_publisher<std_msgs::msg::String>("/aeb/decision", 10);
+    algorithm_ = std::make_unique<aeb_demo::CalibratedAebAlgorithm>(
+        BuildAebConfig(),
+        LoadCalibrationFromParameters());
 
 #if defined(AEB_DEMO_ENABLE_GSTREAMER)
     decoder_ = std::make_unique<aeb_demo::GstreamerH264Decoder>();
@@ -81,16 +84,35 @@ class AebDemoNode final : public rclcpp::Node {
     return config;
   }
 
-  aeb_demo::SimpleAebConfig BuildAebConfig() {
-    aeb_demo::SimpleAebConfig config;
+  aeb_demo::CameraCalibration LoadCalibrationFromParameters() {
+    const std::string intrinsic_file =
+        declare_parameter<std::string>("camera.intrinsic_file", "config/camera_intrinsic.yaml");
+    const std::string extrinsic_file =
+        declare_parameter<std::string>("camera.extrinsic_file", "config/camera_extrinsic.yaml");
+
+    aeb_demo::CameraCalibration calibration;
+    if (!aeb_demo::LoadCameraCalibration(intrinsic_file, extrinsic_file, &calibration)) {
+      RCLCPP_ERROR(
+          get_logger(),
+          "Failed to load camera calibration files: intrinsic=%s extrinsic=%s",
+          intrinsic_file.c_str(),
+          extrinsic_file.c_str());
+    }
+    return calibration;
+  }
+
+  aeb_demo::CalibratedAebConfig BuildAebConfig() {
+    aeb_demo::CalibratedAebConfig config;
     config.roi_x = static_cast<std::uint32_t>(declare_parameter<int>("aeb.roi_x", 480));
     config.roi_y = static_cast<std::uint32_t>(declare_parameter<int>("aeb.roi_y", 768));
     config.roi_width = static_cast<std::uint32_t>(declare_parameter<int>("aeb.roi_width", 960));
     config.roi_height = static_cast<std::uint32_t>(declare_parameter<int>("aeb.roi_height", 600));
     config.dark_pixel_threshold =
         static_cast<std::uint8_t>(declare_parameter<int>("aeb.dark_pixel_threshold", 80));
-    config.brake_ratio_threshold =
-        static_cast<float>(declare_parameter<double>("aeb.brake_ratio_threshold", 0.65));
+    config.near_obstacle_distance_m =
+        declare_parameter<double>("aeb.near_obstacle_distance_m", 8.0);
+    config.near_pixel_ratio_threshold =
+        static_cast<float>(declare_parameter<double>("aeb.near_pixel_ratio_threshold", 0.20));
     config.trigger_confirm_frames =
         static_cast<std::uint32_t>(declare_parameter<int>("aeb.trigger_confirm_frames", 3));
     return config;
@@ -113,7 +135,11 @@ class AebDemoNode final : public rclcpp::Node {
       return;
     }
 
-    const aeb_demo::AebDecision decision = algorithm_.Process(yuv_frame);
+    if (algorithm_ == nullptr) {
+      return;
+    }
+
+    const aeb_demo::AebDecision decision = algorithm_->Process(yuv_frame);
     std_msgs::msg::String message;
     message.data = DecisionToString(decision);
     publisher_->publish(message);
@@ -121,7 +147,7 @@ class AebDemoNode final : public rclcpp::Node {
   }
 
   aeb_demo::UdpH264Receiver receiver_;
-  aeb_demo::SimpleAebAlgorithm algorithm_;
+  std::unique_ptr<aeb_demo::CalibratedAebAlgorithm> algorithm_;
   rclcpp::Publisher<std_msgs::msg::String>::SharedPtr publisher_;
   rclcpp::TimerBase::SharedPtr timer_;
 

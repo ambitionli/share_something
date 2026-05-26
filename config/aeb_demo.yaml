@@ -17,11 +17,16 @@ aeb_demo_node:
       backend: "gstreamer_nvv4l2decoder"
       low_latency: true
 
+    camera:
+      intrinsic_file: "config/camera_intrinsic.yaml"
+      extrinsic_file: "config/camera_extrinsic.yaml"
+
     aeb:
       roi_x: 480
       roi_y: 768
       roi_width: 960
       roi_height: 600
       dark_pixel_threshold: 80
-      brake_ratio_threshold: 0.65
+      near_obstacle_distance_m: 8.0
+      near_pixel_ratio_threshold: 0.20
       trigger_confirm_frames: 3

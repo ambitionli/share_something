@@ -1,0 +1,7 @@
+# Demo pinhole camera intrinsics. Replace with calibrated Orin camera values.
+image_width: 1920
+image_height: 1536
+fx: 1100.0
+fy: 1100.0
+cx: 960.0
+cy: 768.0
